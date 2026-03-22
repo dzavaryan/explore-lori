@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Crop Tool — Explore Lori</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; background: #1a1a1a; color: #eee; }
+
+  header { background: #28292E; padding: 16px 24px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #444; }
+  header h1 { font-size: 18px; font-weight: bold; color: #C9A844; }
+  header p  { font-size: 13px; color: #999; }
+
+  .toolbar { background: #222; padding: 12px 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; border-bottom: 1px solid #333; }
+  .toolbar label { font-size: 12px; color: #aaa; }
+  .toolbar select, .toolbar input { background: #333; border: 1px solid #555; color: #eee; padding: 6px 10px; border-radius: 4px; font-size: 13px; }
+  .aspect-btn { background: #333; border: 1px solid #555; color: #ccc; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .aspect-btn.active { background: #C9A844; color: #28292E; border-color: #C9A844; font-weight: bold; }
+
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; padding: 24px; }
+
+  .photo-card { background: #2a2a2a; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
+  .photo-card__header { padding: 12px 14px 8px; display: flex; justify-content: space-between; align-items: center; }
+  .photo-card__name { font-size: 12px; font-weight: bold; color: #C9A844; font-family: monospace; }
+  .photo-card__size { font-size: 11px; color: #666; }
+
+  .crop-stage {
+    position: relative;
+    width: 100%;
+    cursor: crosshair;
+    overflow: hidden;
+    background: #111;
+  }
+  .crop-stage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    pointer-events: none;
+    user-select: none;
+    transition: object-position 0.1s ease;
+  }
+  /* Crop format heights */
+  .crop-stage.hero    { height: 220px; }
+  .crop-stage.card    { height: 180px; }
+  .crop-stage.square  { height: 340px; }
+  .crop-stage.wide    { height: 140px; }
+
+  .crosshair {
+    position: absolute;
+    width: 24px; height: 24px;
+    margin: -12px 0 0 -12px;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .crosshair::before, .crosshair::after {
+    content: '';
+    position: absolute;
+    background: rgba(201,168,68,0.9);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.5);
+  }
+  .crosshair::before { width: 2px; height: 24px; left: 11px; top: 0; }
+  .crosshair::after  { width: 24px; height: 2px; top: 11px; left: 0; }
+  .dot {
+    position: absolute;
+    width: 8px; height: 8px;
+    background: #C9A844;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    margin: -4px 0 0 -4px;
+    pointer-events: none;
+    z-index: 11;
+  }
+
+  .photo-card__footer { padding: 10px 14px 14px; }
+  .css-output {
+    font-family: monospace;
+    font-size: 11px;
+    background: #1a1a1a;
+    color: #7ec88a;
+    padding: 8px 10px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    word-break: break-all;
+    cursor: pointer;
+    user-select: all;
+  }
+  .css-output:hover { border-color: #C9A844; }
+  .copy-hint { font-size: 10px; color: #555; margin-top: 4px; }
+  .copied { color: #C9A844 !important; }
+
+  .usage-tag { display: inline-block; background: #333; color: #aaa; font-size: 10px; padding: 2px 7px; border-radius: 3px; margin-right: 4px; margin-bottom: 4px; }
+
+  .section-header { grid-column: 1 / -1; padding: 8px 0 4px; border-bottom: 1px solid #444; color: #C9A844; font-size: 13px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+  #copy-all-btn { background: #C9A844; color: #28292E; border: none; padding: 8px 18px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 13px; }
+  #copy-all-btn:hover { background: #ddb94a; }
+
+  .instructions { background: #28292E; padding: 16px 24px; font-size: 12px; color: #888; line-height: 1.8; }
+  .instructions strong { color: #C9A844; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Explore Lori — Photo Crop Tool</h1>
+    <p>Click anywhere on a photo to set the focal point. The image adjusts to keep that point centred in the crop.</p>
+  </div>
+</header>
+
+<div class="instructions">
+  <strong>How to use:</strong>
+  1. Select the crop format (Hero / Card / Square / Wide) that matches where the image is used on the site.
+  2. Click on the photo to set the focal point (the crosshair shows where).
+  3. The <code>object-position</code> value updates live — click it to copy.
+  4. Press <strong>Copy All CSS</strong> to get a full stylesheet of all current settings.
+</div>
+
+<div class="toolbar">
+  <label>Crop format:</label>
+  <button class="aspect-btn active" onclick="setFormat('hero', this)">Hero (16:7)</button>
+  <button class="aspect-btn" onclick="setFormat('card', this)">Card (4:3)</button>
+  <button class="aspect-btn" onclick="setFormat('square', this)">Square (1:1)</button>
+  <button class="aspect-btn" onclick="setFormat('wide', this)">Wide (21:9)</button>
+  <span style="flex:1"></span>
+  <button id="copy-all-btn" onclick="copyAll()">Copy All CSS</button>
+</div>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+const IMAGES = [
+  { file: 'debed-canyon.jpg',        label: 'Debed Canyon',         usage: ['homepage hero'] },
+  { file: 'haghpat-monastery.jpg',   label: 'Haghpat Monastery',    usage: ['discover card', 'akner related'] },
+  { file: 'sanahin-monastery.jpg',   label: 'Sanahin Monastery',    usage: ['discover card'] },
+  { file: 'stay-ethnoforma.jpg',     label: 'Ethnoforma Stay',      usage: ['stays hero'] },
+  { file: 'akner-village.jpg',       label: 'Akner Village',        usage: ['akner village page', 'ethnoforma related'] },
+  { file: 'akner-rooftop.jpg',       label: 'Akner Rooftop View',   usage: ['akner/story'] },
+  { file: 'akner-landscape.jpg',     label: 'Akner Landscape',      usage: ['discover card'] },
+  { file: 'akner-forest.jpg',        label: 'Akner Forest',         usage: ['discover card'] },
+  { file: 'ethnoforma-window.jpg',   label: 'View from Ethnoforma', usage: ['ethnoforma page gallery'] },
+  { file: 'odzun-village.jpg',       label: 'Odzun Village',        usage: ['discover card'] },
+  { file: 'season-autumn.jpg',       label: 'Season: Autumn',       usage: ['homepage seasons'] },
+  { file: 'season-spring.jpg',       label: 'Season: Spring',       usage: ['homepage seasons'] },
+  { file: 'season-summer.jpg',       label: 'Season: Summer',       usage: ['homepage seasons'] },
+  { file: 'season-winter.jpg',       label: 'Season: Winter',       usage: ['homepage seasons'] },
+  { file: 'dzoraget-gorge.jpg',      label: 'Dzoraget Gorge',       usage: ['discover hero', 'discover card'] },
+  { file: 'kobayr-monastery.jpg',    label: 'Kobayr Monastery',     usage: ['discover card'] },
+  { file: 'akhtala-monastery.jpg',   label: 'Akhtala Monastery',    usage: ['discover card'] },
+  { file: 'sanahin-bridge.jpg',      label: 'Sanahin Bridge',       usage: ['discover card'] },
+  { file: 'lori-berd.jpg',           label: 'Lori Berd',            usage: ['discover card'] },
+  { file: 'tashir-lake.jpg',         label: 'Tashir Lake',          usage: ['discover card'] },
+  { file: 'jijur-ridge.jpg',         label: 'Jijur Ridge',          usage: ['discover card'] },
+  { file: 'story-kayan-fortress.jpg',label: 'Kayan Fortress Story', usage: ['stories'] },
+  { file: 'story-haghpat-night.jpg', label: 'Haghpat at Night',     usage: ['stories'] },
+  { file: 'story-beekeeping-lori.jpg',label: 'Lori Beekeeping',     usage: ['stories'] },
+  { file: 'story-november-lori.jpg', label: 'November in Lori',     usage: ['stories'] },
+  { file: 'stay-odzun.jpg',          label: 'Odzun Stay',           usage: ['stay card'] },
+  { file: 'stay-tashir-camp.jpg',    label: 'Tashir Camp Stay',     usage: ['stay card'] },
+  { file: 'stay-dsegh.jpg',         label: 'Dsegh Stay',           usage: ['stay card'] },
+];
+
+let currentFormat = 'hero';
+const positions = {};  // file → {x, y}
+
+function setFormat(format, btn) {
+  currentFormat = format;
+  document.querySelectorAll('.aspect-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.crop-stage').forEach(stage => {
+    stage.className = 'crop-stage ' + format;
+  });
+}
+
+function buildCard(imgData) {
+  const { file, label, usage } = imgData;
+  const pos = positions[file] || { x: 50, y: 50 };
+
+  const card = document.createElement('div');
+  card.className = 'photo-card';
+  card.dataset.file = file;
+
+  const usageTags = usage.map(u => `<span class="usage-tag">${u}</span>`).join('');
+
+  card.innerHTML = `
+    <div class="photo-card__header">
+      <span class="photo-card__name">${file}</span>
+    </div>
+    <div class="crop-stage ${currentFormat}" data-file="${file}">
+      <img src="/images/${file}" alt="${label}" draggable="false">
+      <div class="crosshair" style="left:${pos.x}%;top:${pos.y}%"></div>
+      <div class="dot" style="left:${pos.x}%;top:${pos.y}%"></div>
+    </div>
+    <div class="photo-card__footer">
+      <div style="margin-bottom:6px;">${usageTags}</div>
+      <div class="css-output" data-file="${file}" onclick="copyCSS(this, '${file}')" title="Click to copy">
+        object-position: ${pos.x}% ${pos.y}%;
+      </div>
+      <div class="copy-hint">↑ Click to copy CSS</div>
+    </div>
+  `;
+
+  const stage = card.querySelector('.crop-stage');
+  stage.addEventListener('click', (e) => {
+    const rect = stage.getBoundingClientRect();
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+    const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+    setPosition(file, x, y, card);
+  });
+  stage.addEventListener('mousemove', (e) => {
+    const rect = stage.getBoundingClientRect();
+    const x = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+    const y = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+    const ch = stage.querySelector('.crosshair');
+    ch.style.left = x + '%';
+    ch.style.top = y + '%';
+  });
+
+  return card;
+}
+
+function setPosition(file, x, y, card) {
+  positions[file] = { x, y };
+  const img = card.querySelector('img');
+  img.style.objectPosition = `${x}% ${y}%`;
+  const dot = card.querySelector('.dot');
+  dot.style.left = x + '%';
+  dot.style.top = y + '%';
+  const output = card.querySelector('.css-output');
+  output.textContent = `object-position: ${x}% ${y}%;`;
+  output.classList.remove('copied');
+}
+
+function copyCSS(el, file) {
+  const pos = positions[file] || { x: 50, y: 50 };
+  const text = `.img-${file.replace('.jpg','').replace(/[^a-z0-9]/g,'-')} { object-position: ${pos.x}% ${pos.y}%; }`;
+  navigator.clipboard.writeText(text).then(() => {
+    el.classList.add('copied');
+    el.textContent = '✓ Copied!';
+    setTimeout(() => {
+      el.classList.remove('copied');
+      el.textContent = `object-position: ${pos.x}% ${pos.y}%;`;
+    }, 1500);
+  });
+}
+
+function copyAll() {
+  const lines = ['/* Explore Lori — Photo focal points */'];
+  IMAGES.forEach(({ file }) => {
+    const pos = positions[file] || { x: 50, y: 50 };
+    if (pos.x !== 50 || pos.y !== 50) {
+      const cls = file.replace('.jpg','').replace(/[^a-z0-9]/g,'-');
+      lines.push(`[data-img="${file}"] { object-position: ${pos.x}% ${pos.y}%; }`);
+    }
+  });
+  const text = lines.join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-all-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = 'Copy All CSS', 1500);
+  });
+}
+
+// Build gallery
+const gallery = document.getElementById('gallery');
+IMAGES.forEach(imgData => {
+  gallery.appendChild(buildCard(imgData));
+});
+</script>
+</body>
+</html>

@@ -100,7 +100,7 @@ const FilterSystem = (function () {
 
   function applyFilters() {
     /* Each filterable item must have at least one of the watched attribute names */
-    const watchedAttrs = ['data-type', 'data-season', 'data-difficulty', 'data-pillar', 'data-category'];
+    const watchedAttrs = ['data-type', 'data-season', 'data-difficulty', 'data-pillar', 'data-category', 'data-circuit'];
     const selector = watchedAttrs.map(a => `[${a}]`).join(', ');
     const cards = document.querySelectorAll(selector);
 

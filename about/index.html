@@ -3,48 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Explore Lori</title>
-  <meta name="description" content="Learn about Explore Lori, a free platform for the Lori region of Armenia.">
-
-  
-  <meta property="og:title" content="About">
-  <meta property="og:description" content="Learn about Explore Lori, a free platform for the Lori region of Armenia.">
+  <title>About this Project — Explore Lori</title>
+  <meta name="description" content="Explore Lori is an independent editorial platform documenting the heritage, landscape, and future of Northern Armenia.">
+  <meta property="og:title" content="About this Project — Explore Lori">
   <meta property="og:image" content="/images/og-homepage.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://explorelori.com/about/">
-
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  
   <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/vivid.css">
-  
-
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <style>
+    .about-hero{background:var(--dark);padding:120px 0 80px;text-align:center}
+    .about-hero__label{font-family:var(--font-sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ochre);margin-bottom:20px}
+    .about-hero__title{font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.25rem);color:#fff;max-width:760px;margin:0 auto 24px;line-height:1.15}
+    .about-hero__title em{font-style:italic;color:var(--ochre)}
+    .about-hero__sub{font-size:1.1rem;color:rgba(255,255,255,0.6);max-width:600px;margin:0 auto 36px;line-height:1.7}
+    .manifesto{background:var(--parchment);padding:80px 0}
+    .manifesto__inner{max-width:700px;margin:0 auto;padding:0 var(--pad-x)}
+    .manifesto p{font-family:var(--font-serif);font-size:1.1rem;line-height:1.9;color:var(--body-text);margin-bottom:1.5rem}
+    .manifesto p:first-child::first-letter{font-size:3.5rem;line-height:1;float:left;margin:4px 12px 0 0;color:var(--terracotta)}
+    .pillars{background:var(--dark);padding:80px 0}
+    .pillars__header{text-align:center;margin-bottom:52px}
+    .pillars__label{font-family:var(--font-sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ochre);margin-bottom:12px}
+    .pillars__title{font-family:var(--font-serif);font-size:clamp(1.5rem,3vw,2.25rem);color:#fff}
+    .pillars__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,0.06)}
+    .pillar{background:var(--dark);padding:40px 36px;transition:background 0.2s}
+    .pillar:hover{background:#1a1e26}
+    .pillar__accent{display:block;width:32px;height:2px;margin-bottom:20px}
+    .pillar--archive .pillar__accent{background:var(--stone)}
+    .pillar--ledger .pillar__accent{background:var(--ochre)}
+    .pillar--horizon .pillar__accent{background:var(--green)}
+    .pillar__tag{font-family:var(--font-sans);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;display:block}
+    .pillar--archive .pillar__tag{color:var(--stone)}
+    .pillar--ledger .pillar__tag{color:var(--ochre)}
+    .pillar--horizon .pillar__tag{color:var(--green)}
+    .pillar__name{font-family:var(--font-serif);font-size:1.3rem;color:#fff;margin-bottom:12px}
+    .pillar__desc{font-size:0.875rem;line-height:1.7;color:rgba(255,255,255,0.5)}
+    .values-strip{background:#fff;padding:64px 0;border-top:1px solid var(--stone);border-bottom:1px solid var(--stone)}
+    .values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px}
+    .value__label{font-family:var(--font-sans);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ochre);margin-bottom:10px}
+    .value__title{font-family:var(--font-serif);font-size:1.05rem;color:var(--dark);margin-bottom:8px}
+    .value__desc{font-size:0.85rem;line-height:1.65;color:var(--body-text)}
+    .partnership{background:var(--parchment);padding:80px 0}
+    .partnership__inner{max-width:960px;margin:0 auto;padding:0 var(--pad-x)}
+    .partnership__label{font-family:var(--font-sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--terracotta);margin-bottom:12px}
+    .partnership__title{font-family:var(--font-serif);font-size:clamp(1.5rem,3vw,2.25rem);color:var(--dark);margin-bottom:20px}
+    .partnership__lead{font-size:1rem;line-height:1.75;color:var(--body-text);max-width:640px;margin-bottom:40px}
+    .partner-types{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
+    .partner-type{background:#fff;border:1px solid var(--stone);border-top:3px solid var(--terracotta);padding:24px 20px}
+    .partner-type h4{font-family:var(--font-sans);font-size:0.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--terracotta);margin-bottom:8px}
+    .partner-type p{font-size:0.85rem;line-height:1.6;color:var(--body-text)}
+    .partnership-cta{background:var(--dark);padding:36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .partnership-cta p{font-size:0.95rem;color:rgba(255,255,255,0.75);max-width:480px;line-height:1.65}
+    .contributor{background:var(--sky);padding:80px 0;text-align:center}
+    .contributor__inner{max-width:680px;margin:0 auto;padding:0 var(--pad-x)}
+    .contributor__label{font-family:var(--font-sans);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+    .contributor__title{font-family:var(--font-serif);font-size:clamp(1.5rem,3vw,2.25rem);color:var(--dark);margin-bottom:24px}
+    .contributor__body{font-size:1rem;line-height:1.8;color:var(--body-text);margin-bottom:36px}
+  </style>
 </head>
 <body class="page--about">
 
-  
 <nav class="nav nav--solid" aria-label="Main navigation">
   <div class="nav__inner">
     <a href="/" class="nav__logo" aria-label="Explore Lori home">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-        <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+        <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
       </svg>
       <span class="nav__logo-text">Explore Lori</span>
     </a>
-
     <ul class="nav__links" role="list">
-      <li><a href="/discover/" class="nav__link">Discover</a></li>
-      <li><a href="/stories/" class="nav__link">Stories</a></li>
-      <li><a href="/plan/" class="nav__link">Plan</a></li>
-      <li><a href="/events/" class="nav__link">What's On</a></li>
+      <li><a href="/discover/" class="nav__link">The Map</a></li>
+      <li><a href="/stories/" class="nav__link">The Chronicle</a></li>
+      <li><a href="/plan/" class="nav__link">Getting Here</a></li>
+      <li><a href="/events/" class="nav__link">Briefings</a></li>
     </ul>
-
     <div class="nav__actions">
       <button class="nav__search-btn" id="search-btn" aria-label="Search" aria-expanded="false">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -53,120 +86,208 @@
         </svg>
         <span class="nav__search-label">Search</span>
       </button>
-      <a href="/connect/" class="btn btn--outline btn--sm">Connect</a>
+      <a href="/connect/" class="btn btn--outline btn--sm">Partner With Us</a>
     </div>
-
     <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span class="nav__hamburger-line"></span>
       <span class="nav__hamburger-line"></span>
       <span class="nav__hamburger-line"></span>
     </button>
   </div>
-
   <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
     <ul class="nav__mobile-links" role="list">
-      <li><a href="/discover/">Discover</a></li>
-      <li><a href="/stories/">Stories</a></li>
-      <li><a href="/plan/">Plan</a></li>
-      <li><a href="/events/">What's On</a></li>
-      <li><a href="/connect/">Connect</a></li>
+      <li><a href="/discover/">The Map</a></li>
+      <li><a href="/stories/">The Chronicle</a></li>
+      <li><a href="/plan/">Getting Here</a></li>
+      <li><a href="/events/">Briefings</a></li>
+      <li><a href="/connect/">Partner With Us</a></li>
     </ul>
   </div>
   <div class="nav__overlay" aria-hidden="true"></div>
 </nav>
 
+<section class="about-hero">
+  <div class="container">
+    <p class="about-hero__label">A Regional Chronicle</p>
+    <h1 class="about-hero__title">Explore Lori — <em>An Independent Voice</em> for Northern Armenia</h1>
+    <p class="about-hero__sub">An independent editorial platform documenting the heritage, landscape, and future of the Lori region. Not a guidebook. Not a booking engine. A chronicle.</p>
+    <a href="/discover/" class="btn btn--gold">Explore the Region →</a>
+  </div>
+</section>
 
-  
-<section class=about-hero><div class=about-hero__inner><div><p class=about-hero__eyebrow>The project</p><h1 class=about-hero__title>Built by people who live and walk in Lori</h1><p class=about-hero__lead>Explore Lori started as a question: why is there almost nothing online about a region with two UNESCO monasteries, canyon trails, and centuries of continuous village life? This is the attempt to fix that.</p><a href=/discover/ class="btn btn--outline">Start exploring →</a></div><div class=about-hero__img><img src=/images/about-lori-landscape.jpg alt="Lori canyon landscape at dawn" loading=eager onerror="this.src='images/placeholder.svg'"></div></div></section><section class="section section--light"><div class=about-prose><h2>What is Explore Lori?</h2><p>Explore Lori is a free, independent platform for the Lori region of northern Armenia. It lists trails, monasteries, villages, and hands-on cultural experiences — with honest, accurate information written by people who've been there, ideally people who live there.</p><p>It's not a booking platform. It doesn't take commission. It doesn't run ads. Its only purpose is to help people understand what Lori offers and how to reach it — in a way that benefits the local communities, not just passes through them.</p><h2>Why Lori?</h2><p>Lori has two UNESCO-listed monastery complexes (Haghpat and Sanahin), canyon landscapes as dramatic as anywhere in the region, a rich tradition of carpet weaving and copper craft, and villages where traditional knowledge — of plants, animals, food, and stone — is still genuinely alive. It also has almost no organised tourism infrastructure, very few English-language resources, and most travellers who do visit stay one afternoon and leave.</p><p>That's a problem worth trying to solve. Not by packaging Lori into something it isn't, but by making it easier for people who want to spend real time here to understand what they're looking at and to do it without a middleman.</p><h2>The connection to Ethnoforma</h2><p>Explore Lori grew out of Ethnoforma — an arthouse guesthouse in Akner village, in the Debed canyon. Ethnoforma is a restored stone building in a 200-soul village above Alaverdi, designed around Lori's vernacular materials and craft traditions. Running a guesthouse in Akner means meeting every kind of traveller: people who drove past and stopped on impulse, people who planned six months in advance, people who had no idea Lori existed until last week.</p><p>What became clear quickly was that the information gap was hurting the region. Good travellers — curious, respectful, willing to spend money locally — couldn't find what they needed to stay longer or go deeper. Explore Lori is the attempt to close that gap.</p><p>Ethnoforma guests get access to the platform's full resource base, and some of the trails, guides, and experiences listed here are ones we've personally tested and can vouch for. But Explore Lori is not a marketing arm of Ethnoforma — it covers the whole region, lists competitors, and aims to be genuinely useful to anyone visiting Lori, regardless of where they're sleeping.</p><h2>How the content works</h2><p>Trail information comes from walking the trails and from local guides who know them well. Cultural and village content is written with or by local knowledge holders where possible. Photos are either our own or sourced from publicly available commons with attribution. Nothing is copied from tourism agencies or AI-generated at scale.</p><p>The platform is open to community contributions — if you know a place or route that isn't listed, <a href=/connect/#submit>submit it here</a>. If you're a guide or accommodation provider in Lori, <a href=/connect/#guide>you can list yourself for free</a>.</p></div></section><section class=about-values aria-labelledby=values-heading><div class=container><div class=section__header><div><h2 class=section__title id=values-heading>How we operate</h2><p class=section__lead>Three things that shape every decision about this platform.</p></div></div><div class=about-values__grid><div class=about-value><span class=about-value__icon>🏔</span><h3 class=about-value__title>Accuracy over volume</h3><p class=about-value__desc>Twelve well-described trails are more useful than 80 poorly researched ones. We add slowly and only add things we can stand behind.</p></div><div class=about-value><span class=about-value__icon>🌿</span><h3 class=about-value__title>Local benefit first</h3><p class=about-value__desc>The people who should gain most from tourism in Lori are the people who live here. Every listing, recommendation, and partnership decision is made with that in mind.</p></div><div class=about-value><span class=about-value__icon>📖</span><h3 class=about-value__title>No hidden incentives</h3><p class=about-value__desc>No paid placements, no affiliate commissions, no sponsored content. If something is listed, it's because we think it's worth your time.</p></div></div></div></section><section class="about-ethnoforma section section--light"><div class=about-ethnoforma__inner><div><div class=before-after><div class=before-after__panel><img src=/images/ethnoforma-original.jpg alt="Ethnoforma building before renovation — crumbling plaster, overgrown garden" loading=lazy onerror="this.src='images/placeholder.svg'"><span class=before-after__label>Before</span></div><div class=before-after__panel><img src=/images/stay-ethnoforma.jpg alt="Ethnoforma after renovation — stone facade, wooden balcony, flower-lined stone path" loading=lazy onerror="this.src='images/placeholder.svg'"><span class=before-after__label>After</span></div></div></div><div><p class=about-ethnoforma__eyebrow>Where it started</p><h2 class=about-ethnoforma__title>Ethnoforma, Akner village</h2><p class=about-ethnoforma__desc>The building was a crumbling two-storey house on the edge of Akner — a village of roughly 200 people, on the right bank of the Debed canyon, 10 km from Alaverdi. It had the bones: stone walls, a steep corrugated roof, views into the canyon. What it didn't have was anything else.</p><p class=about-ethnoforma__desc>The renovation stripped back the plaster to expose the original stonework, rebuilt the wooden balcony frame, fitted flower boxes on every window. The interior uses handwoven Lori textiles, locally sourced wood, and a wood-burning stove that actually heats the building. The result is a guesthouse rooted in the vernacular of the region — not a replica of one, but a continuation of it.</p><p class=about-ethnoforma__desc>Akner itself has a 19th-century stone church at its centre, the ruins of Kayan Fortress to the north — one of the most powerful fortresses in medieval Lori — and springs that gave the village its name. It is 4 km from Sanahin Monastery. It is the kind of place that almost nobody visits, because almost nobody knows it exists. That's the gap Explore Lori is trying to close.</p><a href=/discover/akner-village/ class="btn btn--outline">About Akner →</a></div></div></section>
+<section class="manifesto">
+  <div class="manifesto__inner">
+    <p>Explore Lori is an independent initiative born from a simple observation: the story of Northern Armenia is too deep for a standard guidebook. Our mission is to act as a digital archive and a narrative stage for one of the world's most vertically diverse regions.</p>
+    <p>We are not a travel agency. We are not a commercial tour operator. We are a collection of researchers, storytellers, and residents dedicated to the Unseen Lori. We believe that by documenting the hidden theaters, the hand-carved trails, and the ancient stone architecture of our canyons, we can preserve the soul of this region for the next generation of explorers.</p>
+    <p>The story of Lori spans three millennia — from Urartian fortresses and UNESCO-listed monastery complexes, through the industrial copper towns of the Soviet canyon, to the COAF SMART Centers and Tumo Labs now reshaping village life at altitude. This platform exists to connect those three timelines into a single, living document.</p>
+  </div>
+</section>
 
+<section class="pillars">
+  <div class="container">
+    <div class="pillars__header">
+      <p class="pillars__label">Our Editorial Desks</p>
+      <h2 class="pillars__title">Three pillars. One chronicle.</h2>
+    </div>
+    <div class="pillars__grid">
+      <div class="pillar pillar--archive">
+        <span class="pillar__accent"></span>
+        <span class="pillar__tag">The Archive · Ancient</span>
+        <h3 class="pillar__name">Stones &amp; Centuries</h3>
+        <p class="pillar__desc">We provide deep-dive appreciation pieces on the 3,000-year architectural history of the Debed and Dzoraget canyons — from UNESCO cathedrals to forgotten cliffside chapels accessible only on foot. Every wall has a date. We find it.</p>
+      </div>
+      <div class="pillar pillar--ledger">
+        <span class="pillar__accent"></span>
+        <span class="pillar__tag">The Ledger · Hidden</span>
+        <h3 class="pillar__name">The Unseen Lori</h3>
+        <p class="pillar__desc">We curate the Lori Ledger — a community-sourced database of hidden viewpoints, local legends, and artisan traditions across Lori's 50+ villages. If it exists but is not documented, it is in danger of being lost. We document it.</p>
+      </div>
+      <div class="pillar pillar--horizon">
+        <span class="pillar__accent"></span>
+        <span class="pillar__tag">The Horizon · Future</span>
+        <h3 class="pillar__name">The Lori Renaissance</h3>
+        <p class="pillar__desc">We document the modern educational initiatives and innovative regional developments transforming village life — COAF, Tumo, the next generation of highland farmers who are also coders. The future of Lori is not separate from its past.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer class="footer" aria-label="Site footer">
+<section class="values-strip">
+  <div class="container">
+    <div class="values-grid">
+      <div class="value">
+        <p class="value__label">Independence</p>
+        <h3 class="value__title">No hidden incentives</h3>
+        <p class="value__desc">No paid placements, no affiliate commissions, no sponsored content. If something is listed, it is because we believe it is worth your time — or worth preserving.</p>
+      </div>
+      <div class="value">
+        <p class="value__label">Accuracy</p>
+        <h3 class="value__title">Depth over volume</h3>
+        <p class="value__desc">Twelve well-described trails are more useful than 80 poorly researched ones. Our content is walked, verified, and written by people who have been to the place.</p>
+      </div>
+      <div class="value">
+        <p class="value__label">Benefit</p>
+        <h3 class="value__title">Local communities first</h3>
+        <p class="value__desc">The people who should gain most from increased visibility of Lori are the people who live here. Every editorial decision is made with that in mind.</p>
+      </div>
+      <div class="value">
+        <p class="value__label">Neutrality</p>
+        <h3 class="value__title">An open directory</h3>
+        <p class="value__desc">We list guides, guesthouses, and local experts that meet our editorial standards — regardless of affiliation. We celebrate local providers; we do not compete with them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partnership" id="partner">
+  <div class="partnership__inner">
+    <p class="partnership__label">Open Ecosystem</p>
+    <h2 class="partnership__title">An Open Platform for the Lori Region</h2>
+    <p class="partnership__lead">Explore Lori is built on the philosophy of the open ecosystem. We do not compete with local providers — we celebrate them. We are actively seeking partnerships with organisations and individuals working to improve, document, or protect the Lori region.</p>
+    <div class="partner-types">
+      <div class="partner-type">
+        <h4>Local Organisations</h4>
+        <p>Feature your success stories and community impact through long-form editorial coverage on the Chronicle.</p>
+      </div>
+      <div class="partner-type">
+        <h4>Researchers &amp; Historians</h4>
+        <p>Publish your long-form cultural studies and field notes through our editorial platform.</p>
+      </div>
+      <div class="partner-type">
+        <h4>Photographers &amp; Creatives</h4>
+        <p>Contribute to the visual archive of Northern Armenia and reach an engaged editorial audience.</p>
+      </div>
+      <div class="partner-type">
+        <h4>Local Guides &amp; Artisans</h4>
+        <p>List your expertise in the regional directory and connect with travellers seeking authentic local knowledge.</p>
+      </div>
+    </div>
+    <div class="partnership-cta">
+      <p>If you are working to improve, document, or protect the Lori region, this platform is open to you. We review all partnership inquiries personally.</p>
+      <a href="/connect/" class="btn btn--gold">Start a Partnership Conversation →</a>
+    </div>
+  </div>
+</section>
+
+<section class="contributor">
+  <div class="contributor__inner">
+    <p class="contributor__label">Appreciation Journalism</p>
+    <h2 class="contributor__title">How we write</h2>
+    <p class="contributor__body">Our content is driven by appreciation journalism. We don't just list a location — we spend time in its silence. Every story on this platform is a result of walking the trails, talking to the shepherds, and sitting in the stone haylofts of the Akner and Dsegh highlands.<br><br>We use the first-person plural — <em>we</em> — because this chronicle is not the work of one person. It belongs to everyone who has contributed a photograph, a trail note, a village name that was about to be forgotten. We invite you to add yours.</p>
+    <a href="/connect/" class="btn btn--outline">Contribute to the Ledger →</a>
+  </div>
+</section>
+
+<footer class="footer" aria-label="Site footer">
   <div class="container footer__grid">
     <div class="footer__brand">
       <a href="/" class="footer__logo" aria-label="Explore Lori home">
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-          <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+          <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
         </svg>
         Explore Lori
       </a>
-      <p class="footer__tagline">A platform for Lori, Armenia — built by people who live and walk here.</p>
+      <p class="footer__tagline">An independent chronicle of Northern Armenia.</p>
     </div>
-
     <nav class="footer__nav" aria-label="Footer navigation">
       <div class="footer__nav-col">
-        <h4 class="footer__nav-title">Explore</h4>
+        <h4 class="footer__nav-title">The Platform</h4>
         <ul role="list">
-          <li><a href="/discover/">Discover</a></li>
-          <li><a href="/stories/">Stories</a></li>
-          <li><a href="/plan/">Plan Your Trip</a></li>
-          <li><a href="/costs/">Cost Calculator</a></li>
-          <li><a href="/events/">What's On</a></li>
+          <li><a href="/discover/">The Map</a></li>
+          <li><a href="/stories/">The Chronicle</a></li>
+          <li><a href="/plan/">Getting Here</a></li>
+          <li><a href="/events/">Regional Briefings</a></li>
         </ul>
       </div>
       <div class="footer__nav-col">
-        <h4 class="footer__nav-title">Connect</h4>
+        <h4 class="footer__nav-title">Contribute</h4>
         <ul role="list">
-          <li><a href="/connect/">Submit a Place</a></li>
-          <li><a href="/connect/#guide">List as a Guide</a></li>
-          <li><a href="/connect/#stay">List a Stay</a></li>
-          <li><a href="/connect/#write">Write for Us</a></li>
+          <li><a href="/connect/">Submit to the Ledger</a></li>
+          <li><a href="/connect/#guide">List as a Local Expert</a></li>
+          <li><a href="/connect/#write">Write for the Chronicle</a></li>
+          <li><a href="/about/#partner">Partnership Inquiry</a></li>
         </ul>
       </div>
       <div class="footer__nav-col">
         <h4 class="footer__nav-title">About</h4>
         <ul role="list">
-          <li><a href="/about/">About the Project</a></li>
-          <li><a href="/about/#ethnoforma">Ethnoforma</a></li>
-          <li><a href="mailto:hello@explorelori.com">Contact</a></li>
+          <li><a href="/about/">About this Project</a></li>
+          <li><a href="/about/#partner">Partner With Us</a></li>
+          <li><a href="mailto:hello@explorelori.com">hello@explorelori.com</a></li>
         </ul>
       </div>
     </nav>
   </div>
-
   <div class="footer__bottom">
     <div class="container footer__bottom-inner">
-      <p class="footer__copy">&copy; 2026 Explore Lori. Made in Lori, Armenia.</p>
-      <p class="footer__legal">
-        <a href="/privacy/">Privacy</a>
-        <a href="/terms/">Terms</a>
-      </p>
+      <p class="footer__copy">&copy; 2026 Explore Lori. An independent regional chronicle.</p>
+      <p class="footer__legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
     </div>
   </div>
 </footer>
 
-
-  
-  <div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
-    <div class="search-overlay__inner">
-      <div class="search-box">
-        <svg class="search-box__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="2"/>
-          <path d="M13 13 L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+<div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="search-overlay__inner">
+    <div class="search-box">
+      <svg class="search-box__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M13 13 L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" type="search" class="search-box__input" placeholder="Search places, stories, events…"
+        autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Search"
+        aria-autocomplete="list" aria-controls="search-results">
+      <button id="search-close" class="search-box__close" aria-label="Close search">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4 4 L14 14 M14 4 L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
-        <input
-          id="search-input"
-          type="search"
-          class="search-box__input"
-          placeholder="Search places, stories, events…"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
-          aria-label="Search"
-          aria-autocomplete="list"
-          aria-controls="search-results"
-        >
-        <button id="search-close" class="search-box__close" aria-label="Close search">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-            <path d="M4 4 L14 14 M14 4 L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-      <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+      </button>
     </div>
+    <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
   </div>
+</div>
 
-  <script src="/js/main.js"></script>
-  <script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>

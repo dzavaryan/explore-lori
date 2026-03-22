@@ -14,9 +14,6 @@
   <meta property="og:url" content="https://explorelori.com/events/">
 
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   
   <link rel="stylesheet" href="/css/styles.css">
@@ -33,7 +30,7 @@
     <a href="/" class="nav__logo" aria-label="Explore Lori home">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-        <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+        <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
       </svg>
       <span class="nav__logo-text">Explore Lori</span>
     </a>
@@ -89,11 +86,11 @@
 
 .events-hero{background:var(--dark);padding:100px 0 48px;}
 .events-hero__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-x);display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;}
-.events-hero__eyebrow{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.events-hero__eyebrow{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--ochre);margin-bottom:12px;}
 .events-hero__title{font-family:var(--font-serif);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;color:var(--white);line-height:1.04;margin-bottom:14px;}
 .events-hero__subtitle{font-family:var(--font-sans);font-size:1rem;color:rgba(247,244,238,.6);max-width:460px;line-height:1.6;}
 .events-hero__stat{text-align:right;flex-shrink:0;}
-.events-hero__count{font-family:var(--font-serif);font-size:clamp(3.5rem,7vw,5.5rem);font-weight:700;color:var(--gold);line-height:1;}
+.events-hero__count{font-family:var(--font-serif);font-size:clamp(3.5rem,7vw,5.5rem);font-weight:700;color:var(--ochre);line-height:1;}
 .events-hero__count-label{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(247,244,238,.35);margin-top:4px;}
 
 .events-filter{background:var(--dark-2);border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:68px;z-index:100;padding:14px 0;}
@@ -106,12 +103,12 @@
 .ev-clear{font-family:var(--font-sans);font-size:11px;color:rgba(247,244,238,.3);background:none;border:none;cursor:pointer;margin-left:auto;padding:4px 0;transition:color .18s;}
 .ev-clear:hover{color:var(--white);}
 
-.events-body{background:var(--parch);min-height:50vh;}
+.events-body{background:var(--parchment);min-height:50vh;}
 .events-body__inner{max-width:var(--max-w);margin:0 auto;padding:64px var(--pad-x) 96px;}
 
 .ev-month{margin-bottom:64px;}
 .ev-month__header{display:flex;align-items:center;gap:20px;margin-bottom:28px;}
-.ev-month__name{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--slate);white-space:nowrap;}
+.ev-month__name{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--slate-mid);white-space:nowrap;}
 .ev-month__line{flex:1;height:1px;background:rgba(212,196,154,.4);}
 .ev-month__count{font-family:var(--font-sans);font-size:11px;color:var(--stone);white-space:nowrap;}
 
@@ -122,13 +119,13 @@
 .ev-card__top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;}
 .ev-card__date{display:flex;flex-direction:column;align-items:center;background:var(--cat-bg,rgba(212,196,154,.15));border-radius:var(--radius);padding:8px 14px;min-width:56px;text-align:center;flex-shrink:0;}
 .ev-card__day{font-family:var(--font-serif);font-size:1.875rem;font-weight:700;color:var(--cat,var(--dark));line-height:1;}
-.ev-card__month-lbl{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cat,var(--slate));margin-top:3px;opacity:.8;}
-.ev-card__year-lbl{font-family:var(--font-sans);font-size:9px;color:var(--slate);margin-top:1px;opacity:.55;}
-.ev-card__cat{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cat,var(--slate));background:var(--cat-bg,rgba(212,196,154,.15));border-radius:100px;padding:4px 10px;white-space:nowrap;align-self:flex-start;}
+.ev-card__month-lbl{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cat,var(--slate-mid));margin-top:3px;opacity:.8;}
+.ev-card__year-lbl{font-family:var(--font-sans);font-size:9px;color:var(--slate-mid);margin-top:1px;opacity:.55;}
+.ev-card__cat{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cat,var(--slate-mid));background:var(--cat-bg,rgba(212,196,154,.15));border-radius:100px;padding:4px 10px;white-space:nowrap;align-self:flex-start;}
 .ev-card__title{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;color:var(--dark);line-height:1.25;margin-bottom:10px;}
 .ev-card__desc{font-family:var(--font-sans);font-size:.875rem;color:var(--body-text);line-height:1.65;margin-bottom:18px;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .ev-card__foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
-.ev-card__loc{font-family:var(--font-sans);font-size:12px;color:var(--slate);display:flex;align-items:center;gap:5px;}
+.ev-card__loc{font-family:var(--font-sans);font-size:12px;color:var(--slate-mid);display:flex;align-items:center;gap:5px;}
 .ev-card__loc svg{flex-shrink:0;opacity:.65;}
 .ev-card__link{font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--cat,var(--indigo));display:flex;align-items:center;gap:4px;transition:gap .15s;white-space:nowrap;}
 .ev-card__link:hover{gap:8px;}
@@ -628,7 +625,7 @@
       <a href="/" class="footer__logo" aria-label="Explore Lori home">
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-          <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+          <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
         </svg>
         Explore Lori
       </a>

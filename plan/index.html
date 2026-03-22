@@ -14,9 +14,6 @@
   <meta property="og:url" content="https://explorelori.com/plan/">
 
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   
   <link rel="stylesheet" href="/css/styles.css">
@@ -33,7 +30,7 @@
     <a href="/" class="nav__logo" aria-label="Explore Lori home">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-        <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+        <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
       </svg>
       <span class="nav__logo-text">Explore Lori</span>
     </a>
@@ -220,15 +217,15 @@
   .stay-card__img{position:relative;aspect-ratio:4/3;overflow:hidden;flex-shrink:0;}
   .stay-card__img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
   .stay-card:hover .stay-card__img img{transform:scale(1.04);}
-  .stay-card__badge{position:absolute;top:12px;left:12px;background:rgba(28,30,34,.75);backdrop-filter:blur(4px);color:var(--parch);font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
+  .stay-card__badge{position:absolute;top:12px;left:12px;background:rgba(28,30,34,.75);backdrop-filter:blur(4px);color:var(--parchment);font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
   .stay-card__body{padding:22px 22px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
-  .stay-card__loc{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);}
+  .stay-card__loc{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate-mid);}
   .stay-card__name{font-family:var(--font-serif);font-size:1.15rem;font-weight:700;color:var(--dark);line-height:1.2;}
   .stay-card__name a{color:inherit;text-decoration:none;}
-  .stay-card__name a:hover{color:var(--red);}
-  .stay-card__excerpt{font-family:var(--font-sans);font-size:0.875rem;color:var(--slate);line-height:1.55;flex:1;}
+  .stay-card__name a:hover{color:var(--terracotta);}
+  .stay-card__excerpt{font-family:var(--font-sans);font-size:0.875rem;color:var(--slate-mid);line-height:1.55;flex:1;}
   .stay-card__amenities{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0;}
-  .stay-card__amenities li{font-family:var(--font-sans);font-size:11px;color:var(--slate);background:var(--surface);border-radius:3px;padding:3px 8px;}
+  .stay-card__amenities li{font-family:var(--font-sans);font-size:11px;color:var(--slate-mid);background:var(--sky);border-radius:3px;padding:3px 8px;}
   .stay-card__foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;}
   .stay-card__price{font-family:var(--font-sans);font-size:13px;font-weight:700;color:var(--green);}
   @media(max-width:960px){.stay-grid{grid-template-columns:repeat(2,1fr);}}
@@ -276,7 +273,7 @@
         <div class="stay-card__body">
           <span class="stay-card__loc">Odzun · Alaverdi</span>
           <h3 class="stay-card__name">
-            Odzun Village Stay
+            <a href="/stays/odzun-village/">Odzun Village Stay</a>
           </h3>
           <p class="stay-card__excerpt">Stay with a local family 200 metres from the 6th-century Odzun Basilica. Home-cooked Armenian dinner included every evening.</p>
           
@@ -299,7 +296,7 @@
         <div class="stay-card__body">
           <span class="stay-card__loc">Stepanavan · Stepanavan</span>
           <h3 class="stay-card__name">
-            Canyon View Hotel
+            <a href="/stays/canyon-view/">Canyon View Hotel</a>
           </h3>
           <p class="stay-card__excerpt">A recently renovated 12-room hotel at the edge of Stepanavan, with direct access to the Dzoraget Gorge trail from the back door.</p>
           
@@ -322,7 +319,7 @@
         <div class="stay-card__body">
           <span class="stay-card__loc">Tashir · Tashir</span>
           <h3 class="stay-card__name">
-            Tashir Highland Camp
+            <a href="/stays/tashir-camp/">Tashir Highland Camp</a>
           </h3>
           <p class="stay-card__excerpt">Heated canvas tents at 1,800 m with views of the north Lori plateau. Open June–September only. Completely off-grid solar power.</p>
           
@@ -345,7 +342,7 @@
         <div class="stay-card__body">
           <span class="stay-card__loc">Dsegh · Alaverdi</span>
           <h3 class="stay-card__name">
-            Tumanyan Writer&#39;s House
+            <a href="/stays/tumanyan-house/">Tumanyan Writer&#39;s House</a>
           </h3>
           <p class="stay-card__excerpt">A two-bedroom stone cottage in Dsegh, renovated and rented by the village cultural association. 5-minute walk from Tumanyan&#39;s museum-house.</p>
           
@@ -481,7 +478,7 @@
       <a href="/" class="footer__logo" aria-label="Explore Lori home">
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-          <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+          <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
         </svg>
         Explore Lori
       </a>

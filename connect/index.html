@@ -14,9 +14,6 @@
   <meta property="og:url" content="https://explorelori.com/connect/">
 
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   
   <link rel="stylesheet" href="/css/styles.css">
@@ -33,7 +30,7 @@
     <a href="/" class="nav__logo" aria-label="Explore Lori home">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-        <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+        <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
       </svg>
       <span class="nav__logo-text">Explore Lori</span>
     </a>
@@ -137,7 +134,7 @@
       </div>
 
       
-      <form class="cf-form" id="cf-form" novalidate>
+      <form class="cf-form" id="cf-form" name="cf-form" data-netlify="true" netlify-honeypot="bot-field" novalidate>
         <input type="hidden" name="form-name" id="cf-form-name" value="submit-place">
         <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
 
@@ -292,11 +289,11 @@
 </div>
 
 <style>
-.cf-page { background: var(--parch); min-height: 100vh; }
+.cf-page { background: var(--parchment); min-height: 100vh; }
 
 .cf-hero {
   background: var(--dark);
-  color: var(--parch);
+  color: var(--parchment);
   padding: 100px 24px 56px;
   text-align: center;
 }
@@ -386,7 +383,7 @@
   font-size: .78rem; font-weight: 600;
   color: var(--dark);
 }
-.cf-req { color: var(--red); margin-left: 2px; }
+.cf-req { color: var(--terracotta); margin-left: 2px; }
 
 .cf-input {
   border: 1.5px solid #ddd8d0;
@@ -423,7 +420,7 @@ textarea.cf-input { resize: vertical; min-height: 90px; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--red);
+  background: var(--terracotta);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -568,7 +565,7 @@ textarea.cf-input { resize: vertical; min-height: 90px; }
       <a href="/" class="footer__logo" aria-label="Explore Lori home">
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
-          <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+          <circle cx="16" cy="6" r="2.5" fill="var(--terracotta)"/>
         </svg>
         Explore Lori
       </a>
