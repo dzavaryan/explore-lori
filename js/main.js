@@ -67,9 +67,26 @@
 const FilterSystem = (function () {
   const state = {};
 
+  function updateToggleBadge() {
+    const badge = document.querySelector('.filter-toggle-btn__badge');
+    if (!badge) return;
+    const n = Object.keys(state).length;
+    if (n > 0) { badge.textContent = n; badge.removeAttribute('hidden'); }
+    else { badge.setAttribute('hidden', ''); }
+  }
+
   function init(barSelector) {
     const bar = document.querySelector(barSelector);
     if (!bar) return;
+
+    /* Mobile collapse toggle */
+    const toggleBtn = bar.querySelector('.filter-toggle-btn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = bar.classList.toggle('filter-bar--open');
+        toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
 
     const pills = bar.querySelectorAll('[data-filter]');
     pills.forEach(pill => {
@@ -94,6 +111,14 @@ const FilterSystem = (function () {
           state[group] = value;
         }
         applyFilters();
+
+        /* Scroll grid into view so user sees the filtered results */
+        const grid = document.querySelector('.discover__grid, .article-grid, #events-grid');
+        if (grid) {
+          const offset = 80; /* clear fixed nav */
+          const top = grid.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
       });
     });
   }
@@ -141,6 +166,8 @@ const FilterSystem = (function () {
         ? `${n} ${n === 1 ? 'result' : 'results'}`
         : `Showing ${n} ${countEl.dataset.noun || 'items'}`;
     }
+
+    updateToggleBadge();
   }
 
   function clearAll() {
@@ -150,6 +177,7 @@ const FilterSystem = (function () {
     /* Restore "All Stories" active state if present */
     const allTab = document.querySelector('[data-filter="all"]');
     if (allTab) allTab.classList.add('pillar-tab--active');
+    updateToggleBadge();
     applyFilters();
   }
 

@@ -111,6 +111,17 @@
 
 <div class="filter-bar" role="search" aria-label="Filter trails and places">
   <div class="container filter-bar__inner">
+    <button class="filter-toggle-btn" aria-expanded="false" aria-controls="filter-bar-body">
+      <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true">
+        <path d="M1 1h13M3.5 6h8M6 11h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span>Filter</span>
+      <span class="filter-toggle-btn__badge" hidden></span>
+      <svg class="filter-toggle-btn__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+        <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="filter-bar__body" id="filter-bar-body">
     <div class="filter-group" role="group" aria-labelledby="filter-type-label">
       <span class="filter-group__label" id="filter-type-label">Type</span>
       <div class="filter-group__pills">
@@ -149,6 +160,7 @@
       </div>
     </div>
     <button class="filter-bar__clear btn btn--ghost btn--sm" aria-label="Clear all filters">Clear all</button>
+    </div><!-- /.filter-bar__body -->
   </div>
 </div>
 

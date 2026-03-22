@@ -3,7 +3,7 @@
 
 /* 1. Card cover link — make it an absolute overlay so whole card is clickable */
 .article-card,.card{position:relative}
-.card-cover-link{position:absolute;inset:0;z-index:0;display:block}
+.card-cover-link{position:absolute;inset:0;z-index:2;display:block}
 .article-card__body,.card__body,.card__img,.article-card__img,.article-card__img-wrap{position:relative;z-index:1}
 
 /* 2. Story card title link — explicit colour + hover state, no browser defaults */
@@ -796,6 +796,62 @@ body.search-open { overflow: hidden; }
 [data-circuit="gorges"]    .card__tag { border-left:3px solid var(--circuit-gorges); padding-left:8px; }
 [data-circuit="molokan"]   .card__tag { border-left:3px solid var(--circuit-molokan); padding-left:8px; }
 [data-circuit="steppe"]    .card__tag { border-left:3px solid var(--circuit-steppe); padding-left:8px; }
+
+/* ══ Mobile filter toggle ════════════════════════════════════ */
+.filter-toggle-btn { display: none; }
+
+@media (max-width: 767px) {
+  .filter-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 20px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--dark);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .filter-toggle-btn__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ochre);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 20px;
+  }
+  .filter-toggle-btn__chevron {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+  }
+  .filter-bar--open .filter-toggle-btn__chevron { transform: rotate(180deg); }
+  .filter-bar--open .filter-toggle-btn { border-bottom: 1px solid var(--sky); }
+
+  .filter-bar__body {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 20px 20px;
+  }
+  .filter-bar--open .filter-bar__body { display: flex; }
+
+  .filter-bar__inner { flex-direction: column; gap: 0; padding: 0; }
+  .filter-group { flex-direction: column; gap: 8px; }
+  .filter-bar__clear { margin-left: 0; margin-top: 4px; }
+}
+
+@media (min-width: 768px) {
+  .filter-bar__body { display: contents; }
+}
 
 /* ══ btn--gold variant ════════════════════════════════════════ */
 .btn--gold { background:var(--ochre); color:var(--dark); border:2px solid var(--ochre); font-family:var(--font-sans); font-size:0.85rem; font-weight:700; letter-spacing:0.5px; padding:12px 28px; display:inline-block; transition:background 0.2s, border-color 0.2s; }
