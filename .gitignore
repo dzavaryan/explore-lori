@@ -1,0 +1,5 @@
+
+# Development artifacts
+.superpowers/
+.claude/
+tools/crop-preview.html
