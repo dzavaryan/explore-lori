@@ -1,0 +1,49 @@
+[
+  {
+    "id": "armen-grigoryan",
+    "name": "Armen Grigoryan",
+    "specialty": "Canyon & gorge trails, Haghpat–Sanahin area",
+    "bio": "Born in Alaverdi, Armen has been guiding in the Debed canyon for 12 years. He knows every fork in the Kobayr path and which cliff ledges are safe in spring melt.",
+    "photo": "images/guide-armen.jpg",
+    "languages": [
+      "Armenian",
+      "Russian",
+      "English"
+    ],
+    "certifications": [
+      "MCGA Level 2"
+    ],
+    "contactUrl": ""
+  },
+  {
+    "id": "narine-avetisyan",
+    "name": "Narine Avetisyan",
+    "specialty": "Cultural & village walks, craft workshops",
+    "bio": "A cultural anthropologist and native of Stepanavan, Narine runs half-day village walks that visit weavers, beekeepers, and a 90-year-old herbalist who still makes traditional remedies.",
+    "photo": "images/guide-narine.jpg",
+    "languages": [
+      "Armenian",
+      "French",
+      "English"
+    ],
+    "certifications": [
+      "UNESCO Cultural Heritage Guide"
+    ],
+    "contactUrl": ""
+  },
+  {
+    "id": "gevorg-hakobyan",
+    "name": "Gevorg Hakobyan",
+    "specialty": "Alpine trails, Jijur Ridge, Tashir Plateau",
+    "bio": "Mountain rescue volunteer and alpine guide based in Vanadzor. Gevorg leads multi-day treks across north Lori including the rarely-attempted Lori–Javakheti crossing.",
+    "photo": "images/guide-gevorg.jpg",
+    "languages": [
+      "Armenian",
+      "Russian"
+    ],
+    "certifications": [
+      "Armenian Mountain Guide Association"
+    ],
+    "contactUrl": ""
+  }
+]

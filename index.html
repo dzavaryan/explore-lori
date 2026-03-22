@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Lori — Armenia's Canyon Country</title>
+  <meta name="description" content="Explore Lori — trail guides, monastery routes, village stays, and seasonal field notes for Lori, northern Armenia. Written by people who live and walk here.">
+
+  
+  <meta property="og:title" content="Explore Lori — Armenia&#39;s Canyon Country">
+  <meta property="og:description" content="Explore Lori — trail guides, monastery routes, village stays, and seasonal field notes for Lori, northern Armenia. Written by people who live and walk here.">
+  <meta property="og:image" content="/images/og-homepage.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://explorelori.com/">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/vivid.css">
+  
+
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+</head>
+<body class="page--home">
+
+  
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo" aria-label="Explore Lori home">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
+        <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+      </svg>
+      <span class="nav__logo-text">Explore Lori</span>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="/discover/" class="nav__link">Discover</a></li>
+      <li><a href="/stories/" class="nav__link">Stories</a></li>
+      <li><a href="/plan/" class="nav__link">Plan</a></li>
+      <li><a href="/events/" class="nav__link">What's On</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <button class="nav__search-btn" id="search-btn" aria-label="Search" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="7.5" cy="7.5" r="5" stroke="currentColor" stroke-width="1.75"/>
+          <path d="M11.5 11.5 L16 16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+        <span class="nav__search-label">Search</span>
+      </button>
+      <a href="/connect/" class="btn btn--outline btn--sm">Connect</a>
+    </div>
+
+    <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="nav__hamburger-line"></span>
+      <span class="nav__hamburger-line"></span>
+      <span class="nav__hamburger-line"></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <ul class="nav__mobile-links" role="list">
+      <li><a href="/discover/">Discover</a></li>
+      <li><a href="/stories/">Stories</a></li>
+      <li><a href="/plan/">Plan</a></li>
+      <li><a href="/events/">What's On</a></li>
+      <li><a href="/connect/">Connect</a></li>
+    </ul>
+  </div>
+  <div class="nav__overlay" aria-hidden="true"></div>
+</nav>
+
+
+  
+<section class="hero hero--full" aria-label="Hero">
+  <div class="hero__bg" style="background-image: url('/images/debed-canyon.jpg')"></div>
+  <svg class="hero__canyon" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="var(--dark-2)" opacity="0.9" d="M0,280 L0,180 C80,160 120,100 160,120 C200,140 220,200 260,190 C300,180 310,100 360,80 C410,60 430,140 480,150 C530,160 540,90 600,70 C660,50 680,140 740,160 C800,180 810,80 880,60 C950,40 970,160 1040,180 C1110,200 1130,100 1200,90 C1270,80 1300,170 1360,180 L1440,180 L1440,320 L0,320 Z"/>
+    <path fill="var(--dark)" opacity="0.95" d="M0,320 L0,240 C60,220 100,280 160,270 C220,260 240,190 300,180 C360,170 380,240 440,250 C500,260 520,180 580,160 C640,140 670,220 730,230 C790,240 820,160 890,150 C960,140 990,230 1060,240 C1130,250 1160,170 1230,160 C1300,150 1340,240 1440,250 L1440,320 Z"/>
+  </svg>
+  <div class="hero__content">
+    <p class="hero__eyebrow">Lori, Armenia</p>
+    <h1 class="hero__title">The North You<br>Haven't Reached Yet</h1>
+    <p class="hero__subtitle">Gorge trails. Cliff-edge monasteries. Villages where people still forage by season and bake in clay ovens. Lori is the largest region in Armenia. Almost nobody comes here.</p>
+    <div class="hero__actions">
+      <a href="/discover/" class="btn btn--primary btn--lg">Start Exploring</a>
+      <a href="/stories/" class="btn btn--ghost btn--lg">Read the Stories</a>
+    </div>
+  </div>
+  <div class="hero__interests" role="navigation" aria-label="Explore by interest">
+    <a href="/discover/?type=trail" class="interest-pill">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M3 6l9-3 9 3M3 18l9 3 9-3"/></svg> Trails
+    </a>
+    <a href="/discover/?type=place" class="interest-pill">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg> Monasteries
+    </a>
+    <a href="/discover/?type=village" class="interest-pill">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg> Villages
+    </a>
+    <a href="/discover/?type=experience" class="interest-pill">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Experiences
+    </a>
+    <a href="/stories/?pillar=food" class="interest-pill">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg> Food &amp; Foraging
+    </a>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="container stats-strip__inner">
+    <div class="stats-strip__item fade-up"><span class="stats-strip__num">22</span><span class="stats-strip__label">Places &amp; Trails</span></div>
+    <div class="stats-strip__divider" aria-hidden="true"></div>
+    <div class="stats-strip__item fade-up" style="animation-delay:0.1s"><span class="stats-strip__num">19</span><span class="stats-strip__label">Field Stories</span></div>
+    <div class="stats-strip__divider" aria-hidden="true"></div>
+    <div class="stats-strip__item fade-up" style="animation-delay:0.2s"><span class="stats-strip__num">15</span><span class="stats-strip__label">Events This Year</span></div>
+    <div class="stats-strip__divider" aria-hidden="true"></div>
+    <div class="stats-strip__item fade-up" style="animation-delay:0.3s"><span class="stats-strip__num">3</span><span class="stats-strip__label">Local Voices</span></div>
+  </div>
+</div>
+
+
+<section class="section section--light" aria-labelledby="discover-heading">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-intro">
+        <p class="section-intro__label">From the field</p>
+        <h2 class="section-intro__title" id="discover-heading">Discover Lori</h2>
+        <p class="section-intro__sub">Places we know personally — trails, monasteries, villages, and hands-on experiences.</p>
+      </div>
+      <a href="/discover/" class="btn btn--outline">See All →</a>
+    </div>
+    <div class="card-grid card-grid--4">
+      
+      <article class="card" data-type="trail" data-season="spring">
+        <a href="/discover/dzoraget-gorge-loop/" class="card-cover-link" tabindex="-1" aria-hidden="true"></a>
+        <div class="card__img">
+          <img src="/images/dzoraget-gorge.jpg" alt="Dzoraget Gorge Loop" loading="lazy" onerror="this.src='/images/placeholder.svg'">
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Trail · Stepanavan</span>
+          <h3 class="card__title"><a href="/discover/dzoraget-gorge-loop/">Dzoraget Gorge Loop</a></h3>
+          <p class="card__excerpt">A dramatic canyon walk along rust-red tuff cliffs above the Dzoraget River, passing ancient cave hermitages carved directly into the rock.</p>
+          <span class="card__meta">4–5 hrs · Moderate</span>
+        </div>
+      </article>
+      
+      <article class="card" data-type="place" data-season="summer">
+        <a href="/discover/haghpat-monastery/" class="card-cover-link" tabindex="-1" aria-hidden="true"></a>
+        <div class="card__img">
+          <img src="/images/haghpat-monastery.jpg" alt="Haghpat Monastery" loading="lazy" onerror="this.src='/images/placeholder.svg'">
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Place · Alaverdi</span>
+          <h3 class="card__title"><a href="/discover/haghpat-monastery/">Haghpat Monastery</a></h3>
+          <p class="card__excerpt">UNESCO-listed 10th-century monastery complex rising from a forested plateau above the Debed Canyon. Armenia&#39;s finest example of medieval sacred architecture.</p>
+          <span class="card__meta">2–3 hrs · Easy</span>
+        </div>
+      </article>
+      
+      <article class="card" data-type="village" data-season="autumn">
+        <a href="/discover/akner-village/" class="card-cover-link" tabindex="-1" aria-hidden="true"></a>
+        <div class="card__img">
+          <img src="/images/akner-village.jpg" alt="Akner Village" loading="lazy" onerror="this.src='/images/placeholder.svg'">
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Village · Alaverdi</span>
+          <h3 class="card__title"><a href="/discover/akner-village/">Akner Village</a></h3>
+          <p class="card__excerpt">Perched at 1,400 m between forest ridges, Akner is one of Lori&#39;s most intact historic villages — stone houses, walnut groves, and a 13th-century church.</p>
+          <span class="card__meta">Half day · Easy</span>
+        </div>
+      </article>
+      
+      <article class="card" data-type="experience" data-season="autumn">
+        <a href="/discover/alaverdi-copper-culture/" class="card-cover-link" tabindex="-1" aria-hidden="true"></a>
+        <div class="card__img">
+          <img src="/images/copper-craft.jpg" alt="Alaverdi Copper Culture" loading="lazy" onerror="this.src='/images/placeholder.svg'">
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Experience · Alaverdi</span>
+          <h3 class="card__title"><a href="/discover/alaverdi-copper-culture/">Alaverdi Copper Culture</a></h3>
+          <p class="card__excerpt">Meet the last craftsmen working Lori&#39;s 3,000-year-old copper tradition — a guided half-day with a local metalsmith, foundry visit, and hands-on workshop.</p>
+          <span class="card__meta">4 hrs · Easy</span>
+        </div>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section class="section section--dark featured-story" aria-labelledby="story-heading">
+  <div class="container featured-story__layout fade-up">
+    <div class="featured-story__text">
+      <span class="featured-story__label">Featured Story</span>
+      <span class="featured-story__pillar">Culture &amp; History</span>
+      <h2 class="featured-story__title" id="story-heading">The Voice in the Stone: How Lori&#39;s Tuff Built a Kingdom</h2>
+      <p class="featured-story__excerpt">Dzoraget tuff isn&#39;t just a building material — it&#39;s a geological diary written in volcanic fire 2.5 million years ago. Walk the canyon and read the pages.</p>
+      <a href="/stories/voice-of-the-stone/" class="featured-story__link btn btn--primary">Read the Story →</a>
+    </div>
+    <div class="featured-story__img">
+      <img src="/images/story-tuff-stone.jpg" alt="The Voice in the Stone: How Lori&#39;s Tuff Built a Kingdom" loading="lazy" onerror="this.src='/images/placeholder.svg'">
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hp-events" aria-labelledby="events-heading">
+  <style>
+  /* ── section wrapper ── */
+  .hp-events{background:var(--dark);padding:96px 0;}
+  .hp-events__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-x);}
+
+  /* ── header ── */
+  .hp-events__header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px;flex-wrap:wrap;}
+  .hp-events__eyebrow{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .hp-events__title{font-family:var(--font-serif);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--white);line-height:1.06;}
+
+  /* ── Full Calendar button ── */
+  .hp-events__cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-sans);font-size:13px;font-weight:600;letter-spacing:.3px;color:var(--dark);background:var(--stone);padding:12px 22px;border-radius:var(--radius);transition:background .2s,color .2s;white-space:nowrap;text-decoration:none;}
+  .hp-events__cta:hover{background:var(--gold);color:var(--dark);}
+
+  /* ── grid ── */
+  .hp-events__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+
+  /* ── card ── */
+  .hp-ev{position:relative;height:400px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;}
+  .hp-ev__bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .55s ease;}
+  .hp-ev:hover .hp-ev__bg{transform:scale(1.06);}
+  .hp-ev__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,8,6,.92) 0%,rgba(10,8,6,.45) 50%,rgba(10,8,6,.10) 100%);transition:opacity .3s;}
+  .hp-ev:hover .hp-ev__overlay{opacity:.85;}
+
+  /* ── card content ── */
+  .hp-ev__body{position:relative;z-index:1;padding:28px 24px;}
+  .hp-ev__cat{display:inline-block;font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  .hp-ev__date-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;}
+  .hp-ev__day{font-family:var(--font-serif);font-size:3rem;font-weight:700;color:var(--white);line-height:1;letter-spacing:-1.5px;}
+  .hp-ev__month{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(247,244,238,.55);}
+  .hp-ev__title{font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:12px;}
+  .hp-ev__loc{font-family:var(--font-sans);font-size:11px;color:rgba(247,244,238,.5);display:flex;align-items:center;gap:5px;}
+  .hp-ev__loc svg{opacity:.6;flex-shrink:0;}
+
+  /* ── responsive ── */
+  @media(max-width:1024px){.hp-events__grid{grid-template-columns:repeat(2,1fr);}.hp-ev{height:340px;}}
+  @media(max-width:540px){.hp-events__grid{grid-template-columns:1fr;gap:2px;}.hp-ev{height:280px;}}
+  @media(max-width:720px){.hp-events__header{flex-direction:column;align-items:flex-start;}}
+  </style>
+  <div class="hp-events__inner">
+    <div class="hp-events__header">
+      <div>
+        <p class="hp-events__eyebrow">Lori Calendar</p>
+        <h2 class="hp-events__title" id="events-heading">What's On<br>in Lori</h2>
+      </div>
+      <a href="/events/" class="hp-events__cta">Full Calendar →</a>
+    </div>
+    <div class="hp-events__grid">
+      
+      <a href="/events/" class="hp-ev" aria-label="Wild Herb Season Opener, 09 May">
+        <div class="hp-ev__bg" style="background-image:url('/images/story-foraging-lori.jpg')"></div>
+        <div class="hp-ev__overlay"></div>
+        <div class="hp-ev__body">
+          <span class="hp-ev__cat">Food &amp; Foraging</span>
+          <div class="hp-ev__date-row">
+            <span class="hp-ev__day">09</span>
+            <span class="hp-ev__month">May</span>
+          </div>
+          <h3 class="hp-ev__title">Wild Herb Season Opener</h3>
+          <span class="hp-ev__loc">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            Stepanavan Forest Edge
+          </span>
+        </div>
+      </a>
+      
+      <a href="/events/" class="hp-ev" aria-label="Open Trails Day, 27 Jun">
+        <div class="hp-ev__bg" style="background-image:url('/images/debed-canyon.jpg')"></div>
+        <div class="hp-ev__overlay"></div>
+        <div class="hp-ev__body">
+          <span class="hp-ev__cat">Outdoors</span>
+          <div class="hp-ev__date-row">
+            <span class="hp-ev__day">27</span>
+            <span class="hp-ev__month">Jun</span>
+          </div>
+          <h3 class="hp-ev__title">Open Trails Day</h3>
+          <span class="hp-ev__loc">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            Multiple locations, Lori
+          </span>
+        </div>
+      </a>
+      
+      <a href="/events/" class="hp-ev" aria-label="Vardavar at Haghpat, 12 Jul">
+        <div class="hp-ev__bg" style="background-image:url('/images/haghpat-monastery.jpg')"></div>
+        <div class="hp-ev__overlay"></div>
+        <div class="hp-ev__body">
+          <span class="hp-ev__cat">Festival</span>
+          <div class="hp-ev__date-row">
+            <span class="hp-ev__day">12</span>
+            <span class="hp-ev__month">Jul</span>
+          </div>
+          <h3 class="hp-ev__title">Vardavar at Haghpat</h3>
+          <span class="hp-ev__loc">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            Haghpat Monastery, Alaverdi
+          </span>
+        </div>
+      </a>
+      
+      <a href="/events/" class="hp-ev" aria-label="Alaverdi Copper Days, 18 Jul">
+        <div class="hp-ev__bg" style="background-image:url('/images/copper-craft.jpg')"></div>
+        <div class="hp-ev__overlay"></div>
+        <div class="hp-ev__body">
+          <span class="hp-ev__cat">Craft</span>
+          <div class="hp-ev__date-row">
+            <span class="hp-ev__day">18</span>
+            <span class="hp-ev__month">Jul</span>
+          </div>
+          <h3 class="hp-ev__title">Alaverdi Copper Days</h3>
+          <span class="hp-ev__loc">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            Alaverdi Town Centre
+          </span>
+        </div>
+      </a>
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="section section--parch" aria-labelledby="voices-heading">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-intro">
+        <p class="section-intro__label">Local knowledge</p>
+        <h2 class="section-intro__title" id="voices-heading">People of Lori</h2>
+        <p class="section-intro__sub">Stays, guides, and producers run by people who were born here or chose to come back.</p>
+      </div>
+      <a href="/plan/" class="btn btn--outline">Plan your stay →</a>
+    </div>
+    <div class="voices-grid">
+      <article class="voice-card">
+        <div class="voice-card__img"><img src="/images/stay-ethnoforma.jpg" alt="Ethnoforma stone guesthouse in Akner village" loading="lazy" onerror="this.src='/images/placeholder.svg'"></div>
+        <div class="voice-card__body">
+          <span class="voice-card__tag">Guesthouse · Akner, 1,400 m</span>
+          <h3 class="voice-card__name">Ethnoforma</h3>
+          <p class="voice-card__desc">Stone house, handwoven blankets, wood stove, canyon view. Three rooms, home cooking, and a trail out the back gate. No WiFi. That's the point.</p>
+          <a href="/stays/ethnoforma/" class="voice-card__link">Stay here →</a>
+        </div>
+      </article>
+      
+      <article class="voice-card">
+        <div class="voice-card__img"><img src="/images/guide-armen.jpg" alt="Armen Grigoryan" loading="lazy" onerror="this.src='/images/placeholder.svg'"></div>
+        <div class="voice-card__body">
+          <span class="voice-card__tag">Guide · Armenian</span>
+          <h3 class="voice-card__name">Armen Grigoryan</h3>
+          <p class="voice-card__desc">Born in Alaverdi, Armen has been guiding in the Debed canyon for 12 years. He knows every fork in the Kobayr path and which cliff ledges are safe in spring melt.</p>
+          <a href="/plan/#guides" class="voice-card__link">Book a walk →</a>
+        </div>
+      </article>
+      
+      <article class="voice-card">
+        <div class="voice-card__img"><img src="/images/guide-narine.jpg" alt="Narine Avetisyan" loading="lazy" onerror="this.src='/images/placeholder.svg'"></div>
+        <div class="voice-card__body">
+          <span class="voice-card__tag">Guide · Armenian</span>
+          <h3 class="voice-card__name">Narine Avetisyan</h3>
+          <p class="voice-card__desc">A cultural anthropologist and native of Stepanavan, Narine runs half-day village walks that visit weavers, beekeepers, and a 90-year-old herbalist who still makes traditional remedies.</p>
+          <a href="/plan/#guides" class="voice-card__link">Book a walk →</a>
+        </div>
+      </article>
+      
+      <article class="voice-card">
+        <div class="voice-card__img"><img src="/images/voice-beekeeper.jpg" alt="Beehives at the forest edge above Akner village" loading="lazy" onerror="this.src='/images/placeholder.svg'"></div>
+        <div class="voice-card__body">
+          <span class="voice-card__tag">Beekeeper · Akner</span>
+          <h3 class="voice-card__name">Vardan Hakobyan</h3>
+          <p class="voice-card__desc">Forty hives at the forest edge of Akner, where the linden and chestnut begin. He sells by the jar at his gate — linden, wildflower, and a dark chestnut that tastes like the mountain does after rain.</p>
+          <a href="/stories/beekeeping-lori/" class="voice-card__link">Read his story →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section class="section section--dark newsletter-section" aria-labelledby="newsletter-heading">
+  <div class="container">
+    <div class="newsletter-block">
+      <div class="newsletter-block__text">
+        <div class="section-intro section-intro--center">
+          <p class="section-intro__label section-intro__label--light">Stay connected</p>
+          <h2 class="section-intro__title section-intro__title--light" id="newsletter-heading">Letters from Lori</h2>
+          <p class="section-intro__sub section-intro__sub--light">A few times a year — new trails, seasonal guides, stories from the villages. No noise, no ads, no algorithm.</p>
+        </div>
+      </div>
+      <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" aria-label="Newsletter signup">
+        <input type="hidden" name="form-name" value="newsletter">
+        <p class="newsletter-form__honey" aria-hidden="true"><label>Don't fill this out: <input name="bot-field" tabindex="-1"></label></p>
+        <div class="newsletter-form__row">
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input type="email" id="newsletter-email" name="email" class="newsletter-form__input" placeholder="your@email.com" required autocomplete="email">
+          <button type="submit" class="btn btn--primary">Get Letters</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+  <footer class="footer" aria-label="Site footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="Explore Lori home">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
+          <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+        </svg>
+        Explore Lori
+      </a>
+      <p class="footer__tagline">A platform for Lori, Armenia — built by people who live and walk here.</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer navigation">
+      <div class="footer__nav-col">
+        <h4 class="footer__nav-title">Explore</h4>
+        <ul role="list">
+          <li><a href="/discover/">Discover</a></li>
+          <li><a href="/stories/">Stories</a></li>
+          <li><a href="/plan/">Plan Your Trip</a></li>
+          <li><a href="/costs/">Cost Calculator</a></li>
+          <li><a href="/events/">What's On</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-col">
+        <h4 class="footer__nav-title">Connect</h4>
+        <ul role="list">
+          <li><a href="/connect/">Submit a Place</a></li>
+          <li><a href="/connect/#guide">List as a Guide</a></li>
+          <li><a href="/connect/#stay">List a Stay</a></li>
+          <li><a href="/connect/#write">Write for Us</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-col">
+        <h4 class="footer__nav-title">About</h4>
+        <ul role="list">
+          <li><a href="/about/">About the Project</a></li>
+          <li><a href="/about/#ethnoforma">Ethnoforma</a></li>
+          <li><a href="mailto:hello@explorelori.com">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p class="footer__copy">&copy; 2026 Explore Lori. Made in Lori, Armenia.</p>
+      <p class="footer__legal">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+  
+  <div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-overlay__inner">
+      <div class="search-box">
+        <svg class="search-box__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M13 13 L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input
+          id="search-input"
+          type="search"
+          class="search-box__input"
+          placeholder="Search places, stories, events…"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          aria-label="Search"
+          aria-autocomplete="list"
+          aria-controls="search-results"
+        >
+        <button id="search-close" class="search-box__close" aria-label="Close search">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M4 4 L14 14 M14 4 L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/search.js"></script>
+</body>
+</html>

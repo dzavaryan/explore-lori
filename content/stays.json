@@ -1,0 +1,89 @@
+[
+  {
+    "id": "ethnoforma",
+    "name": "Ethnoforma",
+    "type": "Arthouse Guesthouse",
+    "village": "Akner",
+    "region": "Alaverdi",
+    "excerpt": "A restored stone guesthouse rooted in Akner's vernacular architecture — handwoven textiles, wood-burning stove, and a terrace that faces the Debed canyon.",
+    "image": "images/stay-ethnoforma.jpg",
+    "priceRange": "From €35 / night",
+    "amenities": [
+      "Breakfast included",
+      "Hiking guides",
+      "Forest views",
+      "Pet friendly"
+    ],
+    "bookingUrl": "",
+    "website": ""
+  },
+  {
+    "id": "odzun-guesthouse",
+    "name": "Odzun Village Stay",
+    "type": "Family Guesthouse",
+    "village": "Odzun",
+    "region": "Alaverdi",
+    "excerpt": "Stay with a local family 200 metres from the 6th-century Odzun Basilica. Home-cooked Armenian dinner included every evening.",
+    "image": "images/stay-odzun.jpg",
+    "priceRange": "From €25 / night",
+    "amenities": [
+      "Dinner included",
+      "Local guides available",
+      "Garden"
+    ],
+    "bookingUrl": "",
+    "website": ""
+  },
+  {
+    "id": "stepanavan-hotel",
+    "name": "Canyon View Hotel",
+    "type": "Boutique Hotel",
+    "village": "Stepanavan",
+    "region": "Stepanavan",
+    "excerpt": "A recently renovated 12-room hotel at the edge of Stepanavan, with direct access to the Dzoraget Gorge trail from the back door.",
+    "image": "images/stay-stepanavan.jpg",
+    "priceRange": "From €50 / night",
+    "amenities": [
+      "Trail access",
+      "Bike rental",
+      "Restaurant"
+    ],
+    "bookingUrl": "",
+    "website": ""
+  },
+  {
+    "id": "tashir-camp",
+    "name": "Tashir Highland Camp",
+    "type": "Glamping",
+    "village": "Tashir",
+    "region": "Tashir",
+    "excerpt": "Heated canvas tents at 1,800 m with views of the north Lori plateau. Open June–September only. Completely off-grid solar power.",
+    "image": "images/stay-tashir-camp.jpg",
+    "priceRange": "From €60 / night",
+    "amenities": [
+      "Breakfast included",
+      "Horse riding",
+      "Star gazing",
+      "Solar powered"
+    ],
+    "bookingUrl": "",
+    "website": ""
+  },
+  {
+    "id": "dsegh-writer-house",
+    "name": "Tumanyan Writer's House",
+    "type": "Self-catering Cottage",
+    "village": "Dsegh",
+    "region": "Alaverdi",
+    "excerpt": "A two-bedroom stone cottage in Dsegh, renovated and rented by the village cultural association. 5-minute walk from Tumanyan's museum-house.",
+    "image": "images/stay-dsegh.jpg",
+    "priceRange": "From €40 / night",
+    "amenities": [
+      "Self-catering",
+      "Garden terrace",
+      "Village walking maps"
+    ],
+    "bookingUrl": "",
+    "website": ""
+  }
+]

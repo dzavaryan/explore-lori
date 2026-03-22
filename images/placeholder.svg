@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#EAE6DC"/>
+  <path d="M0 450 Q100 380 160 420 Q220 460 300 380 Q360 310 440 350 Q520 390 580 310 Q640 240 720 280 L800 260 L800 600 L0 600 Z" fill="#D4C49A" opacity="0.7"/>
+  <path d="M0 480 Q80 440 160 460 Q240 480 320 420 Q400 360 480 400 Q560 440 640 380 L800 360 L800 600 L0 600 Z" fill="#5C6B7A" opacity="0.3"/>
+  <circle cx="130" cy="180" r="40" fill="none" stroke="#8B3A28" stroke-width="2" opacity="0.4"/>
+  <path d="M100 200 L130 140 L160 200 Z" fill="none" stroke="#8B3A28" stroke-width="2" opacity="0.4"/>
+  <text x="400" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#5C6B7A" opacity="0.7">Photo coming soon</text>
+  <text x="400" y="316" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#5C6B7A" opacity="0.5">See PHOTOS.md for sourcing guide</text>
+</svg>

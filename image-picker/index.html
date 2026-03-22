@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explore Lori — Image Picker</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:#F7F4EE;color:#28292E;min-height:100vh}
+  header{background:#28292E;color:#F7F4EE;padding:20px 32px;display:flex;align-items:center;justify-content:space-between}
+  header h1{font-family:Georgia,serif;font-size:1.4rem;font-weight:400;letter-spacing:-.3px}
+  header span{font-size:12px;opacity:.5;letter-spacing:.5px;text-transform:uppercase}
+  .tabs{display:flex;gap:0;border-bottom:2px solid #D4C49A;background:#fff;padding:0 32px}
+  .tab{padding:14px 22px;font-size:13px;font-weight:600;color:#5C6B7A;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s;background:none;border-top:none;border-left:none;border-right:none;white-space:nowrap}
+  .tab.active{color:#28292E;border-bottom-color:#D4C49A}
+  .layout{display:grid;grid-template-columns:1fr 320px;height:calc(100vh - 113px)}
+  .items-panel{overflow-y:auto;padding:24px 32px;border-right:1px solid #D4C49A}
+  .item-card{display:grid;grid-template-columns:90px 1fr;gap:14px;background:#fff;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;border:2px solid transparent;transition:border-color .15s;align-items:center}
+  .item-card:hover{border-color:#D4C49A}
+  .item-card.selected{border-color:#28292E;background:#FAFAF8}
+  .item-card img{width:90px;height:60px;object-fit:cover;border-radius:4px;background:#EAE6DC}
+  .item-card .no-img{width:90px;height:60px;border-radius:4px;background:#EAE6DC;display:flex;align-items:center;justify-content:center;font-size:10px;color:#5C6B7A;text-align:center;line-height:1.3}
+  .item-info h3{font-size:13px;font-weight:600;line-height:1.3;margin-bottom:4px}
+  .item-info p{font-size:11px;color:#5C6B7A}
+  .item-info .current-img{font-size:10px;color:#8B3A28;margin-top:3px;font-family:monospace}
+  .img-panel{overflow-y:auto;padding:16px;background:#fff}
+  .img-panel h2{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#5C6B7A;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #EAE6DC}
+  .img-panel .no-selection{padding:40px 16px;text-align:center;color:#5C6B7A;font-size:13px;line-height:1.6}
+  .img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .img-thumb{cursor:pointer;border-radius:4px;overflow:hidden;border:2px solid transparent;transition:border-color .15s;position:relative}
+  .img-thumb:hover{border-color:#D4C49A}
+  .img-thumb.current{border-color:#8B3A28}
+  .img-thumb img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .img-thumb .img-name{font-size:9px;color:#5C6B7A;padding:3px 4px;background:#F7F4EE;line-height:1.2;word-break:break-all}
+  .img-thumb .current-badge{position:absolute;top:4px;left:4px;background:#8B3A28;color:#fff;font-size:8px;font-weight:700;letter-spacing:.5px;padding:2px 5px;border-radius:3px;text-transform:uppercase}
+  .export-bar{background:#28292E;padding:12px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .export-bar span{color:rgba(247,244,238,.6);font-size:12px}
+  .export-btn{background:#D4C49A;color:#28292E;border:none;padding:9px 18px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:background .15s}
+  .export-btn:hover{background:#C9A844}
+  .toast{position:fixed;bottom:24px;right:24px;background:#28292E;color:#F7F4EE;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:500;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:999}
+  .toast.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Explore Lori — Image Picker</h1>
+  <span>Local tool · changes export as JSON</span>
+</header>
+<div class="tabs" id="tabs">
+  <button class="tab active" data-section="stories">Stories (19)</button>
+  <button class="tab" data-section="discover">Discover (22)</button>
+  <button class="tab" data-section="events">Events (15)</button>
+  <button class="tab" data-section="stays">Stays (5)</button>
+</div>
+<div class="layout">
+  <div class="items-panel" id="items-panel"></div>
+  <div class="img-panel" id="img-panel">
+    <h2>Available Images</h2>
+    <div class="no-selection" id="no-selection">← Select an item on the left to assign it an image</div>
+    <div class="img-grid" id="img-grid" style="display:none"></div>
+  </div>
+</div>
+<div class="export-bar">
+  <span>When done, download the updated JSON and replace the file in your project:</span>
+  <button class="export-btn" onclick="exportJSON('stories')">↓ stories.json</button>
+  <button class="export-btn" onclick="exportJSON('discover')">↓ discover.json</button>
+  <button class="export-btn" onclick="exportJSON('events')">↓ events.json</button>
+  <button class="export-btn" onclick="exportJSON('stays')">↓ stays.json</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const IMAGES = ["akhtala-monastery.jpg", "akner-village.jpg", "carpet-weaving.jpg", "copper-craft.jpg", "debed-canyon.jpg", "dendropark.jpg", "dsegh-village.jpg", "dzoraget-gorge.jpg", "guide-armen.jpg", "guide-gevorg.jpg", "guide-narine.jpg", "haghpat-monastery.jpg", "jijur-ridge.jpg", "kobayr-monastery.jpg", "lori-berd.jpg", "odzun-village.jpg", "og-discover.jpg", "og-homepage.jpg", "og-plan.jpg", "sanahin-bridge.jpg", "sanahin-monastery.jpg", "season-autumn.jpg", "season-spring.jpg", "season-summer.jpg", "season-winter.jpg", "stay-dsegh.jpg", "stay-ethnoforma.jpg", "stay-odzun.jpg", "stay-stepanavan.jpg", "stay-tashir-camp.jpg", "story-akhtala.jpg", "story-akner-spring.jpg", "story-alaverdi-copper.jpg", "story-beekeeping-lori.jpg", "story-carpet-weavers.jpg", "story-foraging-lori.jpg", "story-haghpat-night.jpg", "story-kayan-fortress.jpg", "story-november-lori.jpg", "story-odzun.jpg", "story-sanahin-bridge.jpg", "story-tuff-stone.jpg", "story-tumanyan-path.jpg", "story-winter-monastery.jpg", "tashir-lake.jpg", "voice-armen.jpg", "voice-beekeeper.jpg", "voice-narine.jpg"];
+const data = {
+  stories: [{"id": "voice-of-stone", "pillar": "culture", "pillarLabel": "Culture & History", "title": "The Voice in the Stone: How Lori's Tuff Built a Kingdom", "excerpt": "Dzoraget tuff isn't just a building material \u2014 it's a geological diary written in volcanic fire 2.5 million years ago. Walk the canyon and read the pages.", "image": "images/story-tuff-stone.jpg", "author": "Sona Hakobyan", "readTime": 8, "season": "spring", "featured": true, "slug": "voice-of-the-stone"}, {"id": "last-carpet-weavers", "pillar": "people", "pillarLabel": "Local Voices", "title": "The Last Women Who Know the Red", "excerpt": "Vordan karmir \u2014 the worm-dye that made Lori carpets famous \u2014 almost disappeared with the Soviet collapse. Three women in Stepanavan brought it back.", "image": "images/story-carpet-weavers.jpg", "author": "Tamar Grigoryan", "readTime": 11, "season": "autumn", "featured": false, "slug": "last-women-who-know-the-red"}, {"id": "midsummer-haghpat", "pillar": "trails", "pillarLabel": "Trails & Nature", "title": "Midsummer at Haghpat: The Walk Nobody Takes", "excerpt": "Tourists arrive by car and leave in an hour. But the real Haghpat begins after dark, when the forest goes quiet and the monastery reveals its actual scale.", "image": "images/story-haghpat-night.jpg", "author": "Artak Petrosyan", "readTime": 6, "season": "summer", "featured": false, "slug": "midsummer-at-haghpat"}, {"id": "copper-city", "pillar": "culture", "pillarLabel": "Culture & History", "title": "Copper City: Alaverdi's Industrial Soul", "excerpt": "The smelter smoke is gone now, but Alaverdi's Soviet-era apartment blocks still cling to gorge walls no architect would dare today. A city that shouldn't exist.", "image": "images/story-alaverdi-copper.jpg", "author": "David Movsisyan", "readTime": 9, "season": "winter", "featured": false, "slug": "copper-city-alaverdi"}, {"id": "spring-in-akner", "pillar": "seasons", "pillarLabel": "Seasons & Weather", "title": "Akner in April: When the Walnut Groves Wake Up", "excerpt": "At 1,400 meters, spring arrives late in Akner. For about three weeks in April, the village sits between bare winter branches and full green \u2014 pure magic.", "image": "images/story-akner-spring.jpg", "author": "Nare Sargsyan", "readTime": 5, "season": "spring", "featured": false, "slug": "akner-in-april"}, {"id": "forager-lori", "pillar": "food", "pillarLabel": "Food & Foraging", "title": "What Lori Tastes Like: A Forager's Field Notes", "excerpt": "Wild garlic, pine mushrooms, sour plums, and the tannic punch of homemade mulberry oghi. A season-by-season guide to eating in Lori's forests and kitchens.", "image": "images/story-foraging-lori.jpg", "author": "Lilit Hovhannisyan", "readTime": 13, "season": "autumn", "featured": true, "slug": "what-lori-tastes-like"}, {"id": "tumanyan-footsteps", "pillar": "people", "pillarLabel": "Local Voices", "title": "In Tumanyan's Footsteps: Dsegh to Haghpat on Foot", "excerpt": "Armenia's greatest poet spent his childhood walking this exact path. The villages he wrote about are still there. Most of his readers never visit.", "image": "images/story-tumanyan-path.jpg", "author": "Mariam Avetisyan", "readTime": 10, "season": "spring", "featured": false, "slug": "tumanyan-footsteps"}, {"id": "winter-monasteries", "pillar": "trails", "pillarLabel": "Trails & Nature", "title": "Lori Under Snow: Why Winter is the Honest Season", "excerpt": "No tourists. No dust. Just you, black basalt walls, and the kind of silence that makes you understand why monks chose these particular gorges.", "image": "images/story-winter-monastery.jpg", "author": "Artak Petrosyan", "readTime": 7, "season": "winter", "featured": false, "slug": "lori-under-snow"}, {"id": "kayan-fortress", "pillar": "culture", "pillarLabel": "Culture & History", "title": "The Fortress That Fell to a Woman's Word", "excerpt": "Kayan sat above the Debed for five centuries. It fell in an afternoon, because a woman told the Lezgins where the spring was.", "image": "images/story-kayan-fortress.jpg", "author": "Sona Hakobyan", "readTime": 7, "season": "autumn", "featured": false, "slug": "kayan-fortress"}, {"id": "beekeeping-lori", "pillar": "people", "pillarLabel": "Local Voices", "title": "The Beekeeper of Akner: A Forest at the Edge of the Village", "excerpt": "An older beekeeper at the forest edge of Akner keeps forty hives and produces some of the finest honey in the region \u2014 linden, chestnut, wildflower.", "image": "images/story-beekeeping-lori.jpg", "author": "Lilit Hovhannisyan", "readTime": 8, "season": "summer", "featured": false, "slug": "beekeeping-lori"}, {"id": "november-in-lori", "pillar": "seasons", "pillarLabel": "Seasons & Weather", "title": "November in Lori: After the Leaves Fall, Everything Is Visible", "excerpt": "November is when Lori shows itself honestly. The leaves fall. The tourists leave. The canyon's geometry becomes visible. Everything else can wait until spring.", "image": "images/story-november-lori.jpg", "author": "Artak Petrosyan", "readTime": 6, "season": "autumn", "featured": false, "slug": "november-in-lori"}, {"id": "akhtala-frescoes", "pillar": "culture", "pillarLabel": "Culture & History", "title": "Akhtala's Frescoes: Paint That Survived Eight Centuries", "excerpt": "Most medieval frescoes in the South Caucasus are gone \u2014 chipped away, plastered over, or lost to war. Akhtala's survived. Nobody knows exactly why.", "image": "images/story-akhtala.jpg", "author": "Sona Hakobyan", "readTime": 8, "season": "spring", "featured": true, "slug": "akhtala-frescoes"}, {"id": "wild-herbs-lori", "pillar": "food", "pillarLabel": "Food & Foraging", "title": "The Wild Herbs of Lori: A Forager's Spring Calendar", "excerpt": "From wood sorrel in April to summer savory in August \u2014 a month-by-month guide to what grows, where to find it, and what to do with it.", "image": "images/story-akner-spring.jpg", "author": "Narine Avetisyan", "readTime": 9, "season": "spring", "featured": false, "slug": "wild-herbs-lori"}, {"id": "sanahin-bridge-story", "pillar": "culture", "pillarLabel": "Culture & History", "title": "The Bridge at Sanahin: What Crossed It and What Didn't", "excerpt": "An 800-year-old bridge still carries foot traffic over the Debed ravine. This is the history of what it's seen \u2014 and what it stopped.", "image": "images/story-sanahin-bridge.jpg", "author": "Artak Petrosyan", "readTime": 6, "season": "spring", "featured": false, "slug": "sanahin-bridge-story"}, {"id": "odzun-village-story", "pillar": "people", "pillarLabel": "Local Voices", "title": "Odzun on a Thursday: A Village Above Everything", "excerpt": "The village plateau ends in a 400-metre drop to the Debed canyon. The people who live here don't think much about the drop. They're used to the edge.", "image": "images/story-odzun.jpg", "author": "Lilit Hovhannisyan", "readTime": 7, "season": "summer", "featured": false, "slug": "odzun-village-story"}, {"id": "pushkin-pass-snow", "pillar": "seasons", "pillarLabel": "Seasons & Weather", "title": "First Snow on Pushkin Pass", "excerpt": "Every October, the same thing happens: a morning of white, a closed road, and half the villages in northern Lori cut off until spring. This is what that looks like.", "image": "images/season-winter.jpg", "author": "Artak Petrosyan", "readTime": 5, "season": "autumn", "featured": false, "slug": "pushkin-pass-snow"}, {"id": "alaverdi-soviet-gorge", "pillar": "culture", "pillarLabel": "Culture & History", "title": "Alaverdi: The Soviet City That Hangs on the Cliff", "excerpt": "A city built vertically into a 350-metre gorge, connected by a Soviet cable car still running from 1958. The copper smelter closed. The city didn't leave.", "image": "images/story-alaverdi-copper.jpg", "author": "Sona Hakobyan", "readTime": 8, "season": "autumn", "featured": false, "slug": "alaverdi-soviet-gorge"}, {"id": "five-days-lori", "pillar": "trails", "pillarLabel": "Trails & Nature", "title": "Five Days in Lori: A Route That Costs Almost Nothing", "excerpt": "Two monasteries, three villages, one gorge trail, and a night in a farmhouse. The actual costs, the actual distances, and what to do if the weather turns.", "image": "images/dzoraget-gorge.jpg", "author": "Goga Dzavaryan", "readTime": 10, "season": "summer", "featured": false, "slug": "five-days-lori"}, {"id": "easter-haghpat-story", "pillar": "people", "pillarLabel": "Local Voices", "title": "Easter at Haghpat: What Happens When the Candles Go Out", "excerpt": "The liturgy starts at midnight. By 3am the congregation is circling the monastery in darkness with candles. By dawn, everyone is eating in the churchyard.", "image": "images/story-haghpat-night.jpg", "author": "Lilit Hovhannisyan", "readTime": 7, "season": "spring", "featured": false, "slug": "easter-haghpat-story"}],
+  discover: [{"id": "gorge-of-dzoraget", "type": "trail", "title": "Dzoraget Gorge Loop", "excerpt": "A dramatic canyon walk along rust-red tuff cliffs above the Dzoraget River, passing ancient cave hermitages carved directly into the rock.", "image": "images/dzoraget-gorge.jpg", "region": "Stepanavan", "season": "spring", "difficulty": "moderate", "duration": "4\u20135 hrs", "distance": "12 km", "elevation": "+480 m", "featured": true, "slug": "dzoraget-gorge-loop"}, {"id": "haghpat-monastery", "type": "place", "title": "Haghpat Monastery", "excerpt": "UNESCO-listed 10th-century monastery complex rising from a forested plateau above the Debed Canyon. Armenia's finest example of medieval sacred architecture.", "image": "images/haghpat-monastery.jpg", "region": "Alaverdi", "season": "summer", "difficulty": "easy", "duration": "2\u20133 hrs", "featured": true, "slug": "haghpat-monastery"}, {"id": "akner-village", "type": "village", "title": "Akner Village", "excerpt": "Perched at 1,400 m between forest ridges, Akner is one of Lori's most intact historic villages \u2014 stone houses, walnut groves, and a 13th-century church.", "image": "images/akner-village.jpg", "region": "Alaverdi", "season": "autumn", "difficulty": "easy", "duration": "Half day", "featured": true, "slug": "akner-village"}, {"id": "lori-berd-fortress", "type": "place", "title": "Lori Berd Fortress", "excerpt": "11th-century fortress city on a dramatic cliff peninsula \u2014 the capital of the Kingdom of Lori, abandoned 900 years ago and never rebuilt.", "image": "images/lori-berd.jpg", "region": "Stepanavan", "season": "spring", "difficulty": "easy", "duration": "2 hrs", "featured": false, "slug": "lori-berd-fortress"}, {"id": "sanahin-monastery", "type": "place", "title": "Sanahin Monastery", "excerpt": "Twin to Haghpat and equally remarkable \u2014 a sprawling 10th-century complex with the birthplace of the legendary Mikoyan brothers beside it.", "image": "images/sanahin-monastery.jpg", "region": "Alaverdi", "season": "summer", "difficulty": "easy", "duration": "2 hrs", "featured": false, "slug": "sanahin-monastery"}, {"id": "debed-canyon-trail", "type": "trail", "title": "Debed Canyon Traverse", "excerpt": "Follow the Debed River north from Alaverdi through copper-stained gorge walls, Soviet-era bridges, and dense forest \u2014 one of Lori's most varied walks.", "image": "images/debed-canyon.jpg", "region": "Alaverdi", "season": "spring", "difficulty": "hard", "duration": "Full day", "distance": "22 km", "elevation": "+640 m", "featured": false, "slug": "debed-canyon-traverse"}, {"id": "dsegh-village", "type": "village", "title": "Dsegh Village", "excerpt": "The birthplace of the poet Hovhannes Tumanyan, set in a gentle valley with a charming museum-house and surrounding meadows perfect for a slow afternoon.", "image": "images/dsegh-village.jpg", "region": "Alaverdi", "season": "summer", "difficulty": "easy", "duration": "2 hrs", "featured": false, "slug": "dsegh-village"}, {"id": "copper-mine-experience", "type": "experience", "title": "Alaverdi Copper Culture", "excerpt": "Meet the last craftsmen working Lori's 3,000-year-old copper tradition \u2014 a guided half-day with a local metalsmith, foundry visit, and hands-on workshop.", "image": "images/copper-craft.jpg", "region": "Alaverdi", "season": "autumn", "difficulty": "easy", "duration": "4 hrs", "featured": true, "slug": "alaverdi-copper-culture"}, {"id": "carpet-weaving-workshop", "type": "experience", "title": "Lori Carpet Weaving", "excerpt": "Learn the indigo-and-vordan-karmir dyeing process that's made Lori carpets distinct for centuries \u2014 a small-group workshop with a master weaver in Stepanavan.", "image": "images/carpet-weaving.jpg", "region": "Stepanavan", "season": "winter", "difficulty": "easy", "duration": "3 hrs", "featured": false, "slug": "lori-carpet-weaving"}, {"id": "jijur-ridge-trail", "type": "trail", "title": "Jijur Ridge Walk", "excerpt": "A high alpine traverse above 2,000 m with panoramic views across both the Debed and Pambak valleys \u2014 best in late summer when the meadows are in full bloom.", "image": "images/jijur-ridge.jpg", "region": "Vanadzor", "season": "summer", "difficulty": "hard", "duration": "6\u20137 hrs", "distance": "18 km", "elevation": "+920 m", "featured": false, "slug": "jijur-ridge-walk"}, {"id": "kobayr-monastery", "type": "place", "title": "Kobayr Monastery", "excerpt": "Half-ruined, half-magnificent \u2014 a 12th-century cliff-side monastery with remarkable Byzantine frescoes still clinging to crumbling walls above the Debed.", "image": "images/kobayr-monastery.jpg", "region": "Alaverdi", "season": "spring", "difficulty": "moderate", "duration": "3 hrs", "featured": false, "slug": "kobayr-monastery"}, {"id": "tashir-lake", "type": "place", "title": "Tashir Lake", "excerpt": "A hidden alpine lake in the north of Lori, rarely visited and surrounded by wild meadows \u2014 bring a tent and stay the night for the full effect.", "image": "images/tashir-lake.jpg", "region": "Tashir", "season": "summer", "difficulty": "moderate", "duration": "Full day", "featured": false, "slug": "tashir-lake"}, {"id": "akhtala-monastery", "type": "place", "title": "Akhtala Monastery", "excerpt": "A 10th-century fortress-monastery with the most complete surviving Byzantine frescoes in the South Caucasus. Largely unvisited, spectacularly intact.", "image": "images/akhtala-monastery.jpg", "region": "Alaverdi", "season": "spring", "difficulty": "easy", "duration": "2\u20133 hrs", "featured": true, "slug": "akhtala-monastery"}, {"id": "odzun-basilica", "type": "place", "title": "Odzun Basilica", "excerpt": "One of Armenia's oldest churches \u2014 a 6th-century basilica on a high plateau above the Debed, with sweeping views and almost no other visitors.", "image": "images/odzun-village.jpg", "region": "Alaverdi", "season": "summer", "difficulty": "easy", "duration": "2 hrs", "featured": false, "slug": "odzun-basilica"}, {"id": "sanahin-bridge", "type": "place", "title": "Sanahin Bridge", "excerpt": "A single-arch medieval bridge spanning the Debed gorge ravine \u2014 800 years old, still sound, and still used as a footpath between two villages.", "image": "images/sanahin-bridge.jpg", "region": "Alaverdi", "season": "spring", "difficulty": "easy", "duration": "1 hr", "featured": false, "slug": "sanahin-bridge"}, {"id": "odzun-village", "type": "village", "title": "Odzun Village", "excerpt": "Perched on a wide plateau 1,100 m above the Debed canyon, Odzun looks like the edge of something \u2014 fields, then forest, then a 400 m drop.", "image": "images/odzun-village.jpg", "region": "Alaverdi", "season": "summer", "difficulty": "easy", "duration": "Half day", "featured": false, "slug": "odzun-village"}, {"id": "stepanavan-dendropark", "type": "place", "title": "Stepanavan Dendropark", "excerpt": "A 35-hectare park planted in 1933 with 620 species of trees from five continents. Come in autumn for the colour, or spring for the understory wildflowers.", "image": "images/dendropark.jpg", "region": "Stepanavan", "season": "autumn", "difficulty": "easy", "duration": "2 hrs", "featured": false, "slug": "stepanavan-dendropark"}, {"id": "mets-mantash-village", "type": "village", "title": "Mets Mantash", "excerpt": "One of Lori's largest traditional villages, spread across a hillside south of Stepanavan. Stone barns, khachkar-filled churchyards, and a weekly market.", "image": "images/dsegh-village.jpg", "region": "Stepanavan", "season": "summer", "difficulty": "easy", "duration": "Half day", "featured": false, "slug": "mets-mantash-village"}, {"id": "wild-herb-walk", "type": "experience", "title": "Wild Herb Foraging Walk", "excerpt": "A guided half-day walk through Lori's forest edge, learning to identify, harvest and cook with 15 edible plants that grow in the region from May to September.", "image": "images/story-foraging-lori.jpg", "region": "Stepanavan", "season": "spring", "difficulty": "easy", "duration": "4 hrs", "featured": false, "slug": "wild-herb-walk"}, {"id": "honey-tasting-akner", "type": "experience", "title": "Honey Day in Akner", "excerpt": "Visit Vardan Hakobyan's forty hives at the forest edge above Akner \u2014 a morning among the hives, tasting linden, chestnut, and wildflower honeys from the jar.", "image": "images/voice-beekeeper.jpg", "region": "Alaverdi", "season": "summer", "difficulty": "easy", "duration": "3 hrs", "featured": false, "slug": "honey-tasting-akner"}, {"id": "pambak-ridge-trail", "type": "trail", "title": "Pambak Ridge Traverse", "excerpt": "A demanding high-alpine crossing along the Pambak range at 2,400 m \u2014 panoramic views north to Georgia, south to Aragats, and nothing but cloud and stone between.", "image": "images/jijur-ridge.jpg", "region": "Vanadzor", "season": "summer", "difficulty": "hard", "duration": "7\u20138 hrs", "distance": "21 km", "elevation": "+1,100 m", "featured": false, "slug": "pambak-ridge-trail"}, {"id": "alaverdi-gorge-walk", "type": "experience", "title": "Alaverdi Soviet Gorge Walk", "excerpt": "The strangest town in Armenia: a copper-smelting city built vertically into a 350 m gorge, connected by a Soviet cable car still running since 1958.", "image": "images/story-alaverdi-copper.jpg", "region": "Alaverdi", "season": "autumn", "difficulty": "easy", "duration": "3 hrs", "featured": false, "slug": "alaverdi-gorge-walk"}],
+  events: [{"id": "wild-herb-season-2026", "title": "Wild Herb Season Opener", "category": "Food & Foraging", "day": "09", "month": "May", "year": 2026, "location": "Stepanavan Forest Edge", "image": "images/story-foraging-lori.jpg", "description": "The first guided foraging walk of the season. A half-day identifying edible spring plants \u2014 wood sorrel, ramsons, nettles, and the first wild strawberries. Led by Narine Avetisyan.", "url": ""}, {"id": "open-trails-day-2026", "title": "Open Trails Day", "category": "Outdoors", "day": "27", "month": "Jun", "year": 2026, "location": "Multiple locations, Lori", "image": "images/debed-canyon.jpg", "description": "Free guided hikes on 6 trails simultaneously \u2014 groups set off from Stepanavan, Alaverdi, Vanadzor, and Tashir at sunrise. No booking required, just show up.", "url": ""}, {"id": "vardavar-haghpat-2026", "title": "Vardavar at Haghpat", "category": "Festival", "day": "12", "month": "Jul", "year": 2026, "location": "Haghpat Monastery, Alaverdi", "image": "images/haghpat-monastery.jpg", "description": "Armenia's ancient water festival, 14 weeks after Easter. At Haghpat, the tradition includes blessing of water at the monastery spring and village festivities in the settlement below.", "url": ""}, {"id": "alaverdi-copper-days-2026", "title": "Alaverdi Copper Days", "category": "Craft", "day": "18", "month": "Jul", "year": 2026, "location": "Alaverdi Town Centre", "image": "images/copper-craft.jpg", "description": "A two-day celebration of 3,000 years of copper heritage \u2014 live metalsmith demonstrations, a street market of copper crafts, and a walk through the Soviet-era smelter district.", "url": ""}, {"id": "monastery-music-2026", "title": "Stone & Sound", "category": "Music", "day": "15", "month": "Aug", "year": 2026, "location": "Haghpat & Sanahin", "image": "images/story-haghpat-night.jpg", "description": "Two evenings of sacred polyphonic music performed inside the monastery churches. The acoustics of 10th-century stone are unlike any concert hall. Haghpat on Friday, Sanahin on Saturday.", "url": ""}, {"id": "honey-festival-akner-2026", "title": "Honey & Hive Festival", "category": "Food & Foraging", "day": "22", "month": "Aug", "year": 2026, "location": "Akner Village", "image": "images/voice-beekeeper.jpg", "description": "Beekeepers from seven villages bring their season's jars to Akner. Tasting tables, hive walks, and a lunch using honey in every course. Held in the meadow above the village.", "url": ""}, {"id": "sanahin-night-walk-2026", "title": "Sanahin After Dark", "category": "Outdoors", "day": "12", "month": "Sep", "year": 2026, "location": "Sanahin Monastery, Alaverdi", "image": "images/sanahin-monastery.jpg", "description": "A guided walk through the Sanahin complex after dark, lit only by handheld lanterns, with a local historian. Limited to 20 people \u2014 registration required.", "url": ""}, {"id": "mushroom-season-2026", "title": "Mushroom Season Walk", "category": "Food & Foraging", "day": "04", "month": "Oct", "year": 2026, "location": "Gyulagarak Forest, Stepanavan", "image": "images/dendropark.jpg", "description": "Peak mushroom season in Lori's forests. A morning walk with a local guide identifying porcini, chanterelles, and saffron milk caps in the beech and oak forest above Gyulagarak.", "url": ""}, {"id": "lori-harvest-table-2026", "title": "Lori Harvest Table", "category": "Food & Drink", "day": "17", "month": "Oct", "year": 2026, "location": "Stepanavan Central Square", "image": "images/akner-village.jpg", "description": "A two-day local producers market \u2014 Lori preserves, smoked meats, wild honeys, and the region's first small-batch mulberry and grape distilleries. Free entry.", "url": ""}, {"id": "carpet-exhibition-2026", "title": "Lori Carpet Exhibition", "category": "Craft", "day": "08", "month": "Nov", "year": 2026, "location": "Vanadzor Culture House", "image": "images/carpet-weaving.jpg", "description": "Contemporary and traditional Lori carpets alongside a live demonstration of the vordan karmir natural dyeing process. Works available to buy directly from the weavers.", "url": ""}, {"id": "new-year-lori-berd-2026", "title": "New Year's Eve at Lori Berd", "category": "Festival", "day": "31", "month": "Dec", "year": 2026, "location": "Lori Berd Fortress, Stepanavan", "image": "images/lori-berd.jpg", "description": "A bonfire on the fortress plateau at midnight, the Stepanavan valley spread below. Warm clothes, headlamp, your own food. A local tradition that's grown every year for the past decade.", "url": ""}, {"id": "tumanyan-festival-2027", "title": "Tumanyan Festival", "category": "Festival", "day": "19", "month": "Feb", "year": 2027, "location": "Dsegh Village, Alaverdi", "image": "images/dsegh-village.jpg", "description": "Annual birthday celebration for Armenia's most beloved poet at his birthplace. Poetry, folk music, and village feasts. Visitors are welcome and fed by the village council.", "url": ""}, {"id": "easter-haghpat-2027", "title": "Easter Vigil at Haghpat", "category": "Religious", "day": "19", "month": "Apr", "year": 2027, "location": "Haghpat Monastery, Alaverdi", "image": "images/story-winter-monastery.jpg", "description": "The Easter liturgy at Haghpat begins at midnight on Holy Saturday. The candlelit procession around the monastery at 3am, in total darkness, is one of the most remarkable things you can witness in Armenia.", "url": ""}, {"id": "open-trails-day-2027", "title": "Open Trails Day", "category": "Outdoors", "day": "26", "month": "Jun", "year": 2027, "location": "Multiple locations, Lori", "image": "images/jijur-ridge.jpg", "description": "The second annual free guided hike day across Lori \u2014 six simultaneous trails, sunrise starts, no registration needed. Guides from the region donate their time.", "url": ""}, {"id": "stone-sound-2027", "title": "Stone & Sound", "category": "Music", "day": "14", "month": "Aug", "year": 2027, "location": "Haghpat & Sanahin", "image": "images/sanahin-bridge.jpg", "description": "The second edition of the monastery polyphony concerts. Two evenings, two churches, the same extraordinary acoustics.", "url": ""}],
+  stays: [{"id": "ethnoforma", "name": "Ethnoforma", "type": "Arthouse Guesthouse", "village": "Akner", "region": "Alaverdi", "excerpt": "A restored stone guesthouse rooted in Akner's vernacular architecture \u2014 handwoven textiles, wood-burning stove, and a terrace that faces the Debed canyon.", "image": "images/stay-ethnoforma.jpg", "priceRange": "From \u20ac35 / night", "amenities": ["Breakfast included", "Hiking guides", "Forest views", "Pet friendly"], "bookingUrl": "", "website": ""}, {"id": "odzun-guesthouse", "name": "Odzun Village Stay", "type": "Family Guesthouse", "village": "Odzun", "region": "Alaverdi", "excerpt": "Stay with a local family 200 metres from the 6th-century Odzun Basilica. Home-cooked Armenian dinner included every evening.", "image": "images/stay-odzun.jpg", "priceRange": "From \u20ac25 / night", "amenities": ["Dinner included", "Local guides available", "Garden"], "bookingUrl": "", "website": ""}, {"id": "stepanavan-hotel", "name": "Canyon View Hotel", "type": "Boutique Hotel", "village": "Stepanavan", "region": "Stepanavan", "excerpt": "A recently renovated 12-room hotel at the edge of Stepanavan, with direct access to the Dzoraget Gorge trail from the back door.", "image": "images/stay-stepanavan.jpg", "priceRange": "From \u20ac50 / night", "amenities": ["Trail access", "Bike rental", "Restaurant"], "bookingUrl": "", "website": ""}, {"id": "tashir-camp", "name": "Tashir Highland Camp", "type": "Glamping", "village": "Tashir", "region": "Tashir", "excerpt": "Heated canvas tents at 1,800 m with views of the north Lori plateau. Open June\u2013September only. Completely off-grid solar power.", "image": "images/stay-tashir-camp.jpg", "priceRange": "From \u20ac60 / night", "amenities": ["Breakfast included", "Horse riding", "Star gazing", "Solar powered"], "bookingUrl": "", "website": ""}, {"id": "dsegh-writer-house", "name": "Tumanyan Writer's House", "type": "Self-catering Cottage", "village": "Dsegh", "region": "Alaverdi", "excerpt": "A two-bedroom stone cottage in Dsegh, renovated and rented by the village cultural association. 5-minute walk from Tumanyan's museum-house.", "image": "images/stay-dsegh.jpg", "priceRange": "From \u20ac40 / night", "amenities": ["Self-catering", "Garden terrace", "Village walking maps"], "bookingUrl": "", "website": ""}]
+};
+
+// Track working copies
+const working = {
+  stories: JSON.parse(JSON.stringify(data.stories)),
+  discover: JSON.parse(JSON.stringify(data.discover)),
+  events: JSON.parse(JSON.stringify(data.events)),
+  stays: JSON.parse(JSON.stringify(data.stays))
+};
+
+let currentSection = 'stories';
+let selectedIdx = null;
+
+function getLabel(section, item) {
+  if (section === 'stories') return item.title;
+  if (section === 'discover') return item.title;
+  if (section === 'events') return item.title + ' · ' + item.month + ' ' + item.year;
+  if (section === 'stays') return item.name;
+  return '?';
+}
+function getSub(section, item) {
+  if (section === 'stories') return item.pillarLabel || item.pillar || '';
+  if (section === 'discover') return (item.type || '') + (item.region ? ' · ' + item.region : '');
+  if (section === 'events') return item.category + ' · ' + item.location;
+  if (section === 'stays') return item.type + ' · ' + item.village;
+  return '';
+}
+function getImg(section, item) {
+  if (section === 'stories') return item.image;
+  if (section === 'discover') return item.image;
+  if (section === 'events') return item.image;
+  if (section === 'stays') return item.image;
+  return null;
+}
+function setImg(section, idx, imgPath) {
+  if (section === 'stories') working[section][idx].image = imgPath;
+  else if (section === 'discover') working[section][idx].image = imgPath;
+  else if (section === 'events') working[section][idx].image = imgPath;
+  else if (section === 'stays') working[section][idx].image = imgPath;
+}
+
+function renderItems() {
+  const panel = document.getElementById('items-panel');
+  const items = working[currentSection];
+  panel.innerHTML = '';
+  items.forEach((item, i) => {
+    const img = getImg(currentSection, item);
+    const card = document.createElement('div');
+    card.className = 'item-card' + (i === selectedIdx ? ' selected' : '');
+    card.onclick = () => selectItem(i);
+    const imgPart = img
+      ? `<img src="${img}" onerror="this.style.display='none'" alt="">`
+      : `<div class="no-img">No image</div>`;
+    card.innerHTML = `
+      ${imgPart}
+      <div class="item-info">
+        <h3>${getLabel(currentSection, item)}</h3>
+        <p>${getSub(currentSection, item)}</p>
+        <p class="current-img">${img || '(no image)'}</p>
+      </div>`;
+    panel.appendChild(card);
+  });
+}
+
+function selectItem(idx) {
+  selectedIdx = idx;
+  renderItems();
+  renderImageGrid();
+}
+
+function renderImageGrid() {
+  const grid = document.getElementById('img-grid');
+  const noSel = document.getElementById('no-selection');
+  if (selectedIdx === null) { grid.style.display='none'; noSel.style.display=''; return; }
+  grid.style.display = 'grid';
+  noSel.style.display = 'none';
+
+  const currentImg = getImg(currentSection, working[currentSection][selectedIdx]);
+  // Normalise — strip leading /
+  const currentFile = currentImg ? currentImg.replace(/^\/?images\//, '') : null;
+
+  grid.innerHTML = '';
+  IMAGES.forEach(fname => {
+    const isCurrent = fname === currentFile;
+    const div = document.createElement('div');
+    div.className = 'img-thumb' + (isCurrent ? ' current' : '');
+    div.onclick = () => assignImage(fname);
+    div.innerHTML = `
+      ${isCurrent ? '<span class="current-badge">Current</span>' : ''}
+      <img src="images/${fname}" alt="${fname}">
+      <div class="img-name">${fname}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+function assignImage(fname) {
+  setImg(currentSection, selectedIdx, 'images/' + fname);
+  showToast('✓ Assigned ' + fname);
+  renderItems();
+  renderImageGrid();
+}
+
+function exportJSON(section) {
+  const blob = new Blob([JSON.stringify(working[section], null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = section + '.json';
+  a.click();
+  showToast('Downloaded ' + section + '.json — replace the file in content/');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// Tab switching
+document.getElementById('tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentSection = btn.dataset.section;
+  selectedIdx = null;
+  document.getElementById('no-selection').style.display = '';
+  document.getElementById('img-grid').style.display = 'none';
+  renderItems();
+});
+
+renderItems();
+</script>
+</body>
+</html>

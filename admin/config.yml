@@ -1,0 +1,137 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+site_url: https://explorelori.com
+
+collections:
+
+  # ── Discover (trails, places, villages, experiences) ──────────────
+  - name: "discover"
+    label: "Discover"
+    files:
+      - name: "discover_items"
+        label: "All Discover Items"
+        file: "content/discover.json"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID (slug)",       name: "id",         widget: "string" }
+              - { label: "Type",            name: "type",       widget: "select",
+                  options: ["trail", "place", "village", "experience"] }
+              - { label: "Title",           name: "title",      widget: "string" }
+              - { label: "Excerpt",         name: "excerpt",    widget: "text" }
+              - { label: "Image",           name: "image",      widget: "image",    required: false }
+              - { label: "Region",          name: "region",     widget: "string",   required: false }
+              - { label: "Season",          name: "season",     widget: "select",
+                  options: ["spring", "summer", "autumn", "winter", "year-round"],
+                  required: false }
+              - { label: "Difficulty",      name: "difficulty", widget: "select",
+                  options: ["easy", "moderate", "hard"],        required: false }
+              - { label: "Duration",        name: "duration",   widget: "string",   required: false }
+              - { label: "Distance",        name: "distance",   widget: "string",   required: false }
+              - { label: "Elevation",       name: "elevation",  widget: "string",   required: false }
+              - { label: "Featured",        name: "featured",   widget: "boolean",  default: false }
+
+  # ── Stories ────────────────────────────────────────────────────────
+  - name: "stories"
+    label: "Stories"
+    files:
+      - name: "stories_items"
+        label: "All Stories"
+        file: "content/stories.json"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Slug",            name: "slug",        widget: "string" }
+              - { label: "Title",           name: "title",       widget: "string" }
+              - { label: "Excerpt",         name: "excerpt",     widget: "text" }
+              - { label: "Author",          name: "author",      widget: "string" }
+              - { label: "Image",           name: "image",       widget: "image",   required: false }
+              - { label: "Pillar",          name: "pillar",      widget: "select",
+                  options: ["trails", "culture", "food", "people", "seasons"] }
+              - { label: "Pillar Label",    name: "pillarLabel", widget: "string" }
+              - { label: "Read Time (min)", name: "readTime",    widget: "number" }
+              - { label: "Season",          name: "season",      widget: "select",
+                  options: ["spring", "summer", "autumn", "winter", "year-round"],
+                  required: false }
+              - { label: "Featured",        name: "featured",    widget: "boolean", default: false }
+
+  # ── Events ─────────────────────────────────────────────────────────
+  - name: "events"
+    label: "Events"
+    files:
+      - name: "events_items"
+        label: "All Events"
+        file: "content/events.json"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID",          name: "id",          widget: "string",   required: false }
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Image",       name: "image",       widget: "image",    required: false }
+              - { label: "Category",    name: "category",    widget: "select",
+                  options: ["Festival", "Religious", "Food & Foraging", "Food & Drink", "Craft", "Outdoors", "Music"] }
+              - { label: "Day",         name: "day",         widget: "string" }
+              - { label: "Month",       name: "month",       widget: "string" }
+              - { label: "Year",        name: "year",        widget: "number" }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text",     required: false }
+              - { label: "URL",         name: "url",         widget: "string",   required: false }
+
+  # ── Stays ──────────────────────────────────────────────────────────
+  - name: "stays"
+    label: "Stays"
+    files:
+      - name: "stays_items"
+        label: "All Stays"
+        file: "content/stays.json"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID (slug)",     name: "id",          widget: "string" }
+              - { label: "Name",          name: "name",        widget: "string" }
+              - { label: "Type",          name: "type",        widget: "select",
+                  options: ["Family guesthouse", "Boutique hotel", "Self-catering cottage",
+                            "Glamping", "Homestay", "Heritage house", "Camp"] }
+              - { label: "Village",       name: "village",     widget: "string" }
+              - { label: "Region",        name: "region",      widget: "string" }
+              - { label: "Excerpt",       name: "excerpt",     widget: "text" }
+              - { label: "Image",         name: "image",       widget: "image",   required: false }
+              - { label: "Amenities",     name: "amenities",   widget: "list",    required: false }
+              - { label: "Price Range",   name: "priceRange",  widget: "string",  required: false }
+              - { label: "Booking URL",   name: "bookingUrl",  widget: "string",  required: false }
+              - { label: "Website",       name: "website",     widget: "string",  required: false }
+              - { label: "Featured",      name: "featured",    widget: "boolean", default: false }
+
+  # ── Guides ─────────────────────────────────────────────────────────
+  - name: "guides"
+    label: "Guides"
+    files:
+      - name: "guides_items"
+        label: "All Guides"
+        file: "content/guides.json"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID (slug)",       name: "id",             widget: "string" }
+              - { label: "Name",            name: "name",           widget: "string" }
+              - { label: "Specialty",       name: "specialty",      widget: "string" }
+              - { label: "Bio",             name: "bio",            widget: "text" }
+              - { label: "Photo",           name: "photo",          widget: "image",   required: false }
+              - { label: "Languages",       name: "languages",      widget: "list",    required: false }
+              - { label: "Certifications",  name: "certifications", widget: "list",    required: false }
+              - { label: "Contact URL",     name: "contactUrl",     widget: "string",  required: false }

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What&#39;s On — Explore Lori</title>
+  <meta name="description" content="Upcoming festivals, ceremonies, trail days and cultural events in Lori, Armenia.">
+
+  
+  <meta property="og:title" content="What&#39;s On — Explore Lori">
+  <meta property="og:description" content="Upcoming festivals, ceremonies, trail days and cultural events in Lori, Armenia.">
+  <meta property="og:image" content="/images/og-homepage.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://explorelori.com/events/">
+
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/vivid.css">
+  
+
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+</head>
+<body class="page--events">
+
+  
+<nav class="nav nav--solid" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo" aria-label="Explore Lori home">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
+        <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+      </svg>
+      <span class="nav__logo-text">Explore Lori</span>
+    </a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="/discover/" class="nav__link">Discover</a></li>
+      <li><a href="/stories/" class="nav__link">Stories</a></li>
+      <li><a href="/plan/" class="nav__link">Plan</a></li>
+      <li><a href="/events/" class="nav__link nav__link--active" aria-current="page">What's On</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <button class="nav__search-btn" id="search-btn" aria-label="Search" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="7.5" cy="7.5" r="5" stroke="currentColor" stroke-width="1.75"/>
+          <path d="M11.5 11.5 L16 16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+        <span class="nav__search-label">Search</span>
+      </button>
+      <a href="/connect/" class="btn btn--outline btn--sm">Connect</a>
+    </div>
+
+    <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="nav__hamburger-line"></span>
+      <span class="nav__hamburger-line"></span>
+      <span class="nav__hamburger-line"></span>
+    </button>
+  </div>
+
+  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <ul class="nav__mobile-links" role="list">
+      <li><a href="/discover/">Discover</a></li>
+      <li><a href="/stories/">Stories</a></li>
+      <li><a href="/plan/">Plan</a></li>
+      <li><a href="/events/">What's On</a></li>
+      <li><a href="/connect/">Connect</a></li>
+    </ul>
+  </div>
+  <div class="nav__overlay" aria-hidden="true"></div>
+</nav>
+
+
+  
+<style>
+.cat--festival{--cat:#C9A844;--cat-bg:rgba(201,168,68,.13);}
+.cat--religious{--cat:#6B5B9E;--cat-bg:rgba(107,91,158,.12);}
+.cat--food-foraging{--cat:#3A7055;--cat-bg:rgba(58,112,85,.12);}
+.cat--food-drink{--cat:#3A7055;--cat-bg:rgba(58,112,85,.12);}
+.cat--craft{--cat:#8B3A28;--cat-bg:rgba(139,58,40,.12);}
+.cat--outdoors{--cat:#3A6B9E;--cat-bg:rgba(58,107,158,.12);}
+.cat--music{--cat:#7B4F8A;--cat-bg:rgba(123,79,138,.12);}
+.cat--default{--cat:#5C6B7A;--cat-bg:rgba(92,107,122,.12);}
+
+.events-hero{background:var(--dark);padding:100px 0 48px;}
+.events-hero__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-x);display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;}
+.events-hero__eyebrow{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.events-hero__title{font-family:var(--font-serif);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;color:var(--white);line-height:1.04;margin-bottom:14px;}
+.events-hero__subtitle{font-family:var(--font-sans);font-size:1rem;color:rgba(247,244,238,.6);max-width:460px;line-height:1.6;}
+.events-hero__stat{text-align:right;flex-shrink:0;}
+.events-hero__count{font-family:var(--font-serif);font-size:clamp(3.5rem,7vw,5.5rem);font-weight:700;color:var(--gold);line-height:1;}
+.events-hero__count-label{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(247,244,238,.35);margin-top:4px;}
+
+.events-filter{background:var(--dark-2);border-bottom:1px solid rgba(255,255,255,.07);position:sticky;top:68px;z-index:100;padding:14px 0;}
+.events-filter__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-x);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.events-filter__label{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(247,244,238,.3);flex-shrink:0;margin-right:4px;}
+.ev-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-sans);font-size:12px;font-weight:600;color:rgba(247,244,238,.65);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:6px 14px 6px 10px;cursor:pointer;transition:background .18s,color .18s,border-color .18s;}
+.ev-pill:hover{background:rgba(255,255,255,.12);color:var(--white);}
+.ev-pill.active,.ev-pill.filter-pill--active{background:rgba(255,255,255,.13);border-color:var(--pill-color,rgba(255,255,255,.25));color:var(--white);box-shadow:inset 0 0 0 1px var(--pill-color,rgba(255,255,255,.2));}
+.ev-pill__dot{width:8px;height:8px;border-radius:50%;background:var(--pill-color,#fff);flex-shrink:0;}
+.ev-clear{font-family:var(--font-sans);font-size:11px;color:rgba(247,244,238,.3);background:none;border:none;cursor:pointer;margin-left:auto;padding:4px 0;transition:color .18s;}
+.ev-clear:hover{color:var(--white);}
+
+.events-body{background:var(--parch);min-height:50vh;}
+.events-body__inner{max-width:var(--max-w);margin:0 auto;padding:64px var(--pad-x) 96px;}
+
+.ev-month{margin-bottom:64px;}
+.ev-month__header{display:flex;align-items:center;gap:20px;margin-bottom:28px;}
+.ev-month__name{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--slate);white-space:nowrap;}
+.ev-month__line{flex:1;height:1px;background:rgba(212,196,154,.4);}
+.ev-month__count{font-family:var(--font-sans);font-size:11px;color:var(--stone);white-space:nowrap;}
+
+.ev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+
+.ev-card{background:var(--white);border-radius:var(--radius-lg);border-left:4px solid var(--cat,var(--stone));padding:26px 26px 22px;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:transform .18s,box-shadow .18s;}
+.ev-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.ev-card__top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;}
+.ev-card__date{display:flex;flex-direction:column;align-items:center;background:var(--cat-bg,rgba(212,196,154,.15));border-radius:var(--radius);padding:8px 14px;min-width:56px;text-align:center;flex-shrink:0;}
+.ev-card__day{font-family:var(--font-serif);font-size:1.875rem;font-weight:700;color:var(--cat,var(--dark));line-height:1;}
+.ev-card__month-lbl{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cat,var(--slate));margin-top:3px;opacity:.8;}
+.ev-card__year-lbl{font-family:var(--font-sans);font-size:9px;color:var(--slate);margin-top:1px;opacity:.55;}
+.ev-card__cat{font-family:var(--font-sans);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--cat,var(--slate));background:var(--cat-bg,rgba(212,196,154,.15));border-radius:100px;padding:4px 10px;white-space:nowrap;align-self:flex-start;}
+.ev-card__title{font-family:var(--font-serif);font-size:1.2rem;font-weight:700;color:var(--dark);line-height:1.25;margin-bottom:10px;}
+.ev-card__desc{font-family:var(--font-sans);font-size:.875rem;color:var(--body-text);line-height:1.65;margin-bottom:18px;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.ev-card__foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.ev-card__loc{font-family:var(--font-sans);font-size:12px;color:var(--slate);display:flex;align-items:center;gap:5px;}
+.ev-card__loc svg{flex-shrink:0;opacity:.65;}
+.ev-card__link{font-family:var(--font-sans);font-size:12px;font-weight:600;color:var(--cat,var(--indigo));display:flex;align-items:center;gap:4px;transition:gap .15s;white-space:nowrap;}
+.ev-card__link:hover{gap:8px;}
+
+.events-submit{background:var(--indigo);padding:56px 0;}
+.events-submit__inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--pad-x);display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.events-submit__title{font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:8px;}
+.events-submit__desc{font-family:var(--font-sans);font-size:.9375rem;color:rgba(247,244,238,.65);max-width:480px;line-height:1.6;}
+
+@media(max-width:900px){.events-hero__inner{flex-direction:column;align-items:flex-start;}.events-hero__stat{text-align:left;}}
+@media(max-width:720px){.ev-grid{grid-template-columns:1fr;}.events-body__inner{padding:40px 20px 64px;}}
+@media(max-width:480px){.ev-pill{font-size:11px;padding:5px 10px 5px 8px;}.events-hero{padding:88px 0 36px;}}
+</style>
+
+<header class="events-hero">
+  <div class="events-hero__inner">
+    <div class="events-hero__text">
+      <p class="events-hero__eyebrow">Lori Calendar</p>
+      <h1 class="events-hero__title">What&#8217;s On<br>in Lori</h1>
+      <p class="events-hero__subtitle">Festivals, ceremonies, trail days and cultural events &#8212; listed as they&#8217;re confirmed.</p>
+    </div>
+    <div class="events-hero__stat">
+      <div class="events-hero__count">15</div>
+      <div class="events-hero__count-label">Upcoming events</div>
+    </div>
+  </div>
+</header>
+
+<nav class="events-filter events-filter-bar" aria-label="Filter by category">
+  <div class="events-filter__inner">
+    <span class="events-filter__label">Category</span>
+    <button class="ev-pill" data-filter="Festival" data-group="category" style="--pill-color:#C9A844"><span class="ev-pill__dot" style="background:#C9A844"></span>Festival</button>
+    <button class="ev-pill" data-filter="Religious" data-group="category" style="--pill-color:#6B5B9E"><span class="ev-pill__dot" style="background:#6B5B9E"></span>Religious</button>
+    <button class="ev-pill" data-filter="Food &amp; Foraging" data-group="category" style="--pill-color:#3A7055"><span class="ev-pill__dot" style="background:#3A7055"></span>Food &amp; Foraging</button>
+    <button class="ev-pill" data-filter="Craft" data-group="category" style="--pill-color:#8B3A28"><span class="ev-pill__dot" style="background:#8B3A28"></span>Craft</button>
+    <button class="ev-pill" data-filter="Outdoors" data-group="category" style="--pill-color:#3A6B9E"><span class="ev-pill__dot" style="background:#3A6B9E"></span>Outdoors</button>
+    <button class="ev-pill" data-filter="Music" data-group="category" style="--pill-color:#7B4F8A"><span class="ev-pill__dot" style="background:#7B4F8A"></span>Music</button>
+    <button class="ev-clear filter-bar__clear" aria-label="Clear filters">Clear all</button>
+  </div>
+</nav>
+
+<main class="events-body" id="main-content">
+  <div class="events-body__inner">
+    
+    <section class="ev-month" aria-label="May 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">May&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--food-foraging" data-category="Food &amp; Foraging" aria-label="Wild Herb Season Opener">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">09</span>
+              <span class="ev-card__month-lbl">May</span>
+              
+            </div>
+            <span class="ev-card__cat">Food &amp; Foraging</span>
+          </div>
+          <h3 class="ev-card__title">Wild Herb Season Opener</h3>
+          <p class="ev-card__desc">The first guided foraging walk of the season. A half-day identifying edible spring plants — wood sorrel, ramsons, nettles, and the first wild strawberries. Led by Narine Avetisyan.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Stepanavan Forest Edge
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Jun 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Jun&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--outdoors" data-category="Outdoors" aria-label="Open Trails Day">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">27</span>
+              <span class="ev-card__month-lbl">Jun</span>
+              
+            </div>
+            <span class="ev-card__cat">Outdoors</span>
+          </div>
+          <h3 class="ev-card__title">Open Trails Day</h3>
+          <p class="ev-card__desc">Free guided hikes on 6 trails simultaneously — groups set off from Stepanavan, Alaverdi, Vanadzor, and Tashir at sunrise. No booking required, just show up.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Multiple locations, Lori
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Jul 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Jul&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">2 events</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--festival" data-category="Festival" aria-label="Vardavar at Haghpat">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">12</span>
+              <span class="ev-card__month-lbl">Jul</span>
+              
+            </div>
+            <span class="ev-card__cat">Festival</span>
+          </div>
+          <h3 class="ev-card__title">Vardavar at Haghpat</h3>
+          <p class="ev-card__desc">Armenia&#39;s ancient water festival, 14 weeks after Easter. At Haghpat, the tradition includes blessing of water at the monastery spring and village festivities in the settlement below.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Haghpat Monastery, Alaverdi
+            </span>
+            
+          </div>
+        </article>
+        
+        <article class="ev-card cat--craft" data-category="Craft" aria-label="Alaverdi Copper Days">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">18</span>
+              <span class="ev-card__month-lbl">Jul</span>
+              
+            </div>
+            <span class="ev-card__cat">Craft</span>
+          </div>
+          <h3 class="ev-card__title">Alaverdi Copper Days</h3>
+          <p class="ev-card__desc">A two-day celebration of 3,000 years of copper heritage — live metalsmith demonstrations, a street market of copper crafts, and a walk through the Soviet-era smelter district.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Alaverdi Town Centre
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Aug 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Aug&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">2 events</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--music" data-category="Music" aria-label="Stone &amp; Sound">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">15</span>
+              <span class="ev-card__month-lbl">Aug</span>
+              
+            </div>
+            <span class="ev-card__cat">Music</span>
+          </div>
+          <h3 class="ev-card__title">Stone &amp; Sound</h3>
+          <p class="ev-card__desc">Two evenings of sacred polyphonic music performed inside the monastery churches. The acoustics of 10th-century stone are unlike any concert hall. Haghpat on Friday, Sanahin on Saturday.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Haghpat &amp; Sanahin
+            </span>
+            
+          </div>
+        </article>
+        
+        <article class="ev-card cat--food-foraging" data-category="Food &amp; Foraging" aria-label="Honey &amp; Hive Festival">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">22</span>
+              <span class="ev-card__month-lbl">Aug</span>
+              
+            </div>
+            <span class="ev-card__cat">Food &amp; Foraging</span>
+          </div>
+          <h3 class="ev-card__title">Honey &amp; Hive Festival</h3>
+          <p class="ev-card__desc">Beekeepers from seven villages bring their season&#39;s jars to Akner. Tasting tables, hive walks, and a lunch using honey in every course. Held in the meadow above the village.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Akner Village
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Sep 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Sep&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--outdoors" data-category="Outdoors" aria-label="Sanahin After Dark">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">12</span>
+              <span class="ev-card__month-lbl">Sep</span>
+              
+            </div>
+            <span class="ev-card__cat">Outdoors</span>
+          </div>
+          <h3 class="ev-card__title">Sanahin After Dark</h3>
+          <p class="ev-card__desc">A guided walk through the Sanahin complex after dark, lit only by handheld lanterns, with a local historian. Limited to 20 people — registration required.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Sanahin Monastery, Alaverdi
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Oct 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Oct&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">2 events</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--food-foraging" data-category="Food &amp; Foraging" aria-label="Mushroom Season Walk">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">04</span>
+              <span class="ev-card__month-lbl">Oct</span>
+              
+            </div>
+            <span class="ev-card__cat">Food &amp; Foraging</span>
+          </div>
+          <h3 class="ev-card__title">Mushroom Season Walk</h3>
+          <p class="ev-card__desc">Peak mushroom season in Lori&#39;s forests. A morning walk with a local guide identifying porcini, chanterelles, and saffron milk caps in the beech and oak forest above Gyulagarak.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Gyulagarak Forest, Stepanavan
+            </span>
+            
+          </div>
+        </article>
+        
+        <article class="ev-card cat--food-drink" data-category="Food &amp; Drink" aria-label="Lori Harvest Table">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">17</span>
+              <span class="ev-card__month-lbl">Oct</span>
+              
+            </div>
+            <span class="ev-card__cat">Food &amp; Drink</span>
+          </div>
+          <h3 class="ev-card__title">Lori Harvest Table</h3>
+          <p class="ev-card__desc">A two-day local producers market — Lori preserves, smoked meats, wild honeys, and the region&#39;s first small-batch mulberry and grape distilleries. Free entry.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Stepanavan Central Square
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Nov 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Nov&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--craft" data-category="Craft" aria-label="Lori Carpet Exhibition">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">08</span>
+              <span class="ev-card__month-lbl">Nov</span>
+              
+            </div>
+            <span class="ev-card__cat">Craft</span>
+          </div>
+          <h3 class="ev-card__title">Lori Carpet Exhibition</h3>
+          <p class="ev-card__desc">Contemporary and traditional Lori carpets alongside a live demonstration of the vordan karmir natural dyeing process. Works available to buy directly from the weavers.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Vanadzor Culture House
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Dec 2026">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Dec&thinsp;&middot;&thinsp;2026</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--festival" data-category="Festival" aria-label="New Year&#39;s Eve at Lori Berd">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">31</span>
+              <span class="ev-card__month-lbl">Dec</span>
+              
+            </div>
+            <span class="ev-card__cat">Festival</span>
+          </div>
+          <h3 class="ev-card__title">New Year&#39;s Eve at Lori Berd</h3>
+          <p class="ev-card__desc">A bonfire on the fortress plateau at midnight, the Stepanavan valley spread below. Warm clothes, headlamp, your own food. A local tradition that&#39;s grown every year for the past decade.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Lori Berd Fortress, Stepanavan
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Feb 2027">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Feb&thinsp;&middot;&thinsp;2027</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--festival" data-category="Festival" aria-label="Tumanyan Festival">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">19</span>
+              <span class="ev-card__month-lbl">Feb</span>
+              <span class="ev-card__year-lbl">2027</span>
+            </div>
+            <span class="ev-card__cat">Festival</span>
+          </div>
+          <h3 class="ev-card__title">Tumanyan Festival</h3>
+          <p class="ev-card__desc">Annual birthday celebration for Armenia&#39;s most beloved poet at his birthplace. Poetry, folk music, and village feasts. Visitors are welcome and fed by the village council.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Dsegh Village, Alaverdi
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Apr 2027">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Apr&thinsp;&middot;&thinsp;2027</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--religious" data-category="Religious" aria-label="Easter Vigil at Haghpat">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">19</span>
+              <span class="ev-card__month-lbl">Apr</span>
+              <span class="ev-card__year-lbl">2027</span>
+            </div>
+            <span class="ev-card__cat">Religious</span>
+          </div>
+          <h3 class="ev-card__title">Easter Vigil at Haghpat</h3>
+          <p class="ev-card__desc">The Easter liturgy at Haghpat begins at midnight on Holy Saturday. The candlelit procession around the monastery at 3am, in total darkness, is one of the most remarkable things you can witness in Armenia.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Haghpat Monastery, Alaverdi
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Jun 2027">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Jun&thinsp;&middot;&thinsp;2027</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--outdoors" data-category="Outdoors" aria-label="Open Trails Day">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">26</span>
+              <span class="ev-card__month-lbl">Jun</span>
+              <span class="ev-card__year-lbl">2027</span>
+            </div>
+            <span class="ev-card__cat">Outdoors</span>
+          </div>
+          <h3 class="ev-card__title">Open Trails Day</h3>
+          <p class="ev-card__desc">The second annual free guided hike day across Lori — six simultaneous trails, sunrise starts, no registration needed. Guides from the region donate their time.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Multiple locations, Lori
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+    <section class="ev-month" aria-label="Aug 2027">
+      <div class="ev-month__header">
+        <h2 class="ev-month__name">Aug&thinsp;&middot;&thinsp;2027</h2>
+        <div class="ev-month__line"></div>
+        <span class="ev-month__count">1 event</span>
+      </div>
+      <div class="ev-grid">
+        
+        <article class="ev-card cat--music" data-category="Music" aria-label="Stone &amp; Sound">
+          <div class="ev-card__top">
+            <div class="ev-card__date">
+              <span class="ev-card__day">14</span>
+              <span class="ev-card__month-lbl">Aug</span>
+              <span class="ev-card__year-lbl">2027</span>
+            </div>
+            <span class="ev-card__cat">Music</span>
+          </div>
+          <h3 class="ev-card__title">Stone &amp; Sound</h3>
+          <p class="ev-card__desc">The second edition of the monastery polyphony concerts. Two evenings, two churches, the same extraordinary acoustics.</p>
+          <div class="ev-card__foot">
+            <span class="ev-card__loc">
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Haghpat &amp; Sanahin
+            </span>
+            
+          </div>
+        </article>
+        
+      </div>
+    </section>
+    
+  </div>
+</main>
+
+<section class="events-submit">
+  <div class="events-submit__inner">
+    <div>
+      <div class="section-intro">
+        <p class="section-intro__label section-intro__label--light">Get listed</p>
+        <h2 class="section-intro__title section-intro__title--light">Running an event in Lori?</h2>
+        <p class="section-intro__sub section-intro__sub--light">Festivals, markets, workshops, trail days. If it's happening in Lori and worth knowing about, we'll list it.</p>
+      </div>
+    </div>
+    <a href="/connect/#submit" class="btn btn--outline">Submit an Event &#8594;</a>
+  </div>
+</section>
+
+
+  <footer class="footer" aria-label="Site footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="/" class="footer__logo" aria-label="Explore Lori home">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M4 24 L10 10 L16 18 L22 8 L28 24"/>
+          <circle cx="16" cy="6" r="2.5" fill="var(--red)"/>
+        </svg>
+        Explore Lori
+      </a>
+      <p class="footer__tagline">A platform for Lori, Armenia — built by people who live and walk here.</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Footer navigation">
+      <div class="footer__nav-col">
+        <h4 class="footer__nav-title">Explore</h4>
+        <ul role="list">
+          <li><a href="/discover/">Discover</a></li>
+          <li><a href="/stories/">Stories</a></li>
+          <li><a href="/plan/">Plan Your Trip</a></li>
+          <li><a href="/costs/">Cost Calculator</a></li>
+          <li><a href="/events/">What's On</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-col">
+        <h4 class="footer__nav-title">Connect</h4>
+        <ul role="list">
+          <li><a href="/connect/">Submit a Place</a></li>
+          <li><a href="/connect/#guide">List as a Guide</a></li>
+          <li><a href="/connect/#stay">List a Stay</a></li>
+          <li><a href="/connect/#write">Write for Us</a></li>
+        </ul>
+      </div>
+      <div class="footer__nav-col">
+        <h4 class="footer__nav-title">About</h4>
+        <ul role="list">
+          <li><a href="/about/">About the Project</a></li>
+          <li><a href="/about/#ethnoforma">Ethnoforma</a></li>
+          <li><a href="mailto:hello@explorelori.com">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p class="footer__copy">&copy; 2026 Explore Lori. Made in Lori, Armenia.</p>
+      <p class="footer__legal">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+  
+  <div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-overlay__inner">
+      <div class="search-box">
+        <svg class="search-box__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M13 13 L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input
+          id="search-input"
+          type="search"
+          class="search-box__input"
+          placeholder="Search places, stories, events…"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+          aria-label="Search"
+          aria-autocomplete="list"
+          aria-controls="search-results"
+        >
+        <button id="search-close" class="search-box__close" aria-label="Close search">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M4 4 L14 14 M14 4 L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/search.js"></script>
+</body>
+</html>

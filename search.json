@@ -1,0 +1,533 @@
+[
+  {
+    "type": "story",
+    "title": "The Voice in the Stone: How Lori's Tuff Built a Kingdom",
+    "excerpt": "Dzoraget tuff isn't just a building material — it's a geological diary written in volcanic fire 2.5 million years ago. Walk the canyon and read the pages.",
+    "tags": "Culture & History",
+    "image": "images/story-tuff-stone.jpg",
+    "url": "/stories/voice-of-the-stone/"
+  },
+  {
+    "type": "story",
+    "title": "The Last Women Who Know the Red",
+    "excerpt": "Vordan karmir — the worm-dye that made Lori carpets famous — almost disappeared with the Soviet collapse. Three women in Stepanavan brought it back.",
+    "tags": "Local Voices",
+    "image": "images/story-carpet-weavers.jpg",
+    "url": "/stories/last-women-who-know-the-red/"
+  },
+  {
+    "type": "story",
+    "title": "Midsummer at Haghpat: The Walk Nobody Takes",
+    "excerpt": "Tourists arrive by car and leave in an hour. But the real Haghpat begins after dark, when the forest goes quiet and the monastery reveals its actual scale.",
+    "tags": "Trails & Nature",
+    "image": "images/story-haghpat-night.jpg",
+    "url": "/stories/midsummer-at-haghpat/"
+  },
+  {
+    "type": "story",
+    "title": "Copper City: Alaverdi's Industrial Soul",
+    "excerpt": "The smelter smoke is gone now, but Alaverdi's Soviet-era apartment blocks still cling to gorge walls no architect would dare today. A city that shouldn't exist.",
+    "tags": "Culture & History",
+    "image": "images/story-alaverdi-copper.jpg",
+    "url": "/stories/copper-city-alaverdi/"
+  },
+  {
+    "type": "story",
+    "title": "Akner in April: When the Walnut Groves Wake Up",
+    "excerpt": "At 1,400 meters, spring arrives late in Akner. For about three weeks in April, the village sits between bare winter branches and full green — pure magic.",
+    "tags": "Seasons & Weather",
+    "image": "images/story-akner-spring.jpg",
+    "url": "/stories/akner-in-april/"
+  },
+  {
+    "type": "story",
+    "title": "What Lori Tastes Like: A Forager's Field Notes",
+    "excerpt": "Wild garlic, pine mushrooms, sour plums, and the tannic punch of homemade mulberry oghi. A season-by-season guide to eating in Lori's forests and kitchens.",
+    "tags": "Food & Foraging",
+    "image": "images/story-foraging-lori.jpg",
+    "url": "/stories/what-lori-tastes-like/"
+  },
+  {
+    "type": "story",
+    "title": "In Tumanyan's Footsteps: Dsegh to Haghpat on Foot",
+    "excerpt": "Armenia's greatest poet spent his childhood walking this exact path. The villages he wrote about are still there. Most of his readers never visit.",
+    "tags": "Local Voices",
+    "image": "images/story-tumanyan-path.jpg",
+    "url": "/stories/tumanyan-footsteps/"
+  },
+  {
+    "type": "story",
+    "title": "Lori Under Snow: Why Winter is the Honest Season",
+    "excerpt": "No tourists. No dust. Just you, black basalt walls, and the kind of silence that makes you understand why monks chose these particular gorges.",
+    "tags": "Trails & Nature",
+    "image": "images/story-winter-monastery.jpg",
+    "url": "/stories/lori-under-snow/"
+  },
+  {
+    "type": "story",
+    "title": "The Fortress That Fell to a Woman's Word",
+    "excerpt": "Kayan sat above the Debed for five centuries. It fell in an afternoon, because a woman told the Lezgins where the spring was.",
+    "tags": "Culture & History",
+    "image": "images/story-kayan-fortress.jpg",
+    "url": "/stories/kayan-fortress/"
+  },
+  {
+    "type": "story",
+    "title": "The Beekeeper of Akner: A Forest at the Edge of the Village",
+    "excerpt": "An older beekeeper at the forest edge of Akner keeps forty hives and produces some of the finest honey in the region — linden, chestnut, wildflower.",
+    "tags": "Local Voices",
+    "image": "images/story-beekeeping-lori.jpg",
+    "url": "/stories/beekeeping-lori/"
+  },
+  {
+    "type": "story",
+    "title": "November in Lori: After the Leaves Fall, Everything Is Visible",
+    "excerpt": "November is when Lori shows itself honestly. The leaves fall. The tourists leave. The canyon's geometry becomes visible. Everything else can wait until spring.",
+    "tags": "Seasons & Weather",
+    "image": "images/story-november-lori.jpg",
+    "url": "/stories/november-in-lori/"
+  },
+  {
+    "type": "story",
+    "title": "Akhtala's Frescoes: Paint That Survived Eight Centuries",
+    "excerpt": "Most medieval frescoes in the South Caucasus are gone — chipped away, plastered over, or lost to war. Akhtala's survived. Nobody knows exactly why.",
+    "tags": "Culture & History",
+    "image": "images/story-akhtala.jpg",
+    "url": "/stories/akhtala-frescoes/"
+  },
+  {
+    "type": "story",
+    "title": "The Wild Herbs of Lori: A Forager's Spring Calendar",
+    "excerpt": "From wood sorrel in April to summer savory in August — a month-by-month guide to what grows, where to find it, and what to do with it.",
+    "tags": "Food & Foraging",
+    "image": "images/story-akner-spring.jpg",
+    "url": "/stories/wild-herbs-lori/"
+  },
+  {
+    "type": "story",
+    "title": "The Bridge at Sanahin: What Crossed It and What Didn't",
+    "excerpt": "An 800-year-old bridge still carries foot traffic over the Debed ravine. This is the history of what it's seen — and what it stopped.",
+    "tags": "Culture & History",
+    "image": "images/story-sanahin-bridge.jpg",
+    "url": "/stories/sanahin-bridge-story/"
+  },
+  {
+    "type": "story",
+    "title": "Odzun on a Thursday: A Village Above Everything",
+    "excerpt": "The village plateau ends in a 400-metre drop to the Debed canyon. The people who live here don't think much about the drop. They're used to the edge.",
+    "tags": "Local Voices",
+    "image": "images/story-odzun.jpg",
+    "url": "/stories/odzun-village-story/"
+  },
+  {
+    "type": "story",
+    "title": "First Snow on Pushkin Pass",
+    "excerpt": "Every October, the same thing happens: a morning of white, a closed road, and half the villages in northern Lori cut off until spring. This is what that looks like.",
+    "tags": "Seasons & Weather",
+    "image": "images/season-winter.jpg",
+    "url": "/stories/pushkin-pass-snow/"
+  },
+  {
+    "type": "story",
+    "title": "Alaverdi: The Soviet City That Hangs on the Cliff",
+    "excerpt": "A city built vertically into a 350-metre gorge, connected by a Soviet cable car still running from 1958. The copper smelter closed. The city didn't leave.",
+    "tags": "Culture & History",
+    "image": "images/story-alaverdi-copper.jpg",
+    "url": "/stories/alaverdi-soviet-gorge/"
+  },
+  {
+    "type": "story",
+    "title": "Five Days in Lori: A Route That Costs Almost Nothing",
+    "excerpt": "Two monasteries, three villages, one gorge trail, and a night in a farmhouse. The actual costs, the actual distances, and what to do if the weather turns.",
+    "tags": "Trails & Nature",
+    "image": "images/dzoraget-gorge.jpg",
+    "url": "/stories/five-days-lori/"
+  },
+  {
+    "type": "story",
+    "title": "Easter at Haghpat: What Happens When the Candles Go Out",
+    "excerpt": "The liturgy starts at midnight. By 3am the congregation is circling the monastery in darkness with candles. By dawn, everyone is eating in the churchyard.",
+    "tags": "Local Voices",
+    "image": "images/story-haghpat-night.jpg",
+    "url": "/stories/easter-haghpat-story/"
+  }
+,
+  {
+    "type": "place",
+    "title": "Dzoraget Gorge Loop",
+    "excerpt": "A dramatic canyon walk along rust-red tuff cliffs above the Dzoraget River, passing ancient cave hermitages carved directly into the rock.",
+    "tags": "trail",
+    "image": "images/dzoraget-gorge.jpg",
+    "url": "/discover/dzoraget-gorge-loop/"
+  },
+  {
+    "type": "place",
+    "title": "Haghpat Monastery",
+    "excerpt": "UNESCO-listed 10th-century monastery complex rising from a forested plateau above the Debed Canyon. Armenia's finest example of medieval sacred architecture.",
+    "tags": "place",
+    "image": "images/haghpat-monastery.jpg",
+    "url": "/discover/haghpat-monastery/"
+  },
+  {
+    "type": "place",
+    "title": "Akner Village",
+    "excerpt": "Perched at 1,400 m between forest ridges, Akner is one of Lori's most intact historic villages — stone houses, walnut groves, and a 13th-century church.",
+    "tags": "village",
+    "image": "images/akner-village.jpg",
+    "url": "/discover/akner-village/"
+  },
+  {
+    "type": "place",
+    "title": "Lori Berd Fortress",
+    "excerpt": "11th-century fortress city on a dramatic cliff peninsula — the capital of the Kingdom of Lori, abandoned 900 years ago and never rebuilt.",
+    "tags": "place",
+    "image": "images/lori-berd.jpg",
+    "url": "/discover/lori-berd-fortress/"
+  },
+  {
+    "type": "place",
+    "title": "Sanahin Monastery",
+    "excerpt": "Twin to Haghpat and equally remarkable — a sprawling 10th-century complex with the birthplace of the legendary Mikoyan brothers beside it.",
+    "tags": "place",
+    "image": "images/sanahin-monastery.jpg",
+    "url": "/discover/sanahin-monastery/"
+  },
+  {
+    "type": "place",
+    "title": "Debed Canyon Traverse",
+    "excerpt": "Follow the Debed River north from Alaverdi through copper-stained gorge walls, Soviet-era bridges, and dense forest — one of Lori's most varied walks.",
+    "tags": "trail",
+    "image": "images/debed-canyon.jpg",
+    "url": "/discover/debed-canyon-traverse/"
+  },
+  {
+    "type": "place",
+    "title": "Dsegh Village",
+    "excerpt": "The birthplace of the poet Hovhannes Tumanyan, set in a gentle valley with a charming museum-house and surrounding meadows perfect for a slow afternoon.",
+    "tags": "village",
+    "image": "images/dsegh-village.jpg",
+    "url": "/discover/dsegh-village/"
+  },
+  {
+    "type": "place",
+    "title": "Alaverdi Copper Culture",
+    "excerpt": "Meet the last craftsmen working Lori's 3,000-year-old copper tradition — a guided half-day with a local metalsmith, foundry visit, and hands-on workshop.",
+    "tags": "experience",
+    "image": "images/copper-craft.jpg",
+    "url": "/discover/alaverdi-copper-culture/"
+  },
+  {
+    "type": "place",
+    "title": "Lori Carpet Weaving",
+    "excerpt": "Learn the indigo-and-vordan-karmir dyeing process that's made Lori carpets distinct for centuries — a small-group workshop with a master weaver in Stepanavan.",
+    "tags": "experience",
+    "image": "images/carpet-weaving.jpg",
+    "url": "/discover/lori-carpet-weaving/"
+  },
+  {
+    "type": "place",
+    "title": "Jijur Ridge Walk",
+    "excerpt": "A high alpine traverse above 2,000 m with panoramic views across both the Debed and Pambak valleys — best in late summer when the meadows are in full bloom.",
+    "tags": "trail",
+    "image": "images/jijur-ridge.jpg",
+    "url": "/discover/jijur-ridge-walk/"
+  },
+  {
+    "type": "place",
+    "title": "Kobayr Monastery",
+    "excerpt": "Half-ruined, half-magnificent — a 12th-century cliff-side monastery with remarkable Byzantine frescoes still clinging to crumbling walls above the Debed.",
+    "tags": "place",
+    "image": "images/kobayr-monastery.jpg",
+    "url": "/discover/kobayr-monastery/"
+  },
+  {
+    "type": "place",
+    "title": "Tashir Lake",
+    "excerpt": "A hidden alpine lake in the north of Lori, rarely visited and surrounded by wild meadows — bring a tent and stay the night for the full effect.",
+    "tags": "place",
+    "image": "images/tashir-lake.jpg",
+    "url": "/discover/tashir-lake/"
+  },
+  {
+    "type": "place",
+    "title": "Akhtala Monastery",
+    "excerpt": "A 10th-century fortress-monastery with the most complete surviving Byzantine frescoes in the South Caucasus. Largely unvisited, spectacularly intact.",
+    "tags": "place",
+    "image": "images/akhtala-monastery.jpg",
+    "url": "/discover/akhtala-monastery/"
+  },
+  {
+    "type": "place",
+    "title": "Odzun Basilica",
+    "excerpt": "One of Armenia's oldest churches — a 6th-century basilica on a high plateau above the Debed, with sweeping views and almost no other visitors.",
+    "tags": "place",
+    "image": "images/odzun-village.jpg",
+    "url": "/discover/odzun-basilica/"
+  },
+  {
+    "type": "place",
+    "title": "Sanahin Bridge",
+    "excerpt": "A single-arch medieval bridge spanning the Debed gorge ravine — 800 years old, still sound, and still used as a footpath between two villages.",
+    "tags": "place",
+    "image": "images/sanahin-bridge.jpg",
+    "url": "/discover/sanahin-bridge/"
+  },
+  {
+    "type": "place",
+    "title": "Odzun Village",
+    "excerpt": "Perched on a wide plateau 1,100 m above the Debed canyon, Odzun looks like the edge of something — fields, then forest, then a 400 m drop.",
+    "tags": "village",
+    "image": "images/odzun-village.jpg",
+    "url": "/discover/odzun-village/"
+  },
+  {
+    "type": "place",
+    "title": "Stepanavan Dendropark",
+    "excerpt": "A 35-hectare park planted in 1933 with 620 species of trees from five continents. Come in autumn for the colour, or spring for the understory wildflowers.",
+    "tags": "place",
+    "image": "images/dendropark.jpg",
+    "url": "/discover/stepanavan-dendropark/"
+  },
+  {
+    "type": "place",
+    "title": "Mets Mantash",
+    "excerpt": "One of Lori's largest traditional villages, spread across a hillside south of Stepanavan. Stone barns, khachkar-filled churchyards, and a weekly market.",
+    "tags": "village",
+    "image": "images/dsegh-village.jpg",
+    "url": "/discover/mets-mantash-village/"
+  },
+  {
+    "type": "place",
+    "title": "Wild Herb Foraging Walk",
+    "excerpt": "A guided half-day walk through Lori's forest edge, learning to identify, harvest and cook with 15 edible plants that grow in the region from May to September.",
+    "tags": "experience",
+    "image": "images/story-foraging-lori.jpg",
+    "url": "/discover/wild-herb-walk/"
+  },
+  {
+    "type": "place",
+    "title": "Honey Day in Akner",
+    "excerpt": "Visit Vardan Hakobyan's forty hives at the forest edge above Akner — a morning among the hives, tasting linden, chestnut, and wildflower honeys from the jar.",
+    "tags": "experience",
+    "image": "images/voice-beekeeper.jpg",
+    "url": "/discover/honey-tasting-akner/"
+  },
+  {
+    "type": "place",
+    "title": "Pambak Ridge Traverse",
+    "excerpt": "A demanding high-alpine crossing along the Pambak range at 2,400 m — panoramic views north to Georgia, south to Aragats, and nothing but cloud and stone between.",
+    "tags": "trail",
+    "image": "images/jijur-ridge.jpg",
+    "url": "/discover/pambak-ridge-trail/"
+  },
+  {
+    "type": "place",
+    "title": "Alaverdi Soviet Gorge Walk",
+    "excerpt": "The strangest town in Armenia: a copper-smelting city built vertically into a 350 m gorge, connected by a Soviet cable car still running since 1958.",
+    "tags": "experience",
+    "image": "images/story-alaverdi-copper.jpg",
+    "url": "/discover/alaverdi-gorge-walk/"
+  }
+,
+  {
+    "type": "event",
+    "title": "Wild Herb Season Opener",
+    "excerpt": "The first guided foraging walk of the season. A half-day identifying edible spring plants — wood sorrel, ramsons, nettles, and the first wild strawberries. Led by Narine Avetisyan.",
+    "tags": "Food & Foraging",
+    "image": "images/story-foraging-lori.jpg",
+    "date": "09 May 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Open Trails Day",
+    "excerpt": "Free guided hikes on 6 trails simultaneously — groups set off from Stepanavan, Alaverdi, Vanadzor, and Tashir at sunrise. No booking required, just show up.",
+    "tags": "Outdoors",
+    "image": "images/debed-canyon.jpg",
+    "date": "27 Jun 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Vardavar at Haghpat",
+    "excerpt": "Armenia's ancient water festival, 14 weeks after Easter. At Haghpat, the tradition includes blessing of water at the monastery spring and village festivities in the settlement below.",
+    "tags": "Festival",
+    "image": "images/haghpat-monastery.jpg",
+    "date": "12 Jul 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Alaverdi Copper Days",
+    "excerpt": "A two-day celebration of 3,000 years of copper heritage — live metalsmith demonstrations, a street market of copper crafts, and a walk through the Soviet-era smelter district.",
+    "tags": "Craft",
+    "image": "images/copper-craft.jpg",
+    "date": "18 Jul 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Stone & Sound",
+    "excerpt": "Two evenings of sacred polyphonic music performed inside the monastery churches. The acoustics of 10th-century stone are unlike any concert hall. Haghpat on Friday, Sanahin on Saturday.",
+    "tags": "Music",
+    "image": "images/story-haghpat-night.jpg",
+    "date": "15 Aug 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Honey & Hive Festival",
+    "excerpt": "Beekeepers from seven villages bring their season's jars to Akner. Tasting tables, hive walks, and a lunch using honey in every course. Held in the meadow above the village.",
+    "tags": "Food & Foraging",
+    "image": "images/voice-beekeeper.jpg",
+    "date": "22 Aug 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Sanahin After Dark",
+    "excerpt": "A guided walk through the Sanahin complex after dark, lit only by handheld lanterns, with a local historian. Limited to 20 people — registration required.",
+    "tags": "Outdoors",
+    "image": "images/sanahin-monastery.jpg",
+    "date": "12 Sep 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Mushroom Season Walk",
+    "excerpt": "Peak mushroom season in Lori's forests. A morning walk with a local guide identifying porcini, chanterelles, and saffron milk caps in the beech and oak forest above Gyulagarak.",
+    "tags": "Food & Foraging",
+    "image": "images/dendropark.jpg",
+    "date": "04 Oct 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Lori Harvest Table",
+    "excerpt": "A two-day local producers market — Lori preserves, smoked meats, wild honeys, and the region's first small-batch mulberry and grape distilleries. Free entry.",
+    "tags": "Food & Drink",
+    "image": "images/akner-village.jpg",
+    "date": "17 Oct 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Lori Carpet Exhibition",
+    "excerpt": "Contemporary and traditional Lori carpets alongside a live demonstration of the vordan karmir natural dyeing process. Works available to buy directly from the weavers.",
+    "tags": "Craft",
+    "image": "images/carpet-weaving.jpg",
+    "date": "08 Nov 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "New Year's Eve at Lori Berd",
+    "excerpt": "A bonfire on the fortress plateau at midnight, the Stepanavan valley spread below. Warm clothes, headlamp, your own food. A local tradition that's grown every year for the past decade.",
+    "tags": "Festival",
+    "image": "images/lori-berd.jpg",
+    "date": "31 Dec 2026",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Tumanyan Festival",
+    "excerpt": "Annual birthday celebration for Armenia's most beloved poet at his birthplace. Poetry, folk music, and village feasts. Visitors are welcome and fed by the village council.",
+    "tags": "Festival",
+    "image": "images/dsegh-village.jpg",
+    "date": "19 Feb 2027",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Easter Vigil at Haghpat",
+    "excerpt": "The Easter liturgy at Haghpat begins at midnight on Holy Saturday. The candlelit procession around the monastery at 3am, in total darkness, is one of the most remarkable things you can witness in Armenia.",
+    "tags": "Religious",
+    "image": "images/story-winter-monastery.jpg",
+    "date": "19 Apr 2027",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Open Trails Day",
+    "excerpt": "The second annual free guided hike day across Lori — six simultaneous trails, sunrise starts, no registration needed. Guides from the region donate their time.",
+    "tags": "Outdoors",
+    "image": "images/jijur-ridge.jpg",
+    "date": "26 Jun 2027",
+    "url": "/events/"
+  },
+  {
+    "type": "event",
+    "title": "Stone & Sound",
+    "excerpt": "The second edition of the monastery polyphony concerts. Two evenings, two churches, the same extraordinary acoustics.",
+    "tags": "Music",
+    "image": "images/sanahin-bridge.jpg",
+    "date": "14 Aug 2027",
+    "url": "/events/"
+  }
+,
+  {
+    "type": "stay",
+    "title": "Ethnoforma",
+    "excerpt": "A restored stone guesthouse rooted in Akner's vernacular architecture — handwoven textiles, wood-burning stove, and a terrace that faces the Debed canyon.",
+    "tags": "Arthouse Guesthouse",
+    "image": "images/stay-ethnoforma.jpg",
+    "url": "/plan/#stays"
+  },
+  {
+    "type": "stay",
+    "title": "Odzun Village Stay",
+    "excerpt": "Stay with a local family 200 metres from the 6th-century Odzun Basilica. Home-cooked Armenian dinner included every evening.",
+    "tags": "Family Guesthouse",
+    "image": "images/stay-odzun.jpg",
+    "url": "/plan/#stays"
+  },
+  {
+    "type": "stay",
+    "title": "Canyon View Hotel",
+    "excerpt": "A recently renovated 12-room hotel at the edge of Stepanavan, with direct access to the Dzoraget Gorge trail from the back door.",
+    "tags": "Boutique Hotel",
+    "image": "images/stay-stepanavan.jpg",
+    "url": "/plan/#stays"
+  },
+  {
+    "type": "stay",
+    "title": "Tashir Highland Camp",
+    "excerpt": "Heated canvas tents at 1,800 m with views of the north Lori plateau. Open June–September only. Completely off-grid solar power.",
+    "tags": "Glamping",
+    "image": "images/stay-tashir-camp.jpg",
+    "url": "/plan/#stays"
+  },
+  {
+    "type": "stay",
+    "title": "Tumanyan Writer's House",
+    "excerpt": "A two-bedroom stone cottage in Dsegh, renovated and rented by the village cultural association. 5-minute walk from Tumanyan's museum-house.",
+    "tags": "Self-catering Cottage",
+    "image": "images/stay-dsegh.jpg",
+    "url": "/plan/#stays"
+  }
+,
+  {
+    "type": "guide",
+    "title": "Armen Grigoryan",
+    "excerpt": "Born in Alaverdi, Armen has been guiding in the Debed canyon for 12 years. He knows every fork in the Kobayr path and which cliff ledges are safe in spring melt.",
+    "tags": "Canyon & gorge trails, Haghpat–Sanahin area",
+    "image": "images/guide-armen.jpg",
+    "url": "/plan/#guides"
+  },
+  {
+    "type": "guide",
+    "title": "Narine Avetisyan",
+    "excerpt": "A cultural anthropologist and native of Stepanavan, Narine runs half-day village walks that visit weavers, beekeepers, and a 90-year-old herbalist who still makes traditional remedies.",
+    "tags": "Cultural & village walks, craft workshops",
+    "image": "images/guide-narine.jpg",
+    "url": "/plan/#guides"
+  },
+  {
+    "type": "guide",
+    "title": "Gevorg Hakobyan",
+    "excerpt": "Mountain rescue volunteer and alpine guide based in Vanadzor. Gevorg leads multi-day treks across north Lori including the rarely-attempted Lori–Javakheti crossing.",
+    "tags": "Alpine trails, Jijur Ridge, Tashir Plateau",
+    "image": "images/guide-gevorg.jpg",
+    "url": "/plan/#guides"
+  }
+]
