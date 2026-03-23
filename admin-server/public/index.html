@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Lori Admin</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="sidebar">
+    <div class="sidebar-logo">Lori Admin</div>
+    <nav class="sidebar-nav">
+      <a href="/" class="active">Dashboard</a>
+      <a href="/discover.html">Discover</a>
+      <a href="/stories.html">Stories</a>
+      <a href="/events.html">Events</a>
+      <a href="/stays.html">Stays</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="admin-content">
+
+    <h1 class="page-title">Dashboard</h1>
+
+    <div class="dash-stats" id="dashStats">
+      <div class="stat-card"><div class="stat-num" id="statDiscover">—</div><div class="stat-label">Discover places</div></div>
+      <div class="stat-card"><div class="stat-num" id="statStories">—</div><div class="stat-label">Stories</div></div>
+      <div class="stat-card"><div class="stat-num" id="statEvents">—</div><div class="stat-label">Events</div></div>
+      <div class="stat-card"><div class="stat-num" id="statStays">—</div><div class="stat-label">Stays</div></div>
+    </div>
+
+    <div class="dash-section">
+      <h2>Build Status</h2>
+      <div class="dash-build-grid">
+        <div>
+          <p class="build-info" id="buildInfo">Loading...</p>
+          <button class="btn btn--primary" id="btnRebuildAll">Rebuild All</button>
+        </div>
+      </div>
+      <pre class="build-log" id="buildLog">Press "Rebuild All" to regenerate all HTML pages from JSON data.</pre>
+    </div>
+
+  </main>
+
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<script src="/js/admin-core.js"></script>
+<script>
+  (async function () {
+    // Load stats and build info
+    try {
+      const res = await fetch('/api/status');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.counts) {
+          document.getElementById('statDiscover').textContent = data.counts.discover ?? '—';
+          document.getElementById('statStories').textContent  = data.counts.stories  ?? '—';
+          document.getElementById('statEvents').textContent   = data.counts.events    ?? '—';
+          document.getElementById('statStays').textContent    = data.counts.stays     ?? '—';
+        }
+        if (data.lastBuild) {
+          document.getElementById('buildInfo').textContent =
+            'Last build: ' + new Date(data.lastBuild).toLocaleString();
+        } else {
+          document.getElementById('buildInfo').textContent = 'No build recorded yet.';
+        }
+      } else {
+        document.getElementById('buildInfo').textContent = 'Could not reach server.';
+      }
+    } catch (e) {
+      document.getElementById('buildInfo').textContent = 'Error: ' + e.message;
+    }
+
+    // Rebuild all
+    document.getElementById('btnRebuildAll').addEventListener('click', async function () {
+      const logEl = document.getElementById('buildLog');
+      const btn   = this;
+      btn.disabled = true;
+      btn.textContent = 'Building…';
+      logEl.textContent = 'Rebuilding all pages…';
+      try {
+        const res = await fetch('/api/build/all', { method: 'POST' });
+        const results = await res.json();
+        if (typeof AdminCore !== 'undefined' && AdminCore.renderBuildStatus) {
+          AdminCore.renderBuildStatus(results, logEl);
+        } else {
+          logEl.textContent = JSON.stringify(results, null, 2);
+        }
+        if (typeof AdminCore !== 'undefined' && AdminCore.showToast) {
+          AdminCore.showToast('Rebuild complete!', 'success');
+        }
+      } catch (e) {
+        logEl.textContent = 'Build error: ' + e.message;
+        if (typeof AdminCore !== 'undefined' && AdminCore.showToast) {
+          AdminCore.showToast('Build failed: ' + e.message, 'error');
+        }
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Rebuild All';
+      }
+    });
+  })();
+</script>
+</body>
+</html>

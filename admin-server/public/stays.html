@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stays — Lori Admin</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <aside class="admin-sidebar" id="sidebar">
+    <div class="sidebar-logo">Lori Admin</div>
+    <nav class="sidebar-nav">
+      <a href="/">Dashboard</a>
+      <a href="/discover.html">Discover</a>
+      <a href="/stories.html">Stories</a>
+      <a href="/events.html">Events</a>
+      <a href="/stays.html" class="active">Stays</a>
+    </nav>
+  </aside>
+
+  <main class="admin-content">
+    <div class="page-header">
+      <h1 class="page-title">Stays</h1>
+      <button class="btn btn--primary" id="btnNew">+ New Stay</button>
+    </div>
+
+    <table class="data-table" id="dataTable">
+      <thead>
+        <tr>
+          <th>Name</th><th>Type</th><th>Village</th><th>Region</th><th>Price Range</th><th>Featured</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <aside class="edit-panel" id="editPanel">
+      <div class="edit-panel__header">
+        <h2 id="panelTitle">New Stay</h2>
+        <button class="btn btn--sm" id="btnClose">✕</button>
+      </div>
+      <div class="edit-panel__body">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" id="fName" type="text">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type</label>
+          <select class="form-select" id="fType">
+            <option value="guesthouse">Guesthouse</option>
+            <option value="hotel">Hotel</option>
+            <option value="homestay">Homestay</option>
+            <option value="eco-lodge">Eco-lodge</option>
+            <option value="hostel">Hostel</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Village</label>
+          <input class="form-input" id="fVillage" type="text">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Region</label>
+          <input class="form-input" id="fRegion" type="text">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Excerpt</label>
+          <textarea class="form-textarea" id="fExcerpt"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Price Range</label>
+          <input class="form-input" id="fPriceRange" type="text" placeholder="€30–50/night">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Booking URL</label>
+          <input class="form-input" id="fBookingUrl" type="text" placeholder="https://…">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Website</label>
+          <input class="form-input" id="fWebsite" type="text" placeholder="https://…">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Amenities</label>
+          <div class="amenity-list" id="amenityList"></div>
+          <button class="btn btn--sm btn--secondary" id="btnAddAmenity" type="button">+ Add amenity</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Image path</label>
+          <img class="img-preview" id="fImgPreview" alt="Preview">
+          <input class="form-input" id="fImage" type="text" placeholder="/images/…">
+          <input type="file" id="fImageUpload" accept="image/*" style="margin-top:8px">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><input type="checkbox" id="fFeatured"> Featured</label>
+        </div>
+      </div>
+      <div class="edit-panel__footer">
+        <button class="btn btn--primary" id="btnSave">Save Stay</button>
+        <button class="btn btn--secondary" id="btnSaveRebuild">Save &amp; Rebuild</button>
+        <button class="btn btn--danger" id="btnDelete" style="margin-left:auto">Delete</button>
+      </div>
+    </aside>
+
+  </main>
+
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<script src="/js/admin-core.js"></script>
+<script src="/js/stays-ui.js"></script>
+</body>
+</html>
