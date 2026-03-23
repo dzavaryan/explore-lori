@@ -1053,6 +1053,14 @@ body.search-open { overflow: hidden; }
   background: var(--parchment);
 }
 
+/* Mobile: stack hero action buttons vertically */
+@media (max-width: 600px) {
+  .hero__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 /* Desktop: constrain panel width and centre it */
 @media (min-width: 640px) {
   .quiz-panel {
