@@ -72,6 +72,9 @@
   /* ── DOM refs (populated in init) ── */
   let panel, overlay, body, footer, dotsEl, backBtn;
 
+  /* ── Timers ── */
+  let advanceTimer = null;
+
   /* ── Open / Close ── */
   function open() {
     currentStep = 0;
@@ -160,7 +163,8 @@
     /* On steps 1–4: auto-advance after brief highlight */
     if (currentStep < STEPS.length - 1) {
       btn.classList.add('quiz-option--selected');
-      setTimeout(advance, 220);
+      clearTimeout(advanceTimer);
+      advanceTimer = setTimeout(advance, 220);
     } else {
       /* Step 5: just highlight, wait for CTA */
       body.querySelectorAll('.quiz-option').forEach(b => b.classList.remove('quiz-option--selected'));
@@ -216,7 +220,7 @@
     dotsEl  = document.querySelector('.js-quiz-dots');
     backBtn = document.querySelector('.js-quiz-back');
 
-    if (!panel) return;   /* not on homepage, bail */
+    if (!panel || !overlay || !backBtn) return;   /* not on homepage or incomplete markup, bail */
 
     /* Trigger buttons */
     document.querySelectorAll('.js-quiz-open').forEach(btn => {
@@ -229,9 +233,10 @@
     backBtn.addEventListener('click', goBack);
 
     /* Keyboard escape */
-    document.addEventListener('keydown', e => {
+    function onKeyDown(e) {
       if (e.key === 'Escape' && panel.classList.contains('quiz-panel--open')) close();
-    });
+    }
+    document.addEventListener('keydown', onKeyDown);
   }
 
   /* Guard: if DOMContentLoaded already fired (script is late-body), call init immediately */
