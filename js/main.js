@@ -260,7 +260,7 @@ function initFromURLParams() {
   }
 
   /* Scroll grid into view */
-  if (appliedAny || days) {
+  if (appliedAny || days === 'short' || days === 'medium') {
     const grid = document.querySelector('.discover__grid');
     if (grid) {
       const offset = 80;
@@ -277,12 +277,14 @@ function applyDaysLimit(limit) {
   const grid = document.querySelector('.discover__grid');
   if (!grid) return;
 
+  /* Idempotency guard — prevent double button injection if called more than once */
+  if (grid.nextElementSibling?.classList.contains('quiz-show-all')) return;
+
   /* Collect visible cards in DOM order.
      Match the full watchedAttrs selector from FilterSystem so no card type is missed. */
   const cardSelector = '[data-type], [data-season], [data-difficulty], [data-circuit]';
-  const visible = [...grid.querySelectorAll(cardSelector)]
-    /* deduplicate — a card with multiple watched attrs would appear multiple times */
-    .filter((el, i, arr) => arr.indexOf(el) === i)
+  /* Set deduplicates cards that carry multiple watched attrs (each appears once per selector branch) */
+  const visible = [...new Set(grid.querySelectorAll(cardSelector))]
     .filter(c => c.style.display !== 'none');
 
   if (visible.length <= limit) return;   /* nothing to hide */
