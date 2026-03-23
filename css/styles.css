@@ -1074,3 +1074,145 @@ body.search-open { overflow: hidden; }
     transform: translateX(-50%) translateY(0);
   }
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   Mobile fixes — v0.18.1
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1. Homepage event category label — fix blue inherited link colour */
+.hp-ev__cat {
+  color: #B8943A !important;
+}
+
+/* 2. Tighter section padding and horizontal gutter on phones */
+@media (max-width: 480px) {
+  :root {
+    --pad-x: 16px;
+    --pad-section: 40px;
+  }
+}
+
+/* 3. Single-column card grids on phones (override conflicting !important rules) */
+@media (max-width: 639px) {
+  .card-grid--2,
+  .card-grid--3,
+  .card-grid--4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Homepage featured discover cards */
+  .discover-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .discover-grid .card--featured {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+
+  /* Homepage event photo strip — vertical stack */
+  .hp-events__grid {
+    grid-template-columns: 1fr !important;
+  }
+  .hp-ev {
+    height: 260px !important;
+  }
+
+  /* Stories/article grid */
+  .article-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stay grid */
+  .stay-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 4. Card body — tighten padding and clamp excerpt on phones */
+@media (max-width: 639px) {
+  .card__body {
+    padding: 16px;
+  }
+  .card__excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card__img {
+    height: 180px;
+  }
+}
+
+/* 5. Hero section — compress on small phones */
+@media (max-width: 480px) {
+  .hero {
+    min-height: 85vh;
+  }
+  .hero__actions {
+    gap: 10px;
+  }
+  .hero__actions .btn {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+  /* Remove excessive bottom margin before interest pills */
+  .hero__actions {
+    margin-bottom: 28px;
+  }
+}
+
+/* 6. Section headings — tighter on phones */
+@media (max-width: 480px) {
+  .section-title,
+  .section__title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+  h2 {
+    font-size: clamp(1.4rem, 6vw, 1.9rem);
+  }
+}
+
+/* 7. Featured banner — remove large min-height on phones */
+@media (max-width: 639px) {
+  .featured-banner {
+    padding: 32px var(--pad-x);
+  }
+  .featured-banner__img {
+    min-height: 200px !important;
+    max-height: 220px;
+    object-fit: cover;
+  }
+}
+
+/* 8. HP events section — reduce top/bottom padding */
+@media (max-width: 639px) {
+  .hp-events {
+    padding: 48px 0 !important;
+  }
+  .hp-events__header {
+    margin-bottom: 28px !important;
+  }
+}
+
+/* 9. Plan page transport cards — prevent overflow */
+@media (max-width: 639px) {
+  .transport-card__detail {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+}
+
+/* 10. Stay cards on mobile */
+@media (max-width: 639px) {
+  .stay-card {
+    flex-direction: column;
+  }
+  .stay-card__img {
+    width: 100%;
+    height: 180px;
+    flex-shrink: 0;
+  }
+}
