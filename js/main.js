@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     FilterSystem.init('.filter-bar');
     const clearBtn = document.querySelector('.filter-bar__clear');
     if (clearBtn) clearBtn.addEventListener('click', FilterSystem.clearAll);
+    initFromURLParams();
   }
 
   /* Stories page — pillar tabs */
@@ -215,6 +216,91 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clearBtn) clearBtn.addEventListener('click', FilterSystem.clearAll);
   }
 });
+
+/* ── Quiz URL param → filter pre-application ─────────────────
+   Called on /discover/ when redirected from the homepage quiz.
+   Reads params, clicks matching filter pills, applies day limit,
+   then cleans the URL.
+   ─────────────────────────────────────────────────────────── */
+function initFromURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.toString()) return;   /* nothing to do */
+
+  /* Map param name → data-group value used in pill markup */
+  const paramToGroup = {
+    type:       'type',
+    season:     'season',
+    difficulty: 'difficulty',
+    circuit:    'circuit',
+  };
+
+  let appliedAny = false;
+
+  Object.entries(paramToGroup).forEach(([param, group]) => {
+    const value = params.get(param);
+    if (!value) return;
+    /* Full two-attribute selector prevents cross-group value collisions */
+    const pill = document.querySelector(`[data-filter="${value}"][data-group="${group}"]`);
+    if (!pill) {
+      console.warn(`[quiz] no pill found for param=${param} value=${value} group=${group} — skipping`);
+      return;
+    }
+    /* Only click if NOT already active — clicking an active pill toggles it off */
+    if (pill.getAttribute('aria-pressed') !== 'true') {
+      pill.click();
+      appliedAny = true;
+    }
+  });
+
+  /* Days limit — hide cards beyond threshold after filters applied */
+  const days = params.get('days');
+  if (days === 'short' || days === 'medium') {
+    const limit = days === 'short' ? 4 : 8;
+    applyDaysLimit(limit);
+  }
+
+  /* Scroll grid into view */
+  if (appliedAny || days) {
+    const grid = document.querySelector('.discover__grid');
+    if (grid) {
+      const offset = 80;
+      const top = grid.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+
+  /* Clean URL — use pathname, not hardcoded string */
+  history.replaceState({}, '', window.location.pathname);
+}
+
+function applyDaysLimit(limit) {
+  const grid = document.querySelector('.discover__grid');
+  if (!grid) return;
+
+  /* Collect visible cards in DOM order.
+     Match the full watchedAttrs selector from FilterSystem so no card type is missed. */
+  const cardSelector = '[data-type], [data-season], [data-difficulty], [data-circuit]';
+  const visible = [...grid.querySelectorAll(cardSelector)]
+    /* deduplicate — a card with multiple watched attrs would appear multiple times */
+    .filter((el, i, arr) => arr.indexOf(el) === i)
+    .filter(c => c.style.display !== 'none');
+
+  if (visible.length <= limit) return;   /* nothing to hide */
+
+  /* Hide cards beyond limit */
+  visible.slice(limit).forEach(card => card.classList.add('quiz-hidden'));
+
+  /* Inject "Show all" button */
+  const showAllBtn = document.createElement('button');
+  showAllBtn.className = 'quiz-show-all';
+  showAllBtn.type = 'button';
+  showAllBtn.textContent = `Show all ${visible.length} results →`;
+  showAllBtn.addEventListener('click', () => {
+    grid.querySelectorAll('.quiz-hidden').forEach(c => c.classList.remove('quiz-hidden'));
+    showAllBtn.remove();
+  });
+  grid.insertAdjacentElement('afterend', showAllBtn);
+}
 
 /* ── Season tabs (Plan page) ── */
 (function initSeasonTabs() {
