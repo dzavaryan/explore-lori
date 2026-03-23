@@ -3,3 +3,11 @@
 .superpowers/
 .claude/
 tools/crop-preview.html
+
+# Admin server
+admin-server/node_modules/
+admin-server/package-lock.json
+
+# Backup files
+content/*.bak
+*.bak
