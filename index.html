@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Lori — Where the gorge meets the forest.</title>
+  <meta name="description" content="High-end editorial chronicle of Lori Province, Northern Armenia. Monasteries, canyon ecology, village life, and foraged food culture.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- GLOBAL HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo"><span class="logo-explore">Explore </span>Lori</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img-placeholder" aria-label="Dzoraget Gorge panorama, Lori Province">
+      <span class="hero-img-label">Dzoraget Gorge, Lori Province — GPS 41.0350266, 44.6274643</span>
+    </div>
+    <div class="hero-content container">
+      <p class="hero-eyebrow">Northern Armenia</p>
+      <h1>Where the gorge meets the forest.</h1>
+      <p class="hero-sub">Twelve centuries of monasteries, medieval bridges, and copper-canyon light — mapped, narrated, and seasonally timed.</p>
+      <div class="hero-actions">
+        <a href="/discover/" class="btn btn-primary">Open the Map</a>
+        <a href="/stories/" class="btn btn-outline">Read the Chronicle</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHRONICLE FEED -->
+  <section class="feed section-gap">
+    <div class="container">
+      <div class="feed-header">
+        <h2>From the Chronicle</h2>
+        <a href="/stories/" class="btn btn-outline">All Stories</a>
+      </div>
+      <div class="feed-grid">
+
+        <article class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #8B3A28, #B8943A);" role="img" aria-label="Haghpat Monastery at dawn"></div>
+          <div class="card-body">
+            <p class="card-tag">Monastery Plateau</p>
+            <h3 class="card-title">The hour the khachkar catches fire</h3>
+            <p class="card-excerpt">Each October morning at Haghpat, the rising sun aligns with the gavit oculus and prints amber geometry across a ninth-century cross-stone. We timed it to the minute.</p>
+            <p class="card-meta">Photography &middot; 6 min read</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #4A5A6A, #6B7A8A);" role="img" aria-label="Alaverdi copper smelter in the Debed gorge"></div>
+          <div class="card-body">
+            <p class="card-tag">Deep Gorges</p>
+            <h3 class="card-title">Copper, canyon, and the Debed River</h3>
+            <p class="card-excerpt">Alaverdi's smelter has exhaled sulphur into the gorge since 1770. Today the canyon smells of pine resin and wet stone — a landscape in slow recovery.</p>
+            <p class="card-meta">Reportage &middot; 8 min read</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #3A7055, #3A4A6A);" role="img" aria-label="Akner Barn Stage summer festival"></div>
+          <div class="card-body">
+            <p class="card-tag">Poet's Highlands</p>
+            <h3 class="card-title">A barn that became a stage at 1,700 metres</h3>
+            <p class="card-excerpt">Every July, Akner village hosts chamber music inside a renovated cattle barn. The acoustics are wrong and completely right. How a small community rebuilt cultural memory in stone.</p>
+            <p class="card-meta">Culture &middot; 7 min read</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER CTA -->
+  <section class="newsletter section-gap">
+    <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-copy">
+          <h2>Letters from Lori</h2>
+          <p>Seasonal dispatches — monastery light conditions, road-opening dates, and stories that don't make the website. Sent no more than once a month.</p>
+        </div>
+        <form class="newsletter-form" name="letters-from-lori" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="letters-from-lori">
+          <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="form-row">
+            <label for="email" class="sr-only">Email address</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" class="form-input">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </div>
+          <p class="caption" style="margin-top:0.5rem">No spam. Unsubscribe anytime.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <p class="footer-brand">Explore Lori</p>
+        <p style="margin-top:0.75rem; font-size:0.875rem; color:rgba(255,255,255,0.55); max-width:260px;">
+          Independent editorial platform for Lori Province, Northern Armenia.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>&copy; 2026 Explore Lori. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+</body>
+</html>
