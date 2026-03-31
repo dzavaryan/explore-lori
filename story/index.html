@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story — Explore Lori</title>
+  <meta name="description" content="A story from Lori Province, Northern Armenia.">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ── STORY HERO ── */
+    .story-hero {
+      height: 55vh;
+      min-height: 340px;
+      position: relative;
+      overflow: hidden;
+    }
+    .story-hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-back {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      background: rgba(44,51,64,0.55);
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 0.875rem;
+      z-index: 2;
+      transition: background 0.2s;
+    }
+    .hero-back:hover { background: rgba(44,51,64,0.8); color: #fff; }
+    .hero-season-badge {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.5rem;
+      background: rgba(44,51,64,0.75);
+      backdrop-filter: blur(4px);
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      padding: 0.3rem 0.75rem;
+      z-index: 2;
+    }
+    .hero-caption {
+      position: absolute;
+      bottom: 1.25rem;
+      right: 1.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      z-index: 2;
+    }
+
+    /* ── STORY BODY ── */
+    .story-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem var(--space-sm) 4rem;
+    }
+    .story-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .pillar-tag {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ochre);
+    }
+    .dot { color: var(--stone); font-size: 0.5rem; }
+    .cbadge {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+    }
+    .sbadge {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--slate);
+      border: 1px solid var(--stone);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+    }
+    .story-date {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      color: var(--slate);
+      margin-left: auto;
+    }
+    .story-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      color: var(--green);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .story-lede {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.125rem;
+      color: var(--slate);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--stone);
+    }
+    .story-prose p {
+      font-family: var(--font-sans);
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+    .story-prose .pull-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+      color: var(--green);
+      border-left: 4px solid var(--ochre);
+      padding-left: 1.5rem;
+      margin: 2.5rem 0;
+      line-height: 1.4;
+    }
+
+    /* ── RELATED ── */
+    .related-section {
+      background: var(--sky);
+      border-top: 1px solid var(--stone);
+      padding: 3rem 0 4rem;
+    }
+    .related-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 1.5rem;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .card-a {
+      background: #fff;
+      border: 1px solid var(--stone);
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-a:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .card-a-img { width: 100%; height: 180px; position: relative; }
+    .card-a-season {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(44,51,64,0.65);
+      backdrop-filter: blur(3px);
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      padding: 0.25rem 0.5rem;
+    }
+    .card-a-body { padding: 1.125rem 1.25rem 1.375rem; }
+    .card-a-title {
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      color: var(--green);
+      line-height: 1.25;
+      margin: 0.5rem 0 0.375rem;
+    }
+    .card-a-excerpt {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--slate);
+      line-height: 1.5;
+    }
+    .card-a-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--stone);
+    }
+    .card-a-meta-sm { font-family: var(--font-sans); font-size: 0.75rem; color: var(--slate); }
+    .read-link-sm {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ochre);
+    }
+
+    /* ── ERROR STATE ── */
+    .story-error {
+      text-align: center;
+      padding: 6rem var(--space-sm);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .story-error h1 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .story-error p {
+      color: var(--slate);
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .related-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .related-grid { grid-template-columns: 1fr; }
+      .story-body { padding: 2rem var(--space-sm) 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo"><span class="logo-explore">Explore </span>Lori</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="/stories/" class="active">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENT: injected by JS -->
+  <main id="story-main"></main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <p class="footer-brand">Explore Lori</p>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(255,255,255,0.55);max-width:260px;">
+          Independent editorial platform for Lori Province, Northern Armenia.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>&copy; 2026 Explore Lori. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    var TYPES = {
+      longread:    'Long Read',
+      photography: 'Photography Essay',
+      fieldnotes:  'Field Notes',
+      reportage:   'Reportage'
+    };
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function capFirst(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function typeLabel(id) {
+      return TYPES[id] || capFirst(id);
+    }
+
+    function formatDate(iso) {
+      var d = new Date(iso);
+      var months = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+      return months[d.getMonth()] + ' ' + d.getFullYear();
+    }
+
+    // Placeholder prose paragraphs (will be replaced by CMS body field in future)
+    var PROSE = [
+      'The road into the gorge descends through three climate zones in twelve kilometres. At the canyon rim the air carries pine resin; by the river it smells of wet basalt and cold water moving fast over limestone. The light in the gorge shifts direction twice a day — morning from the east wall, afternoon from the west — and for two hours around noon it disappears entirely behind the ridge.',
+      'Locals measure the seasons not by calendar but by the gorge: when the Debed runs grey with snowmelt you are in April; when it runs green and low you are in August; when it runs clear and fast and cold you are in October and the chestnuts are falling. The gorge has its own internal clock, indifferent to the rest of the country.',
+      'What the maps do not show is the human scale of the place. The monastery walls are chest-height in places, worn down by twelve centuries of hands trailing across them. The stones are warm in the afternoon and cold in the morning. In that sense the gorge is not so much a landscape as a chronology — everything here has a date, a maker, a reason, and most of those reasons are still legible if you know how to read stone.'
+    ];
+
+    var PULL_QUOTE = 'The gorge is not so much a landscape as a chronology — everything here has a date, a maker, a reason.';
+
+    function renderStory(story) {
+      var main = document.getElementById('story-main');
+
+      // Update page title
+      document.title = escHtml(story.title) + ' — Explore Lori';
+
+      main.innerHTML =
+        // Hero
+        '<div class="story-hero">' +
+          '<div class="story-hero-bg" style="background:' + escHtml(story.image_gradient) + '"></div>' +
+          '<a class="hero-back" href="/stories/">\u2190 The Chronicle</a>' +
+          '<span class="hero-season-badge">' + escHtml(capFirst(story.season)) + '</span>' +
+          (story.image_caption ? '<span class="hero-caption">' + escHtml(story.image_caption) + '</span>' : '') +
+        '</div>' +
+
+        // Body
+        '<article>' +
+          '<div class="story-body">' +
+            '<div class="story-meta-row">' +
+              '<span class="pillar-tag">' + escHtml(capFirst(story.pillar)) + '</span>' +
+              '<span class="dot">\u25cf</span>' +
+              '<span class="cbadge" style="background:' + escHtml(story.circuit_color) + '">' + escHtml(story.circuit_name) + '</span>' +
+              '<span class="dot">\u25cf</span>' +
+              '<span class="sbadge">' + escHtml(capFirst(story.season)) + '</span>' +
+              '<span class="dot">\u25cf</span>' +
+              '<span class="sbadge">' + escHtml(typeLabel(story.type)) + '</span>' +
+              '<span class="story-date">' + escHtml(String(story.read_time)) + ' min \u00b7 ' + escHtml(formatDate(story.date)) + '</span>' +
+            '</div>' +
+            '<h1 class="story-title">' + escHtml(story.title) + '</h1>' +
+            '<p class="story-lede">' + escHtml(story.excerpt) + '</p>' +
+            '<div class="story-prose">' +
+              '<p>' + PROSE[0] + '</p>' +
+              '<blockquote class="pull-quote">' + PULL_QUOTE + '</blockquote>' +
+              '<p>' + PROSE[1] + '</p>' +
+              '<p>' + PROSE[2] + '</p>' +
+            '</div>' +
+          '</div>' +
+        '</article>' +
+
+        // Related (placeholder — filled after fetch)
+        '<section class="related-section" id="related-section" style="display:none">' +
+          '<div class="container">' +
+            '<p class="related-label">More from Lori</p>' +
+            '<div class="related-grid" id="related-grid"></div>' +
+          '</div>' +
+        '</section>';
+    }
+
+    function renderRelated(currentStory, allStories) {
+      var related = allStories.filter(function (s) {
+        return s.slug !== currentStory.slug &&
+          (s.circuit === currentStory.circuit || s.pillar === currentStory.pillar);
+      }).slice(0, 3);
+
+      if (related.length === 0) return;
+
+      var grid = document.getElementById('related-grid');
+      var section = document.getElementById('related-section');
+      if (!grid || !section) return;
+
+      grid.innerHTML = related.map(function (s) {
+        return '<a class="card-a" href="/story/?slug=' + escHtml(s.slug) + '">' +
+          '<div class="card-a-img" style="background:' + escHtml(s.image_gradient) + '">' +
+            '<span class="card-a-season">' + escHtml(capFirst(s.season)) + '</span>' +
+          '</div>' +
+          '<div class="card-a-body">' +
+            '<div style="display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;">' +
+              '<span class="pillar-tag" style="font-size:0.65rem">' + escHtml(capFirst(s.pillar)) + '</span>' +
+              '<span class="dot">\u25cf</span>' +
+              '<span class="cbadge" style="background:' + escHtml(s.circuit_color) + ';font-size:0.65rem">' + escHtml(s.circuit_name) + '</span>' +
+            '</div>' +
+            '<h3 class="card-a-title">' + escHtml(s.title) + '</h3>' +
+            '<p class="card-a-excerpt">' + escHtml(s.excerpt) + '</p>' +
+            '<div class="card-a-footer">' +
+              '<span class="card-a-meta-sm">' + escHtml(String(s.read_time)) + ' min \u00b7 ' + escHtml(typeLabel(s.type)) + '</span>' +
+              '<span class="read-link-sm">Read \u2192</span>' +
+            '</div>' +
+          '</div>' +
+        '</a>';
+      }).join('');
+
+      section.style.display = 'block';
+    }
+
+    function showError(msg) {
+      document.getElementById('story-main').innerHTML =
+        '<div class="story-error">' +
+          '<h1>Story not found</h1>' +
+          '<p>' + escHtml(msg) + '</p>' +
+          '<a href="/stories/" class="btn btn-primary">Back to The Chronicle</a>' +
+        '</div>';
+    }
+
+    // ── INIT ──────────────────────────────────────────────────────────────────
+    var slug = new URLSearchParams(window.location.search).get('slug');
+
+    if (!slug) {
+      window.location.replace('/stories/');
+      return;
+    }
+
+    fetch('/data/stories.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (stories) {
+        var story = null;
+        for (var i = 0; i < stories.length; i++) {
+          if (stories[i].slug === slug) { story = stories[i]; break; }
+        }
+
+        if (!story) {
+          showError('No story found with the slug \u201c' + slug + '\u201d.');
+          return;
+        }
+
+        renderStory(story);
+        renderRelated(story, stories);
+      })
+      .catch(function (err) {
+        console.error('Story load error:', err);
+        showError('Could not load story data. Please try again.');
+      });
+
+  })();
+  </script>
+</body>
+</html>

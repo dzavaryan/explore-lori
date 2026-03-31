@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Here — Explore Lori</title>
+  <meta name="description" content="How to get to Lori Province, Northern Armenia — by car, bus, or from Tbilisi.">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .plan-hero {
+      background: var(--green);
+      padding: 4rem 0 3rem;
+      border-bottom: 3px solid var(--ochre);
+    }
+    .plan-hero h1 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; }
+    .plan-hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 520px; }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+    .section-sub {
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      color: var(--slate);
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+
+    /* ── ROUTES ── */
+    .routes-section { padding: 4rem 0; border-bottom: 1px solid var(--stone); }
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .route-card {
+      background: var(--sky);
+      border: 1px solid var(--stone);
+      border-top: 4px solid var(--ochre);
+      padding: 1.75rem;
+    }
+    .route-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.875rem;
+      display: block;
+    }
+    .route-card h3 {
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+    .route-duration {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--ochre);
+      margin-bottom: 0.875rem;
+    }
+    .route-card p {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* ── ENTRY POINTS ── */
+    .entry-section { padding: 4rem 0; border-bottom: 1px solid var(--stone); }
+    .entry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .entry-card {
+      border-left: 3px solid var(--stone);
+      padding-left: 1.25rem;
+    }
+    .entry-card h3 {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+    .entry-circuit {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 0.625rem;
+    }
+    .entry-card p {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    /* ── SEASONS ── */
+    .seasons-section { padding: 4rem 0; border-bottom: 1px solid var(--stone); background: var(--sky); }
+    .season-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .season-card {
+      background: #fff;
+      border: 1px solid var(--stone);
+      padding: 1.5rem;
+    }
+    .season-name {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      margin-bottom: 0.375rem;
+    }
+    .season-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--green);
+      margin-bottom: 0.625rem;
+    }
+    .season-card p {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    /* ── PRACTICAL TIPS ── */
+    .tips-section { padding: 4rem 0; }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .tip-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--sky);
+      border: 1px solid var(--stone);
+    }
+    .tip-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .tip-item h4 {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+    }
+    .tip-item p {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    @media (max-width: 900px) {
+      .route-grid { grid-template-columns: 1fr; }
+      .entry-grid { grid-template-columns: repeat(2, 1fr); }
+      .season-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .entry-grid { grid-template-columns: 1fr; }
+      .season-row { grid-template-columns: 1fr; }
+      .tips-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo"><span class="logo-explore">Explore </span>Lori</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/" class="active">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="plan-hero">
+    <div class="container">
+      <h1>Getting Here</h1>
+      <p>Lori Province sits 2–3 hours north of Yerevan and 3 hours south of Tbilisi. The roads are good. The logistics are straightforward once you know them.</p>
+    </div>
+  </div>
+
+  <!-- ROUTES -->
+  <section class="routes-section">
+    <div class="container">
+      <h2 class="section-title">How to arrive</h2>
+      <p class="section-sub">Three main routes into Lori — by private car, shared minibus from Yerevan, or overland from Tbilisi.</p>
+      <div class="route-grid">
+
+        <div class="route-card">
+          <span class="route-icon" aria-hidden="true">🚗</span>
+          <h3>From Yerevan by car</h3>
+          <p class="route-duration">2.5 hrs via M6 highway</p>
+          <p>Take the M6 north from Yerevan through the Pambak Pass. The road is paved and well-maintained year-round except during heavy snowfall (January–March). Enter Lori at Vanadzor, the provincial capital. Fuel is available throughout — last reliable station before the gorge roads is in Vanadzor.</p>
+        </div>
+
+        <div class="route-card">
+          <span class="route-icon" aria-hidden="true">🚌</span>
+          <h3>From Yerevan by marshrutka</h3>
+          <p class="route-duration">3 hrs · Departs Nord Bus Station</p>
+          <p>Shared minibuses (marshrutkas) run hourly from Yerevan's Nord Bus Station (Kilikia) to Vanadzor from 07:00–18:00. Buy tickets at the station — no advance booking required. Vanadzor to Alaverdi requires a separate marshrutka or taxi; the gorge road is not served by scheduled transport.</p>
+        </div>
+
+        <div class="route-card">
+          <span class="route-icon" aria-hidden="true">🌍</span>
+          <h3>From Tbilisi overland</h3>
+          <p class="route-duration">~3 hrs · Shared taxi or rental car</p>
+          <p>Cross the Bagratashen border crossing on the Debed River — open 24 hours, typically 20–40 minutes processing. Shared taxis run from Tbilisi's Didube station to Alaverdi (the first Lori town after the border) for around 20 GEL. Rental cars can cross with advance documentation from the hire company.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTRY POINTS -->
+  <section class="entry-section">
+    <div class="container">
+      <h2 class="section-title">Key entry points</h2>
+      <p class="section-sub">Three gateway towns, each opening different circuits of the province.</p>
+      <div class="entry-grid">
+
+        <div class="entry-card">
+          <h3>Vanadzor</h3>
+          <span class="entry-circuit" style="background:#3A4A6A">Gugark Forest Corridor</span>
+          <p>The provincial capital and main transport hub. Hotels, banks, and ATMs. Good base for the Pambak Range and access to the M6 toward Stepanavan. The town itself has a low-key Soviet modernist centre worth an afternoon.</p>
+        </div>
+
+        <div class="entry-card">
+          <h3>Alaverdi</h3>
+          <span class="entry-circuit" style="background:#B8943A">Deep Gorges</span>
+          <p>The first town after the Georgian border, set 300 metres below the plateau in the Debed gorge. Gateway to the Monastery Plateau (Haghpat and Sanahin are 10 minutes by road). The town is small but has guesthouses, a market, and the gorge walking trails begin here.</p>
+        </div>
+
+        <div class="entry-card">
+          <h3>Stepanavan</h3>
+          <span class="entry-circuit" style="background:#5A6A5A">Resilience Valley</span>
+          <p>The northern plateau town, higher and quieter than Vanadzor. Base for the Dendropark, the Lori Berd fortress, and the Northern Steppe circuit. The town square has a working Soviet-era canteen and a surprisingly good bakery.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASONS -->
+  <section class="seasons-section">
+    <div class="container">
+      <h2 class="section-title">Road conditions by season</h2>
+      <p class="section-sub">Lori's roads are reliable on the main arteries. The gorge and highland roads are a different matter.</p>
+      <div class="season-row">
+
+        <div class="season-card">
+          <p class="season-name">Spring</p>
+          <h3>April – May</h3>
+          <p>Main roads clear by April. Pushkin Pass (Stepanavan–Vanadzor) reopens late May. Gorge roads can have landslide debris in April — check locally before driving. Best season for wildflowers and the Debed at full flood.</p>
+        </div>
+
+        <div class="season-card">
+          <p class="season-name">Summer</p>
+          <h3>June – August</h3>
+          <p>All roads open. Sub-alpine meadows accessible by 4WD track above 2,000m. High season for the monastery circuits — expect more visitors at Haghpat and Sanahin on weekends. Gorge driving is excellent; the light is best in the early morning.</p>
+        </div>
+
+        <div class="season-card">
+          <p class="season-name">Autumn</p>
+          <h3>September – November</h3>
+          <p>The best driving season. All roads clear, low traffic, and the gorge hornbeam turns cadmium yellow from mid-October. First snow on the high passes by late November — highland roads can close without notice after October 20th.</p>
+        </div>
+
+        <div class="season-card">
+          <p class="season-name">Winter</p>
+          <h3>December – March</h3>
+          <p>M6 and main roads are kept clear with salt and ploughs. Gorge roads to Haghpat and Sanahin are accessible in good weather. Pushkin Pass closes. 4WD recommended for any off-main-road travel. The gorge in January snow is extremely beautiful and very empty.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICAL TIPS -->
+  <section class="tips-section">
+    <div class="container">
+      <h2 class="section-title">Practical notes</h2>
+      <p class="section-sub">The things guidebooks usually skip.</p>
+      <div class="tips-grid">
+
+        <div class="tip-item">
+          <span class="tip-icon" aria-hidden="true">💳</span>
+          <div>
+            <h4>Cash and ATMs</h4>
+            <p>Armenian dram only outside Yerevan. ATMs in Vanadzor and Alaverdi accept Visa and Mastercard reliably. No card payments at guesthouses or petrol stations in the gorge — carry dram. The nearest reliable ATM to Haghpat is in Alaverdi, 10km away.</p>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <span class="tip-icon" aria-hidden="true">📱</span>
+          <div>
+            <h4>SIM cards and coverage</h4>
+            <p>Ucom and Viva-MTS have the best coverage in Lori. Buy a SIM at Yerevan airport or any phone shop in Vanadzor — data is cheap (3GB for around 2,000 AMD). Signal disappears in deep gorge sections but returns at the plateau. No coverage above 2,200m.</p>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <span class="tip-icon" aria-hidden="true">⛽</span>
+          <div>
+            <h4>Fuel</h4>
+            <p>Petrol stations in Vanadzor, Alaverdi, and Stepanavan. The gorge road between Alaverdi and Akner has no petrol station — fill up before descending. LPG (autogas) is available at most stations and is the cheapest option if your rental car supports it.</p>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <span class="tip-icon" aria-hidden="true">🛂</span>
+          <div>
+            <h4>Border crossing (Georgia)</h4>
+            <p>Bagratashen crossing is open 24 hours. EU, US, UK, and most CIS citizens enter Armenia visa-free. The crossing itself is small and usually fast (20–40 min). No Armenian health insurance required. Car insurance is mandatory — buy Green Card coverage before arrival or at the crossing kiosk.</p>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <span class="tip-icon" aria-hidden="true">🏨</span>
+          <div>
+            <h4>Accommodation</h4>
+            <p>Guesthouses (tun-hotel) dominate outside Vanadzor. Most cost 8,000–15,000 AMD per night including breakfast. Book by phone — many do not appear on booking platforms. The Chronicle carries periodic recommendations for specific guesthouses; search by circuit.</p>
+          </div>
+        </div>
+
+        <div class="tip-item">
+          <span class="tip-icon" aria-hidden="true">🗣️</span>
+          <div>
+            <h4>Language</h4>
+            <p>Armenian throughout. Russian widely understood by people over 40. English is spoken at some guesthouses in Alaverdi and Vanadzor — increasingly by younger people. A few words of Armenian go a long way; the Debed gorge is not a tourist circuit and visitors are treated accordingly — with curiosity and hospitality.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <p class="footer-brand">Explore Lori</p>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(255,255,255,0.55);max-width:260px;">
+          Independent editorial platform for Lori Province, Northern Armenia.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>&copy; 2026 Explore Lori. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+</body>
+</html>

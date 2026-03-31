@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Explore Lori</title>
+  <meta name="description" content="About Explore Lori — an independent editorial platform for Lori Province, Northern Armenia.">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ── PAGE HERO ── */
+    .about-hero {
+      background: var(--green);
+      padding: 4rem 0 3rem;
+      border-bottom: 3px solid var(--ochre);
+    }
+    .about-hero h1 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; }
+    .about-hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 560px; }
+
+    /* ── MANIFESTO ── */
+    .manifesto-section { padding: 4rem 0; border-bottom: 1px solid var(--stone); }
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .manifesto-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      color: var(--green);
+      margin-bottom: 1.25rem;
+      line-height: 1.15;
+    }
+    .manifesto-text p {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      color: var(--dark);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .manifesto-text p:last-child { margin-bottom: 0; }
+    .manifesto-image {
+      height: 420px;
+      background: linear-gradient(155deg, #3A5A3A 0%, #2C3340 50%, #B8943A 100%);
+      position: relative;
+    }
+    .manifesto-image-caption {
+      position: absolute;
+      bottom: 0.875rem;
+      left: 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── PILLARS ── */
+    .pillars-section { padding: 4rem 0; border-bottom: 1px solid var(--stone); }
+    .pillars-section h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+    .pillars-section .section-sub {
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      color: var(--slate);
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .pillar-card {
+      background: var(--sky);
+      border: 1px solid var(--stone);
+      border-top: 4px solid #ccc; /* overridden by JS */
+      padding: 1.5rem;
+    }
+    .pillar-card-name {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .pillar-card-desc {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    /* ── PARTNERS ── */
+    .partners-section { padding: 3.5rem 0; border-bottom: 1px solid var(--stone); }
+    .partners-section h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      color: var(--green);
+      margin-bottom: 2rem;
+    }
+    .partners-strip {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .partner-tile {
+      background: var(--sky);
+      border: 1px solid var(--stone);
+      padding: 1.25rem 2rem;
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--slate);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section { padding: 4rem 0; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-copy h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .contact-copy p {
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      color: var(--dark);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .contact-email {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ochre);
+      margin-top: 0.5rem;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.375rem; }
+    .form-field label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .form-field input,
+    .form-field textarea {
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--stone);
+      background: #fff;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.15s;
+      resize: vertical;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--ochre); }
+
+    @media (max-width: 900px) {
+      .manifesto-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .manifesto-image { height: 280px; }
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo"><span class="logo-explore">Explore </span>Lori</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/" class="active">About</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="about-hero">
+    <div class="container">
+      <h1>About Explore Lori</h1>
+      <p>An independent editorial platform for Lori Province, Northern Armenia — built to last as long as the monasteries.</p>
+    </div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto-section">
+    <div class="container">
+      <div class="manifesto-grid">
+        <div class="manifesto-text">
+          <h2>An independent eye on the north</h2>
+          <p>Lori Province is the least-documented corner of the South Caucasus. Twelve circuits of gorge, plateau, and forest hold medieval monasteries, Soviet-era copper towns, and villages where the 9th century and the 21st century exist in the same afternoon. Almost none of it has been written about with the care it deserves.</p>
+          <p>Explore Lori was founded on a single premise: that a place this complex deserves long-form attention. Not listicles. Not hotel recommendations. Long reads, photography essays, field notes, and reportage — written by people who have spent enough time in the gorge to notice when the light changes direction at noon.</p>
+          <p>Everything published here is original, independently reported, and seasonally timed. We do not accept press trips, sponsored content, or destination marketing. The work is editorially independent and always will be.</p>
+        </div>
+        <div class="manifesto-image" role="img" aria-label="Debed River gorge, early morning">
+          <span class="manifesto-image-caption">Debed River gorge, early morning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars-section">
+    <div class="container">
+      <h2>What we cover</h2>
+      <p class="section-sub">Each story belongs to a pillar — the lens through which we approach Lori's complexity.</p>
+      <div class="pillars-grid" id="pillars-grid">
+        <!-- Injected by JS from /data/pillars.json -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partners-section">
+    <div class="container">
+      <h2>Partners &amp; supporters</h2>
+      <div class="partners-strip">
+        <div class="partner-tile">Lori Marz Tourism</div>
+        <div class="partner-tile">Armenian Geographic</div>
+        <div class="partner-tile">COAF Foundation</div>
+        <div class="partner-tile">Caucasus Nature Fund</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-copy">
+          <h2>Get in touch</h2>
+          <p>For story pitches, photography proposals, partnership enquiries, or corrections — we read everything and reply to most things.</p>
+          <p>For urgent corrections to published stories, please include the URL in your message.</p>
+          <p class="contact-email">hello@explorelori.com</p>
+        </div>
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact">
+          <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="form-field">
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-field">
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-field">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="5" required placeholder="Your message..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <p class="footer-brand">Explore Lori</p>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(255,255,255,0.55);max-width:260px;">
+          Independent editorial platform for Lori Province, Northern Armenia.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>&copy; 2026 Explore Lori. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+  <script>
+  (function () {
+    var PILLAR_DESCS = {
+      culture:   'Monasteries, cross-stones, oral tradition, music, living memory, and the rituals that outlasted empire.',
+      landscape: 'Gorges, plateaus, river systems, geology, and the seasonal light that shapes how this place feels.',
+      food:      'Village kitchens, highland honey, Soviet-era canteens, and the larder of the Pambak sub-alpine meadows.',
+      ecology:   'Forests, wildlife corridors, wetlands, and the slow work of environmental recovery after industrial extraction.',
+      economy:   'Copper towns, agricultural cycles, micro-entrepreneurs, diaspora investment, and what resilience looks like at 1,800 metres.',
+      grants:    'EU and USAID development programmes, NGO projects, and the infrastructure of international attention in a peripheral region.'
+    };
+
+    fetch('/data/pillars.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (pillars) {
+        var grid = document.getElementById('pillars-grid');
+        grid.innerHTML = pillars.map(function (p) {
+          var desc = PILLAR_DESCS[p.id] || '';
+          return '<div class="pillar-card" style="border-top-color:' + p.color + '">' +
+            '<div class="pillar-card-name" style="color:' + p.color + '">' + p.name + '</div>' +
+            '<p class="pillar-card-desc">' + desc + '</p>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function (err) {
+        console.error('Pillars load error:', err);
+      });
+  })();
+  </script>
+</body>
+</html>

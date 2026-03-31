@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Chronicle — Explore Lori</title>
+  <meta name="description" content="Long reads, field notes, and photography essays from Lori Province, Northern Armenia.">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ── PAGE HEADER ── */
+    .chronicle-header {
+      background: var(--green);
+      padding: 3.5rem 0 2.5rem;
+      border-bottom: 3px solid var(--ochre);
+    }
+    .chronicle-header h1 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; }
+    .chronicle-header p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 520px; }
+
+    /* ── FILTER BAR ── */
+    .filter-row {
+      background: var(--sky);
+      border-bottom: 1px solid var(--stone);
+      padding: 0.875rem 0;
+      position: sticky;
+      top: var(--nav-height);
+      z-index: 50;
+    }
+    .filter-row .container {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-right: 0.25rem;
+    }
+
+    /* ── MULTI-SELECT DROPDOWN ── */
+    .ms-dropdown { position: relative; }
+
+    .ms-btn {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--dark);
+      background: #fff;
+      border: 1.5px solid var(--stone);
+      padding: 0.45rem 2rem 0.45rem 0.875rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      transition: border-color 0.15s;
+      position: relative;
+      min-width: 110px;
+    }
+    .ms-btn::after {
+      content: '';
+      position: absolute;
+      right: 0.625rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--slate);
+      transition: transform 0.2s;
+    }
+    .ms-btn.open::after { transform: translateY(-50%) rotate(180deg); }
+    .ms-btn:hover { border-color: var(--green); }
+    .ms-btn.has-selection {
+      border-color: var(--ochre);
+      background: #fff8ee;
+      color: var(--ochre);
+    }
+    .ms-btn.has-selection::after { border-top-color: var(--ochre); }
+
+    .ms-count {
+      background: var(--ochre);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: 9px;
+      padding: 0.1rem 0.45rem;
+      line-height: 1.4;
+    }
+
+    .ms-panel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      background: #fff;
+      border: 1.5px solid var(--stone);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      z-index: 200;
+      min-width: 200px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .ms-panel.open { display: block; }
+
+    .ms-option {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--dark);
+      transition: background 0.1s;
+      border-bottom: 1px solid rgba(200,191,168,0.3);
+      user-select: none;
+    }
+    .ms-option:last-child { border-bottom: none; }
+    .ms-option:hover { background: var(--sky); }
+    .ms-option.checked { color: var(--green); font-weight: 600; }
+
+    .ms-checkbox {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--stone);
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .ms-option.checked .ms-checkbox {
+      background: var(--green);
+      border-color: var(--green);
+    }
+    .ms-option.checked .ms-checkbox::after {
+      content: '';
+      width: 4px;
+      height: 7px;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(45deg) translate(-1px, -1px);
+    }
+
+    .ms-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .filter-divider {
+      width: 1px;
+      height: 1.25rem;
+      background: var(--stone);
+      margin: 0 0.125rem;
+    }
+    .filter-reset {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--slate);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.45rem 0.5rem;
+      transition: color 0.15s;
+    }
+    .filter-reset:hover { color: var(--terracotta); }
+    .filter-count {
+      margin-left: auto;
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      color: var(--slate);
+    }
+
+    /* ── LEAD STORY (Style B) ── */
+    .lead-story { margin: 2.5rem 0 0; }
+    .card-b {
+      background: var(--sky);
+      border: 1px solid var(--stone);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .card-b:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .card-b-img {
+      height: 340px;
+      position: relative;
+    }
+    .img-season-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(44,51,64,0.75);
+      backdrop-filter: blur(4px);
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      padding: 0.3rem 0.65rem;
+    }
+    .img-caption {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0.875rem;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .card-b-body {
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .pillar-tag {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ochre);
+    }
+    .dot { color: var(--stone); font-size: 0.45rem; }
+    .cbadge {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+    }
+    .sbadge {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--slate);
+      border: 1px solid var(--stone);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+    }
+    .card-b-title {
+      font-family: var(--font-serif);
+      font-size: 1.875rem;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 0.875rem;
+    }
+    .card-b-excerpt {
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      color: var(--slate);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .card-b-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--stone);
+      padding-top: 0.875rem;
+    }
+    .readtime { font-family: var(--font-sans); font-size: 0.8125rem; color: var(--slate); }
+    .read-link {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ochre);
+    }
+
+    /* ── GRID (Style A) ── */
+    .grid-section { padding: 2.5rem 0 4rem; }
+    .grid-label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      border-top: 1px solid var(--stone);
+      padding-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .card-a {
+      background: var(--sky);
+      border: 1px solid var(--stone);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .card-a:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .card-a-img { width: 100%; height: 200px; position: relative; }
+    .card-a-season {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: rgba(44,51,64,0.65);
+      backdrop-filter: blur(3px);
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      padding: 0.25rem 0.5rem;
+    }
+    .card-a-body { padding: 1.125rem 1.25rem 1.375rem; }
+    .card-a-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      color: var(--green);
+      line-height: 1.25;
+      margin: 0.625rem 0 0.5rem;
+    }
+    .card-a-excerpt {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+    .card-a-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.875rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--stone);
+    }
+    .card-a-meta-sm { font-family: var(--font-sans); font-size: 0.75rem; color: var(--slate); }
+    .read-link-sm {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ochre);
+    }
+
+    .load-more { text-align: center; padding-top: 2.5rem; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--slate);
+      font-family: var(--font-sans);
+    }
+    .empty-state p:first-child {
+      font-size: 1.25rem;
+      font-family: var(--font-serif);
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── MOBILE: SNAP SCROLL ── */
+    @media (max-width: 768px) {
+      .chronicle-header { display: none; }
+
+      .mobile-snap-container {
+        display: flex;
+        flex-direction: column;
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        height: calc(100svh - var(--nav-height) - 54px);
+      }
+
+      .snap-card {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        height: calc(100svh - var(--nav-height) - 54px);
+        display: flex;
+        flex-direction: column;
+        background: var(--sky);
+        border-bottom: 2px solid var(--stone);
+        overflow: hidden;
+        position: relative;
+        text-decoration: none;
+      }
+
+      .snap-card-img {
+        flex: 0 0 52%;
+        position: relative;
+      }
+      .snap-season-badge {
+        position: absolute;
+        bottom: 0.75rem;
+        left: 0.875rem;
+        background: rgba(44,51,64,0.8);
+        backdrop-filter: blur(4px);
+        font-family: var(--font-sans);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ochre);
+        padding: 0.3rem 0.65rem;
+      }
+      .snap-card-body {
+        flex: 1;
+        padding: 1.25rem 1.25rem 1rem;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .snap-card-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.625rem; flex-wrap: wrap; }
+      .snap-card-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.25rem, 5vw, 1.5rem);
+        color: var(--green);
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+      }
+      .snap-card-excerpt {
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        color: var(--slate);
+        line-height: 1.55;
+        flex: 1;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+      .snap-card-footer {
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--stone);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+
+      .snap-indicator {
+        position: fixed;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        z-index: 300;
+      }
+      .snap-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--stone);
+        transition: background 0.2s, transform 0.2s;
+        cursor: pointer;
+      }
+      .snap-dot.active { background: var(--ochre); transform: scale(1.4); }
+
+      .desktop-only { display: none !important; }
+      .mobile-only { display: block !important; }
+    }
+
+    @media (min-width: 769px) {
+      .mobile-only { display: none !important; }
+    }
+
+    @media (max-width: 900px) {
+      .story-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .story-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo"><span class="logo-explore">Explore </span>Lori</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="/stories/" class="active">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER (desktop only) -->
+  <div class="chronicle-header">
+    <div class="container">
+      <h1>The Chronicle</h1>
+      <p>Long reads, field notes, and photography essays from Lori Province.</p>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-row" id="filter-row" role="toolbar" aria-label="Filter stories">
+    <div class="container">
+      <span class="filter-label">Filter</span>
+      <div id="filter-dropdowns" style="display:contents"></div>
+      <div class="filter-divider"></div>
+      <button class="filter-reset" id="filter-reset">Clear all</button>
+      <span class="filter-count" id="filter-count"></span>
+    </div>
+  </div>
+
+  <!-- ═══════ DESKTOP LAYOUT ═══════ -->
+  <div class="desktop-only" id="desktop-layout">
+
+    <div class="lead-story" id="lead-section">
+      <!-- injected by JS -->
+    </div>
+
+    <div class="grid-section" id="grid-section" style="display:none">
+      <div class="container">
+        <p class="grid-label">More stories</p>
+        <div class="story-grid" id="story-grid"></div>
+        <div class="load-more" id="load-more-wrap" style="display:none">
+          <button class="btn btn-outline" id="load-more-btn">Load more stories</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" id="empty-state" style="display:none">
+      <p>No stories match your filters.</p>
+      <p>Try adjusting or clearing your selection.</p>
+    </div>
+
+  </div>
+
+  <!-- ═══════ MOBILE SNAP LAYOUT ═══════ -->
+  <div class="mobile-only">
+    <div class="mobile-snap-container" id="snap-container">
+      <!-- injected by JS -->
+    </div>
+    <div class="snap-indicator" id="snap-indicator">
+      <!-- injected by JS -->
+    </div>
+  </div>
+
+  <script src="/js/nav.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    // ── CONSTANTS ─────────────────────────────────────────────────────────────
+    var CIRCUITS = [
+      { id: '1', name: 'Monastery Plateau',      color: '#8B3A28' },
+      { id: '2', name: "Poet's Highlands",        color: '#3A7055' },
+      { id: '3', name: 'Fortress Plateau',        color: '#4A5A6A' },
+      { id: '4', name: 'Deep Gorges',             color: '#B8943A' },
+      { id: '5', name: 'Gugark Forest Corridor',  color: '#3A4A6A' },
+      { id: '6', name: 'Northern Steppe',         color: '#8A7A6A' },
+      { id: '7', name: 'Resilience Valley',       color: '#5A6A5A' }
+    ];
+
+    var SEASONS = [
+      { id: 'spring', label: 'Spring' },
+      { id: 'summer', label: 'Summer' },
+      { id: 'autumn', label: 'Autumn' },
+      { id: 'winter', label: 'Winter' }
+    ];
+
+    var TYPES = [
+      { id: 'longread',    label: 'Long Read' },
+      { id: 'photography', label: 'Photography Essay' },
+      { id: 'fieldnotes',  label: 'Field Notes' },
+      { id: 'reportage',   label: 'Reportage' }
+    ];
+
+    var PAGE_SIZE = 9;
+
+    // ── STATE ─────────────────────────────────────────────────────────────────
+    var allStories = [];
+    var selected = { pillar: [], circuit: [], season: [], type: [] };
+    var page = 1;
+
+    // ── UTILITY ───────────────────────────────────────────────────────────────
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function capFirst(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function typeLabel(id) {
+      var t = TYPES.find(function (x) { return x.id === id; });
+      return t ? t.label : capFirst(id);
+    }
+
+    function storyUrl(story) {
+      return '/story/?slug=' + escHtml(story.slug);
+    }
+
+    // ── BUILD FILTER BAR ──────────────────────────────────────────────────────
+    function buildFilterBar(pillars) {
+      var container = document.getElementById('filter-dropdowns');
+      container.innerHTML = '';
+
+      var dims = [
+        {
+          id: 'pillar',
+          label: 'Pillar',
+          options: pillars.map(function (p) {
+            return { id: p.id, label: p.name, color: p.color };
+          })
+        },
+        {
+          id: 'circuit',
+          label: 'Circuit',
+          options: CIRCUITS.map(function (c) {
+            return { id: c.id, label: c.name, color: c.color };
+          })
+        },
+        {
+          id: 'season',
+          label: 'Season',
+          options: SEASONS.map(function (s) {
+            return { id: s.id, label: s.label };
+          })
+        },
+        {
+          id: 'type',
+          label: 'Type',
+          options: TYPES.map(function (t) {
+            return { id: t.id, label: t.label };
+          })
+        }
+      ];
+
+      dims.forEach(function (dim) {
+        var wrap = document.createElement('div');
+        wrap.className = 'ms-dropdown';
+
+        var btn = document.createElement('button');
+        btn.className = 'ms-btn';
+        btn.id = 'btn-' + dim.id;
+        btn.setAttribute('aria-haspopup', 'listbox');
+        btn.setAttribute('aria-expanded', 'false');
+
+        var labelSpan = document.createElement('span');
+        labelSpan.id = 'label-' + dim.id;
+        labelSpan.textContent = dim.label;
+        btn.appendChild(labelSpan);
+
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          togglePanel(dim.id);
+        });
+
+        var panel = document.createElement('div');
+        panel.className = 'ms-panel';
+        panel.id = 'panel-' + dim.id;
+        panel.setAttribute('role', 'listbox');
+        panel.setAttribute('aria-multiselectable', 'true');
+
+        dim.options.forEach(function (opt) {
+          var item = document.createElement('div');
+          item.className = 'ms-option';
+          item.setAttribute('role', 'option');
+          item.dataset.dim = dim.id;
+          item.dataset.val = opt.id;
+
+          var chk = document.createElement('span');
+          chk.className = 'ms-checkbox';
+
+          item.appendChild(chk);
+
+          if (opt.color) {
+            var swatch = document.createElement('span');
+            swatch.className = 'ms-swatch';
+            swatch.style.background = opt.color;
+            item.appendChild(swatch);
+          }
+
+          item.appendChild(document.createTextNode(opt.label));
+
+          item.addEventListener('click', function (e) {
+            e.stopPropagation();
+            toggleOption(dim.id, opt.id, item);
+          });
+
+          panel.appendChild(item);
+        });
+
+        wrap.appendChild(btn);
+        wrap.appendChild(panel);
+        container.appendChild(wrap);
+      });
+
+      // Reset button
+      document.getElementById('filter-reset').addEventListener('click', resetAll);
+
+      // Close panels on outside click
+      document.addEventListener('click', function () {
+        document.querySelectorAll('.ms-panel').forEach(function (p) { p.classList.remove('open'); });
+        document.querySelectorAll('.ms-btn').forEach(function (b) { b.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); });
+      });
+    }
+
+    function togglePanel(dimId) {
+      var panel = document.getElementById('panel-' + dimId);
+      var btn   = document.getElementById('btn-' + dimId);
+      var isOpen = panel.classList.contains('open');
+      // close all first
+      document.querySelectorAll('.ms-panel').forEach(function (p) { p.classList.remove('open'); });
+      document.querySelectorAll('.ms-btn').forEach(function (b) { b.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); });
+      if (!isOpen) {
+        panel.classList.add('open');
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    function toggleOption(dim, val, el) {
+      el.classList.toggle('checked');
+      var arr = selected[dim];
+      var idx = arr.indexOf(val);
+      if (idx === -1) arr.push(val); else arr.splice(idx, 1);
+      updateBtnLabel(dim);
+      page = 1;
+      applyFilters();
+    }
+
+    function updateBtnLabel(dim) {
+      var arr = selected[dim];
+      var btn = document.getElementById('btn-' + dim);
+      var labelEl = document.getElementById('label-' + dim);
+      var names = { pillar: 'Pillar', circuit: 'Circuit', season: 'Season', type: 'Type' };
+
+      var existing = btn.querySelector('.ms-count');
+      if (existing) existing.remove();
+
+      if (arr.length === 0) {
+        labelEl.textContent = names[dim];
+        btn.classList.remove('has-selection');
+      } else if (arr.length === 1) {
+        var checkedEl = document.querySelector('#panel-' + dim + ' .ms-option.checked');
+        var text = checkedEl ? checkedEl.textContent.trim() : capFirst(arr[0]);
+        labelEl.textContent = text.length > 14 ? text.slice(0, 13) + '\u2026' : text;
+        btn.classList.add('has-selection');
+      } else {
+        labelEl.textContent = names[dim];
+        btn.classList.add('has-selection');
+        var badge = document.createElement('span');
+        badge.className = 'ms-count';
+        badge.textContent = arr.length;
+        btn.appendChild(badge);
+      }
+    }
+
+    function resetAll() {
+      selected = { pillar: [], circuit: [], season: [], type: [] };
+      document.querySelectorAll('.ms-option').forEach(function (o) { o.classList.remove('checked'); });
+      ['pillar', 'circuit', 'season', 'type'].forEach(updateBtnLabel);
+      page = 1;
+      applyFilters();
+    }
+
+    // ── FILTER & RENDER ───────────────────────────────────────────────────────
+    function getFiltered() {
+      return allStories.filter(function (s) {
+        if (selected.pillar.length  && selected.pillar.indexOf(s.pillar)            === -1) return false;
+        if (selected.circuit.length && selected.circuit.indexOf(String(s.circuit))  === -1) return false;
+        if (selected.season.length  && selected.season.indexOf(s.season)            === -1) return false;
+        if (selected.type.length    && selected.type.indexOf(s.type)                === -1) return false;
+        return true;
+      });
+    }
+
+    function applyFilters() {
+      var filtered = getFiltered();
+      var count = filtered.length;
+      document.getElementById('filter-count').textContent =
+        count + ' stor' + (count === 1 ? 'y' : 'ies');
+
+      renderDesktop(filtered);
+      renderMobile(filtered);
+    }
+
+    // ── DESKTOP RENDER ────────────────────────────────────────────────────────
+    function renderDesktop(filtered) {
+      var leadSection  = document.getElementById('lead-section');
+      var gridSection  = document.getElementById('grid-section');
+      var grid         = document.getElementById('story-grid');
+      var loadMoreWrap = document.getElementById('load-more-wrap');
+      var loadMoreBtn  = document.getElementById('load-more-btn');
+      var emptyState   = document.getElementById('empty-state');
+
+      if (filtered.length === 0) {
+        leadSection.innerHTML = '';
+        gridSection.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      // Lead story (first/most recent)
+      leadSection.innerHTML = '<div class="container">' + renderCardB(filtered[0]) + '</div>';
+
+      // Grid (remaining, paginated)
+      var gridStories = filtered.slice(1, 1 + page * PAGE_SIZE);
+      var hasMore = filtered.length > 1 + gridStories.length;
+
+      if (gridStories.length > 0) {
+        gridSection.style.display = 'block';
+        grid.innerHTML = gridStories.map(renderCardA).join('');
+      } else {
+        gridSection.style.display = 'none';
+      }
+
+      loadMoreWrap.style.display = hasMore ? 'block' : 'none';
+
+      // Re-attach load more handler
+      loadMoreBtn.onclick = function () {
+        page += 1;
+        renderDesktop(filtered);
+      };
+    }
+
+    function renderCardB(s) {
+      return '<a class="card-b" href="' + storyUrl(s) + '">' +
+        '<div class="card-b-img" style="background:' + escHtml(s.image_gradient) + '">' +
+          '<span class="img-season-badge">' + escHtml(capFirst(s.season)) + '</span>' +
+          (s.image_caption ? '<span class="img-caption">' + escHtml(s.image_caption) + '</span>' : '') +
+        '</div>' +
+        '<div class="card-b-body">' +
+          '<div class="card-meta-row">' +
+            '<span class="pillar-tag">' + escHtml(capFirst(s.pillar)) + '</span>' +
+            '<span class="dot">\u25cf</span>' +
+            '<span class="cbadge" style="background:' + escHtml(s.circuit_color) + '">' + escHtml(s.circuit_name) + '</span>' +
+            '<span class="dot">\u25cf</span>' +
+            '<span class="sbadge">' + escHtml(capFirst(s.season)) + '</span>' +
+            '<span class="dot">\u25cf</span>' +
+            '<span class="sbadge">' + escHtml(typeLabel(s.type)) + '</span>' +
+          '</div>' +
+          '<h2 class="card-b-title">' + escHtml(s.title) + '</h2>' +
+          '<p class="card-b-excerpt">' + escHtml(s.excerpt) + '</p>' +
+          '<div class="card-b-footer">' +
+            '<span class="readtime">' + escHtml(String(s.read_time)) + ' min read</span>' +
+            '<span class="read-link">Read the full story \u2192</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }
+
+    function renderCardA(s) {
+      return '<a class="card-a" href="' + storyUrl(s) + '">' +
+        '<div class="card-a-img" style="background:' + escHtml(s.image_gradient) + '">' +
+          '<span class="card-a-season">' + escHtml(capFirst(s.season)) + '</span>' +
+        '</div>' +
+        '<div class="card-a-body">' +
+          '<div class="card-meta-row">' +
+            '<span class="pillar-tag" style="font-size:0.68rem">' + escHtml(capFirst(s.pillar)) + '</span>' +
+            '<span class="dot">\u25cf</span>' +
+            '<span class="cbadge" style="background:' + escHtml(s.circuit_color) + ';font-size:0.65rem">' + escHtml(s.circuit_name) + '</span>' +
+          '</div>' +
+          '<h3 class="card-a-title">' + escHtml(s.title) + '</h3>' +
+          '<p class="card-a-excerpt">' + escHtml(s.excerpt) + '</p>' +
+          '<div class="card-a-footer">' +
+            '<span class="card-a-meta-sm">' + escHtml(String(s.read_time)) + ' min \u00b7 ' + escHtml(typeLabel(s.type)) + '</span>' +
+            '<span class="read-link-sm">Read \u2192</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }
+
+    // ── MOBILE RENDER ─────────────────────────────────────────────────────────
+    function renderMobile(filtered) {
+      var container = document.getElementById('snap-container');
+      var indicator = document.getElementById('snap-indicator');
+
+      container.innerHTML = filtered.map(renderSnapCard).join('');
+      rebuildDots(filtered.length);
+
+      container.onscroll = null;
+      container.addEventListener('scroll', function () {
+        var cards = container.querySelectorAll('.snap-card');
+        var idx = Math.round(container.scrollTop / container.clientHeight);
+        document.querySelectorAll('.snap-dot').forEach(function (d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+      }, { passive: true });
+    }
+
+    function renderSnapCard(s) {
+      return '<a class="snap-card" href="' + storyUrl(s) + '">' +
+        '<div class="snap-card-img" style="background:' + escHtml(s.image_gradient) + '">' +
+          '<span class="snap-season-badge">' + escHtml(capFirst(s.season)) + '</span>' +
+        '</div>' +
+        '<div class="snap-card-body">' +
+          '<div class="snap-card-meta">' +
+            '<span class="pillar-tag">' + escHtml(capFirst(s.pillar)) + '</span>' +
+            '<span class="dot">\u25cf</span>' +
+            '<span class="cbadge" style="background:' + escHtml(s.circuit_color) + ';font-size:0.65rem">' + escHtml(s.circuit_name) + '</span>' +
+          '</div>' +
+          '<h2 class="snap-card-title">' + escHtml(s.title) + '</h2>' +
+          '<p class="snap-card-excerpt">' + escHtml(s.excerpt) + '</p>' +
+          '<div class="snap-card-footer">' +
+            '<span class="readtime">' + escHtml(String(s.read_time)) + ' min \u00b7 ' + escHtml(typeLabel(s.type)) + '</span>' +
+            '<span class="read-link">Read \u2192</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }
+
+    function rebuildDots(count) {
+      var indicator = document.getElementById('snap-indicator');
+      var container = document.getElementById('snap-container');
+      indicator.innerHTML = '';
+      for (var i = 0; i < count; i++) {
+        (function (idx) {
+          var d = document.createElement('div');
+          d.className = 'snap-dot' + (idx === 0 ? ' active' : '');
+          d.addEventListener('click', function () {
+            var cards = container.querySelectorAll('.snap-card');
+            if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth' });
+          });
+          indicator.appendChild(d);
+        })(i);
+      }
+    }
+
+    // ── INIT ──────────────────────────────────────────────────────────────────
+    Promise.all([
+      fetch('/data/pillars.json').then(function (r) { if (!r.ok) throw new Error('pillars ' + r.status); return r.json(); }),
+      fetch('/data/stories.json').then(function (r) { if (!r.ok) throw new Error('stories ' + r.status); return r.json(); })
+    ]).then(function (results) {
+      var pillars = results[0];
+      allStories  = results[1];
+
+      buildFilterBar(pillars);
+      applyFilters();
+    }).catch(function (err) {
+      console.error('Chronicle init failed:', err);
+      document.getElementById('filter-count').textContent = 'Data unavailable';
+    });
+
+  })();
+  </script>
+</body>
+</html>

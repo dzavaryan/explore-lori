@@ -1,0 +1,8 @@
+[
+  { "id": "culture",   "name": "Culture",   "color": "#8B3A28" },
+  { "id": "landscape", "name": "Landscape", "color": "#4A5A6A" },
+  { "id": "food",      "name": "Food",      "color": "#B8943A" },
+  { "id": "ecology",   "name": "Ecology",   "color": "#3A7055" },
+  { "id": "economy",   "name": "Economy",   "color": "#3A4A6A" },
+  { "id": "grants",    "name": "Grants",    "color": "#5A6A5A" }
+]
