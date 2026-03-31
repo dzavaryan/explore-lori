@@ -327,14 +327,129 @@
       return months[d.getMonth()] + ' ' + d.getFullYear();
     }
 
-    // Placeholder prose paragraphs (will be replaced by CMS body field in future)
-    var PROSE = [
+    // Story body content keyed by slug
+    var STORY_BODY = {
+      'alaverdi-copper': {
+        paras: [
+          'The smelter has been exhaling since 1770. For two centuries the sulphur dioxide drifted south down the canyon, bleaching the basalt faces, killing the vegetation in a kilometre-wide corridor above the river. Stand at the gorge rim today and the recovery is visible in layers: the lowest band is still bare rock, then a strip of pioneer grass, then the first young pines pushing back against the slope. The forest is returning at the speed the factory destroyed it — about thirty years per fifty metres of elevation.',
+          'The Debed runs grey in April when the snowmelt carries sediment down from the Pambak range. By July it runs greenish-clear, low enough to wade in the wide shallows above Alaverdi. The copper-stained rock faces turn a particular shade of oxidised green in afternoon light — not the grey-green of the water, but a warmer, mineral hue that photographers come specifically to catch in the hour before sunset. It is, objectively, beautiful. It is also the visible residue of industrial poisoning at a scale that took two centuries to accumulate.',
+          'The town itself occupies the only flat ground in the gorge, a narrow terrace perhaps four hundred metres wide between the river and the canyon wall. The Soviet architects built upward — nine-storey blocks, a cantilevered culture house, a cable car to the plateau above. Most of the cable car infrastructure is still standing. A few cabins remain on the wire. The view from the upper station, on a clear morning, takes in the monastery at Haghpat across the canyon, the monastery at Kobayr on its cliff to the north, and the smelter chimney below — all three within the same frame.'
+        ],
+        quote: 'The forest is returning at the speed the factory destroyed it — about thirty years per fifty metres of elevation.'
+      },
+      'haghpat-khachkar': {
+        paras: [
+          'The alignment happens at 7:14 in mid-October. The sun, still low on the eastern ridge, sends a shaft through the gavit oculus — the circular ceiling opening in the monastery\'s narthex — and it prints on the west wall where the ninth-century cross-stone stands. The geometry lasts eleven minutes. The amber ellipse shrinks as the sun climbs, moving across the khachkar\'s carved interlace, and then it is gone. The stone goes back to being grey.',
+          'Haghpat\'s builders understood optics. The placement of the oculus is not accidental — medieval Armenian church architects calculated solar angles with a precision that subsequent centuries of restoration work have done their best to obscure. The particular alignment we came to document happens on four or five mornings per year, symmetrically spaced around the autumn equinox. In spring the corresponding dates fall in March, but the morning light in October is better: colder, lower, harder. The amber colour comes from the iron in the tuff.',
+          'Outside the gavit, in the courtyard, the smell changes seasonally. In October it is chestnuts — vendors from the village below set up braziers by eight in the morning, before the day-trip buses arrive from Tbilisi. The smoke drifts across the carved facades. We had the monastery to ourselves for the eleven minutes of the alignment, and then a minibus from Yerevan pulled in and twenty people with telephoto lenses walked through the gate, looking for the thing we had just seen.'
+        ],
+        quote: 'The geometry lasts eleven minutes. The amber ellipse shrinks as the sun climbs, and then it is gone. The stone goes back to being grey.'
+      },
+      'akner-barn-stage': {
+        paras: [
+          'The barn was built for cattle, not music. The stone walls are a metre thick — fieldstone, uncoursed, filled with rubble — and they do something unexpected to sound: they strip the reverb almost entirely. A cello played in the centre of the room sounds close, immediate, like it is two metres from your ear regardless of where you are sitting. The acoustics are, technically, wrong for chamber music. The musicians say they have learned to play differently here. Slower. More deliberate.',
+          'Akner sits at 1,700 metres on a south-facing slope above the Dzoraget gorge. The village was losing people at the rate of most highland Armenian villages — one or two families a year — until a resident named Siran Hakobyan converted her grandfather\'s barn in 2019 and started inviting musicians. The first year there were four concerts and thirty people. By 2024 there were twelve concerts and the guest list was managed by a waiting list. The musicians come for free; the audience pays what it can.',
+          'The transformation is not complete. The barn still smells faintly of hay. The wooden benches are borrowed from the village school. The toilet is outside. But in July, when the walnut trees are in full leaf and the ridge above the village still carries a line of snow, and someone is playing Schubert inside a stone cattle barn at altitude — there is nothing quite like it in the south Caucasus. Possibly anywhere.'
+        ],
+        quote: 'The acoustics are, technically, wrong for chamber music. The musicians say they have learned to play differently here. Slower. More deliberate.'
+      },
+      'pambak-honey-map': {
+        paras: [
+          'The Caucasian bee works at altitude. At 2,100 metres on the Pambak ridge, where most domesticated bee species would refuse to forage, the local strain of Apis mellifera caucasica moves between clover patches in temperatures that would ground other pollinators. The beekeepers from Stepanavan drive their hives up in May on trailers, stack them along the tree line at the edge of the sub-alpine meadow, and retrieve them in September. What happens in between is, as one beekeeper put it, between the bees and the mountain.',
+          'The honey varies by elevation in a way that is unusually legible to the palate. Below 1,500 metres, where linden trees dominate, the honey is pale gold and floral with a slight medicinal edge. Between 1,500 and 1,900 metres the meadow honey is darker, wilder, with notes of thyme and a faint resinous finish from the conifer pollen mixed in. Above 2,000 metres, where the flowering season compresses into six weeks, the honey is dense, almost savoury, with the particular intensity of plants that have to do everything fast.',
+          'Vardan Hakobyan, who has kept forty hives on the Akner forest edge for thirty years, does not sell his chestnut honey through any retailer. It goes to people he knows, at a price he sets each year based on what the season was like. In 2022, after a late frost wiped out the early chestnut blossom, he made four jars. He kept two. This is not how most agricultural economics works. It is, however, how the best honey in Lori is produced.'
+        ],
+        quote: 'Above 2,000 metres, where the flowering season compresses into six weeks, the honey is dense, almost savoury — the particular intensity of plants that have to do everything fast.'
+      },
+      'kobayr-fresco': {
+        paras: [
+          'The incomplete fresco is in the eastern apse. The artist — Georgian, working in the Byzantine idiom — got as far as the underpainting, the sinopia, and the first layer of plaster on the lower register. The upper section was never touched. Art historians argue about the year he left: 1212, after the Mongol incursion reached the Debed valley; or earlier, possibly 1180, after the monastery changed from Armenian to Georgian administration. The brush marks in the sinopia suggest he stopped mid-session. Not a planned departure.',
+          'The pigment that survives is remarkable. The red is still vivid after eight hundred years — iron oxide suspended in lime plaster, which is close to indestructible if the roof stays intact. Kobayr\'s roof has not always stayed intact. The eastern apse was re-roofed at some point in the nineteenth century, clumsily, which is why the frescoes at eye level are better preserved than the ones above, where water infiltration did its work. The faces of the saints in the lower register are nearly complete. The faces in the middle register are shadows.',
+          'To reach Kobayr you walk forty-five minutes up a path that begins at the roadside below Alaverdi and climbs through oak scrub to the cliff where the monastery sits. In autumn it is dry and the hornbeam below the cliff turns a colour somewhere between amber and cadmium yellow. The monastery is never locked. Nobody is there. You can spend two hours in the apse with the unfinished fresco and the question of why someone left in the middle.'
+        ],
+        quote: 'The brush marks in the sinopia suggest he stopped mid-session. Not a planned departure.'
+      },
+      'sanahin-bridge-problem': {
+        paras: [
+          'The bridge is 1192 AD. It spans a ravine off the Debed, single arch, tuff stone, twelve metres across. Queen Vaneni built it, or commissioned it — the inscription says built, though what a queen builds is usually what she pays for. It has been carrying foot traffic for 832 years without a railing. The local engineer, Harut Petrosyan, has detailed drawings showing how a minimal steel rail could be attached without damaging the masonry. He has presented them twice to the village council. The village council has opinions.',
+          'The opinions break along a generational line common in Armenian heritage disputes. The older residents, who grew up crossing the bridge daily, say a railing would change the experience of the bridge — the experience of walking across something ancient without a modern hand to hold. The younger residents, some of whom have children, say the absence of a railing is the reason their children are not allowed to cross it unaccompanied. Outside voices — conservationists from Yerevan, a UNESCO observer — add technical arguments to both sides.',
+          'Harut\'s drawings are good. He is a practical man who has been crossing this bridge since childhood and does not romanticise its danger. His proposed railing is demountable — it could be removed for photographs. He has accounted for the seasonal flooding, the frost cycles, the differential expansion rates of steel and tuff stone. What his drawings cannot account for is the question of who owns the past: the people who are in it daily, or the idea of what it represents. That question is not in any engineering specification. It is the actual argument.'
+        ],
+        quote: 'Who owns the past — the people who are in it daily, or the idea of what it represents? That question is not in any engineering specification.'
+      },
+      'lori-jars': {
+        paras: [
+          'The cellar is below the main house, accessed through a hatch in the kitchen floor. Gayane Hovhannisyan, who is seventy-three and has lived in Dsegh her entire life, opens it with the confidence of someone who has done this ten thousand times. The steps are cut stone, worn smooth. The smell coming up is cold and complex: vinegar, dried herbs, beeswax, the particular sweetness of fermented cornelian cherry, and underneath everything, the clean mineral smell of the stone walls themselves. She turns on a single bulb. The shelves are full.',
+          'She does not use labels. She knows each jar by its position and its year and the slight colour variation that distinguishes the 2023 ramsons pickle from the 2024 — the older one has gone from bright green to olive. She walks us through the inventory as if reading from a document: pickled ramsons from the field above the village in April, dried cornelian cherry from August, walnut paste made in October before the first frost takes the flavour out of the shells, matsun sealed with a double layer of cloth and a ring of rendered fat around the lid to keep the air out. Four kinds of dried herb. Three kinds of fruit leather. One shelf dedicated entirely to different preparations of the same apple variety, which grows on a tree at the edge of the property and which she has never been able to name beyond calling it the yellow one.',
+          'The point of the cellar is not abundance for its own sake. It is the Pushkin Pass, which closes in November and does not reopen reliably until May, cutting the village from Vanadzor and the lower towns for weeks at a time in a hard winter. The cellar is the calculation behind that closure: everything that needs to be in the house by October, in sufficient quantity, preserved by the method most likely to survive six months without electricity. Gayane learned from her mother. Her mother learned from hers. The recipes are not written down anywhere.'
+        ],
+        quote: 'The cellar is the calculation behind the pass closure: everything that needs to be in the house by October, preserved by the method most likely to survive six months without electricity.'
+      },
+      'sanahin-haghpat-path': {
+        paras: [
+          'The road between Sanahin and Haghpat takes twelve minutes by car. The old mule path takes two hours on foot. Nobody uses it now except the people who know about it, which is fewer than a dozen locals and perhaps fifty visiting walkers per year. It begins at the north edge of Sanahin village, climbs through a hazel wood where the trees grow close enough to shade the path even in summer, traverses a shoulder of the ridge with views down into the Debed canyon, and descends through pine forest to the plateau where Haghpat sits. The path is not marked. It is not on any hiking map we have found.',
+          'The forest section is the best part. The path runs along the upper edge of a beech-oak-hornbeam mix that covers the canyon wall, and in this section you are walking at the level where the canopy meets the light. The birds are different here than at the river — no kingfishers, no herons, but woodpeckers in the dead beeches and, in May, the cuckoo calling from somewhere in the pine section ahead. The floor of the path in this section is soft with twenty years of leaf fall, and the walking is effortless.',
+          'The arrival at Haghpat on foot is different from the arrival by road. The road brings you to the car park, to the souvenir vendors, to the entrance queue in summer. The path brings you in through the forest above the monastery, so that you see the roof first — the dark basalt tiles of the gavit, then the drum of the main church below it — and you understand the site from above before you enter it from ground level. This is almost certainly how the people who built it arrived, and it is the better way to see it.'
+        ],
+        quote: 'The path brings you in through the forest above, so you see the roof first. This is almost certainly how the people who built it arrived.'
+      },
+      'vardavar-haghpat': {
+        paras: [
+          'Vardavar is the feast of the Transfiguration, celebrated on the fourteenth Sunday after Easter, which puts it in late July. The water tradition is pagan — older than Christianity, grafted onto the church calendar when the missionaries arrived in the fourth century and found it impossible to remove. In Haghpat the water comes from buckets, from garden hoses, from the windows of houses. Children with water pistols patrol the lane below the monastery gate. By ten in the morning nobody in the village is dry.',
+          'The monastery itself is not immune. We watched a group of teenagers fill a bucket from the spring behind the gavit and pour it over a friend standing in the main courtyard. A priest who was crossing the courtyard received a secondary splash. He continued walking. This is the point — for one day, the dignity of the ancient and the dignity of the institutional are suspended, and the only rule is that everyone gets wet and nobody minds. The UNESCO world heritage plaque on the entrance wall gets wet too.',
+          'We stayed from the morning water fights through the afternoon service and into the evening, when the village sits outside on the benches and in the street and the mood turns quieter. By then everything is dry — the air in the gorge in July is hot enough to evaporate a soaked shirt in forty minutes. The monastery, when the last visitors leave at dusk, is empty and silent and smelling faintly of spring water dried on warm stone. It is completely dignified again. It was dignified all along.'
+        ],
+        quote: 'For one day, the dignity of the ancient and the dignity of the institutional are suspended, and the only rule is that everyone gets wet and nobody minds.'
+      },
+      'alaverdi-after-copper': {
+        paras: [
+          'The Vallex Group acquired the mine in 2004 and the smelter in 2005. Since then the operation has never fully stopped, but it has twice come close — in 2009 and again in 2016 — and both times the town measured the near-closure in months of unpaid salaries and the particular silence that settles over a canyon city when the smelter goes idle. The chimney is the town\'s heartbeat. When it smokes, Alaverdi breathes. When it doesn\'t, the conversation in the coffee places turns to who has a relative in Russia and how long the savings will last.',
+          'Three households, three answers. Lilit, thirty-four, who works at the COAF Smart Center in Debet village and sends her daughter to its robotics programme, says the smelter question is not her question anymore. Her daughter is twelve and will not work in copper. Aram, fifty-eight, a former smelter technician now running a small guesthouse for hikers, says he misses the certainty of the shift schedule more than the work itself. Hasmik, seventy-one, whose husband spent thirty years in the smelter and whose pension is calibrated to the Soviet-era formula, says simply that the mine must stay — the alternative is not visible to her from where she is standing.',
+          'What Alaverdi is becoming is not yet clear. The canyon tourism is real but small. The COAF centre is real and excellent. The remittances from the diaspora are real and necessary. None of these things is a replacement for the economic density of a single large employer in a single-industry canyon city. The more honest answer is that Alaverdi is suspended between its industrial past and whatever comes next, and the people living there are doing what people in that position have always done: continuing, adapting, and waiting to see what the mountain offers.'
+        ],
+        quote: 'The chimney is the town\'s heartbeat. When it smokes, Alaverdi breathes. When it doesn\'t, the conversation turns to who has a relative in Russia.'
+      },
+      'khachkar-faces-east': {
+        paras: [
+          'Every khachkar in Armenia faces west. The rule is theological — the cross faces the setting sun, faces Jerusalem, faces the dead — and it is consistent enough to be useful as a dating tool. Medieval khachkars face west. Soviet-era war memorials, when they adopt the form, also face west. There is one on a plateau above Odzun that faces east. It has been there for at least four hundred years, according to a seventeenth-century traveller\'s account that mentions it specifically and seems to find the orientation as puzzling as we do.',
+          'Nobody in Odzun agrees on why. The village priest says it was placed that way to face the sunrise on the feast day of the saint to whom it is dedicated. An old woman near the church says her grandmother told her it marks the grave of a man who died facing east — he was walking toward home from somewhere far away and never arrived. A younger man who teaches history at the village school says there is a tradition in some Armenian communities of placing a memorial khachkar facing the direction from which the deceased is expected to return. None of these explanations is verifiable. All three feel true.',
+          'The khachkar itself is not remarkable in its carving — mid-quality interlace, a standard cross form, an inscription that erosion has made illegible. What makes it worth the twenty-minute walk from the village is the context: it stands alone in a field, with the Debed canyon falling away to the east in front of it and the plateau stretching west behind it, facing the thing it should be turning its back on. Whatever the reason, someone made a deliberate choice. That choice is still here, still facing east, still unexplained.'
+        ],
+        quote: 'Someone made a deliberate choice four hundred years ago. That choice is still here, still facing east, still unexplained.'
+      },
+      'gevorg-kobayr-ledges': {
+        paras: [
+          'Gevorg Hakobyan has walked the Kobayr path several hundred times. He counts the season-specific hazards the way other people count steps: the loose tuff face at the third switchback that gets undercut by the spring melt and drops a section every two or three years; the ledge traverse at the top that looks solid and isn\'t, specifically in April when the frost-thaw cycle is working on the joints. He does not explain these things in advance. He walks at a pace that makes you watch his feet and copy them, and that is the lesson.',
+          'He is forty-four, a native of Alaverdi, trained through the Armenian Mountain Guide Association. He speaks Armenian and Russian and a careful, deliberate English that he uses for precision rather than fluency — he chooses his words the way he chooses his foot placements. He has been guiding since he was twenty-six, when a visiting German botanist hired him to carry equipment on a week-long traverse of the Jijur ridge, and he discovered that he knew things about the mountain that were worth money to people who did not know them. He still seems faintly surprised by this.',
+          'What he looks at on the Kobayr path: the vegetation at the base of the tuff faces, which tells him how saturated the rock is from below; the colour of the exposed limestone, which tells him how recently it has been wet; the behaviour of the path surface under his feet, which tells him something he cannot quite articulate but which reliably saves him from a bad step. What he does not bother explaining: why it matters that you approach the monastery from the north rather than the south, which he demonstrates by simply walking north. You understand when you see the facade in full afternoon light rather than in its own shadow.'
+        ],
+        quote: 'He does not explain the hazards in advance. He walks at a pace that makes you watch his feet and copy them, and that is the lesson.'
+      },
+      'mets-mantash-grant': {
+        paras: [
+          'The application was forty-three pages. It was written by a schoolteacher named Arshak Danielyan and a retired agronomist named Zhanna Petrosyan over eleven months, on evenings and weekends, using a laptop borrowed from the school and a translation dictionary for the EU terminology that did not map cleanly onto the way people talk about water in a highland Armenian village. The grant was for an irrigation channel from the Mantash stream to the south hillside, where the soil is deep and south-facing and had been dry-farmed for generations. They received it in March 2018. The channel opened in June 2019.',
+          'In the five years after the water started flowing, the south hillside changed. The first year: seven households planted fruit trees — apple, plum, cherry — that required irrigation and that nobody had planted there before because there was no water. The second year: one household added a small hothouse and began selling tomatoes to the market in Stepanavan. By 2022 the hillside had twenty hectares under cultivation that had been fallow since the Soviet collective closed in 1991. The village population, which had been declining since 1994, held steady for the first time in thirty years.',
+          'Arshak still teaches at the school. He is fifty-one now and has helped two other villages in the area write similar applications. The terminology still doesn\'t map cleanly, he says. The EU form asks for "beneficiaries" and he writes in the names of families he has known his whole life. He asks us whether this is what is meant. We say yes. He says he thought so, but it felt strange to use a word like that for his neighbours. The irrigation channel, which cost less than a new tractor, is still running.'
+        ],
+        quote: 'The EU form asks for "beneficiaries" and he writes in the names of families he has known his whole life. It felt strange to use a word like that for his neighbours.'
+      },
+      'akner-chestnut': {
+        paras: [
+          'The trees are at least four hundred years old, possibly older. There are nine of them along the forest edge above Akner village, growing in a loose line that follows the contour of the slope as if they were planted with spacing in mind. Nobody planted them, or at least nobody in Akner has a record of it. The oldest resident, Vardan Hakobyan\'s aunt, who is eighty-seven and has lived in Akner her entire life, says the trees were already old when her grandmother was young. That takes the line of memory back approximately 150 years and leaves another 250 unaccounted for.',
+          'Vardan has a theory involving a monk and a very long walk. The theory is that a monk from the Haghpat monastery, possibly in the seventeenth century, brought chestnut seeds from the forest above Kobayr — where chestnuts grow naturally in the canyon microclimate — and planted them on the warmer south-facing slope above Akner as a food source for the monastery\'s beehives. The trees would have been accessible from Haghpat via the old mule path. The honey from Vardan\'s hives, positioned closest to the chestnut line, is darker and more bitter than the meadow honey from higher elevation — the taste is unmistakably chestnut.',
+          'There is no documentary evidence for the monk. There are no other chestnuts in the vicinity. The Kobayr canyon trees are the closest wild stand, and they are twelve kilometres away by trail. But the line the trees make along the slope, the evenness of the spacing, the way they sit just inside the treeline where a planted grove would be placed rather than in the random distribution of a naturally seeded stand — all of it suggests intention. Vardan tastes his chestnut honey every year and says it tastes like an explanation. He has not found anyone who disagrees.'
+        ],
+        quote: 'Vardan tastes his chestnut honey every year and says it tastes like an explanation. He has not found anyone who disagrees.'
+      }
+    };
+
+    // Fallback prose for any story not in STORY_BODY
+    var DEFAULT_PROSE = [
       'The road into the gorge descends through three climate zones in twelve kilometres. At the canyon rim the air carries pine resin; by the river it smells of wet basalt and cold water moving fast over limestone. The light in the gorge shifts direction twice a day — morning from the east wall, afternoon from the west — and for two hours around noon it disappears entirely behind the ridge.',
       'Locals measure the seasons not by calendar but by the gorge: when the Debed runs grey with snowmelt you are in April; when it runs green and low you are in August; when it runs clear and fast and cold you are in October and the chestnuts are falling. The gorge has its own internal clock, indifferent to the rest of the country.',
       'What the maps do not show is the human scale of the place. The monastery walls are chest-height in places, worn down by twelve centuries of hands trailing across them. The stones are warm in the afternoon and cold in the morning. In that sense the gorge is not so much a landscape as a chronology — everything here has a date, a maker, a reason, and most of those reasons are still legible if you know how to read stone.'
     ];
-
-    var PULL_QUOTE = 'The gorge is not so much a landscape as a chronology — everything here has a date, a maker, a reason.';
+    var DEFAULT_PULL_QUOTE = 'The gorge is not so much a landscape as a chronology — everything here has a date, a maker, a reason.';
 
     function renderStory(story) {
       var main = document.getElementById('story-main');
@@ -368,12 +483,15 @@
             '</div>' +
             '<h1 class="story-title">' + escHtml(story.title) + '</h1>' +
             '<p class="story-lede">' + escHtml(story.excerpt) + '</p>' +
-            '<div class="story-prose">' +
-              '<p>' + PROSE[0] + '</p>' +
-              '<blockquote class="pull-quote">' + PULL_QUOTE + '</blockquote>' +
-              '<p>' + PROSE[1] + '</p>' +
-              '<p>' + PROSE[2] + '</p>' +
-            '</div>' +
+            (function() {
+              var body = STORY_BODY[story.slug] || { paras: DEFAULT_PROSE, quote: DEFAULT_PULL_QUOTE };
+              return '<div class="story-prose">' +
+                '<p>' + body.paras[0] + '</p>' +
+                '<blockquote class="pull-quote">' + body.quote + '</blockquote>' +
+                '<p>' + body.paras[1] + '</p>' +
+                '<p>' + body.paras[2] + '</p>' +
+              '</div>';
+            })() +
           '</div>' +
         '</article>' +
 
