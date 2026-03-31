@@ -3,6 +3,8 @@
    explorelori.com
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
 /* ── 1. CSS CUSTOM PROPERTIES ────────────────────────────── */
 :root {
   /* Palette */
@@ -16,8 +18,8 @@
   --stone: #C8BFA8;         /* borders, dividers — Warm stone */
 
   /* Typography */
-  --font-serif: Georgia, 'Times New Roman', serif;
-  --font-sans: Arial, Helvetica, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', Arial, Helvetica, sans-serif;
 
   /* Spacing scale */
   --space-xs: 0.5rem;
@@ -246,24 +248,32 @@ p {
   justify-content: flex-end;
   overflow: hidden;
 }
-.hero-img-placeholder {
+.hero-photo {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #3A5A3A 0%, #2C3340 40%, #B8943A 100%);
-  display: flex;
-  align-items: flex-end;
-  padding: var(--space-md);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30,38,48,0.9) 0%, rgba(30,38,48,0.3) 50%, rgba(30,38,48,0.15) 100%);
 }
 .hero-img-label {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.45);
+  z-index: 2;
 }
 .hero-content {
   position: relative;
   z-index: 2;
   padding-bottom: var(--space-xl);
-  background: linear-gradient(to top, rgba(44, 51, 64, 0.85) 0%, transparent 100%);
   padding-top: var(--space-xl);
 }
 .hero-eyebrow {
@@ -302,12 +312,24 @@ p {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
+.card-img-link {
+  display: block;
+  overflow: hidden;
+}
+.card-img-link:hover .card-img { transform: scale(1.03); }
 .card-img {
   width: 100%;
   aspect-ratio: 16 / 9;
   background: var(--stone);
   object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
 }
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+.card-title a:hover { color: var(--ochre); }
 .card-body {
   padding: var(--space-md);
 }

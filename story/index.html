@@ -345,7 +345,9 @@
       main.innerHTML =
         // Hero
         '<div class="story-hero">' +
-          '<div class="story-hero-bg" style="background:' + escHtml(story.image_gradient) + '"></div>' +
+          '<div class="story-hero-bg" style="background:' + escHtml(story.image_gradient) + '">' +
+            (story.image_path ? '<img src="' + escHtml(story.image_path) + '" alt="' + escHtml(story.title) + '" loading="eager" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display=\'none\'">' : '') +
+          '</div>' +
           '<a class="hero-back" href="/stories/">\u2190 The Chronicle</a>' +
           '<span class="hero-season-badge">' + escHtml(capFirst(story.season)) + '</span>' +
           (story.image_caption ? '<span class="hero-caption">' + escHtml(story.image_caption) + '</span>' : '') +
@@ -397,8 +399,12 @@
       if (!grid || !section) return;
 
       grid.innerHTML = related.map(function (s) {
+        var imgContent = s.image_path
+          ? '<img src="' + escHtml(s.image_path) + '" alt="' + escHtml(s.title) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display=\'none\'">'
+          : '';
         return '<a class="card-a" href="/story/?slug=' + escHtml(s.slug) + '">' +
-          '<div class="card-a-img" style="background:' + escHtml(s.image_gradient) + '">' +
+          '<div class="card-a-img" style="background:' + escHtml(s.image_gradient) + ';background-size:cover">' +
+            imgContent +
             '<span class="card-a-season">' + escHtml(capFirst(s.season)) + '</span>' +
           '</div>' +
           '<div class="card-a-body">' +

@@ -861,9 +861,17 @@
       };
     }
 
+    function imgStyle(s) {
+      return 'background:' + escHtml(s.image_gradient) + ';background-size:cover;background-position:center';
+    }
+
     function renderCardB(s) {
+      var imgContent = s.image_path
+        ? '<img src="' + escHtml(s.image_path) + '" alt="' + escHtml(s.title) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display=\'none\'">'
+        : '';
       return '<a class="card-b" href="' + storyUrl(s) + '">' +
-        '<div class="card-b-img" style="background:' + escHtml(s.image_gradient) + '">' +
+        '<div class="card-b-img" style="' + imgStyle(s) + '">' +
+          imgContent +
           '<span class="img-season-badge">' + escHtml(capFirst(s.season)) + '</span>' +
           (s.image_caption ? '<span class="img-caption">' + escHtml(s.image_caption) + '</span>' : '') +
         '</div>' +
@@ -888,8 +896,12 @@
     }
 
     function renderCardA(s) {
+      var imgContent = s.image_path
+        ? '<img src="' + escHtml(s.image_path) + '" alt="' + escHtml(s.title) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display=\'none\'">'
+        : '';
       return '<a class="card-a" href="' + storyUrl(s) + '">' +
-        '<div class="card-a-img" style="background:' + escHtml(s.image_gradient) + '">' +
+        '<div class="card-a-img" style="' + imgStyle(s) + '">' +
+          imgContent +
           '<span class="card-a-season">' + escHtml(capFirst(s.season)) + '</span>' +
         '</div>' +
         '<div class="card-a-body">' +
@@ -927,8 +939,12 @@
     }
 
     function renderSnapCard(s) {
+      var imgContent = s.image_path
+        ? '<img src="' + escHtml(s.image_path) + '" alt="' + escHtml(s.title) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display=\'none\'">'
+        : '';
       return '<a class="snap-card" href="' + storyUrl(s) + '">' +
-        '<div class="snap-card-img" style="background:' + escHtml(s.image_gradient) + '">' +
+        '<div class="snap-card-img" style="' + imgStyle(s) + '">' +
+          imgContent +
           '<span class="snap-season-badge">' + escHtml(capFirst(s.season)) + '</span>' +
         '</div>' +
         '<div class="snap-card-body">' +

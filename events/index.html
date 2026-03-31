@@ -476,8 +476,12 @@
     }
 
     function renderEventCard(ev) {
+      var imgContent = ev.image_path
+        ? '<img src="' + escHtml(ev.image_path) + '" alt="' + escHtml(ev.title) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display=\'none\'">'
+        : '';
       return '<div class="event-card">' +
-        '<div class="event-card-img" style="background:' + escHtml(ev.image_gradient) + '">' +
+        '<div class="event-card-img" style="background:' + escHtml(ev.image_gradient) + ';background-size:cover">' +
+          imgContent +
           '<span class="event-season-badge">' + escHtml(capFirst(ev.season)) + '</span>' +
           '<span class="event-type-badge">' + escHtml(capFirst(ev.type)) + '</span>' +
         '</div>' +
