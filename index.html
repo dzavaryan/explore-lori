@@ -3,9 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Explore Lori — Where the gorge meets the forest.</title>
-  <meta name="description" content="High-end editorial chronicle of Lori Province, Northern Armenia. Monasteries, canyon ecology, village life, and foraged food culture.">
+  <title>Explore Lori — Armenia's Canyon Country</title>
+  <meta name="description" content="Independent editorial platform for Lori Province, Northern Armenia. Monasteries, canyon trails, village food, and the people who live here.">
   <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--dark);
+      padding: 1.25rem 0;
+    }
+    .stats-strip .container {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 2.5rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      color: var(--ochre);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.25rem;
+    }
+
+    /* ── DISCOVER SECTION ── */
+    .discover-section { background: var(--parchment); }
+    .section-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      margin-bottom: 0.5rem;
+    }
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    .loc-card {
+      display: block;
+      text-decoration: none;
+      background: var(--sky);
+      border: 1px solid var(--stone);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .loc-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .loc-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .loc-card-body { padding: 1.25rem; }
+    .loc-card-type {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.375rem;
+    }
+    .loc-card-name {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      color: var(--green);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .loc-card-hook {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+    .loc-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.875rem;
+      padding-top: 0.875rem;
+      border-top: 1px solid var(--stone);
+    }
+
+    /* ── EVENTS STRIP ── */
+    .events-section { background: var(--sky); border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    .event-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .event-date-block {
+      flex-shrink: 0;
+      width: 52px;
+      text-align: center;
+      background: var(--green);
+      padding: 0.5rem 0.25rem;
+    }
+    .event-month {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .event-day {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--ochre);
+      line-height: 1;
+    }
+    .event-info {}
+    .event-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--green);
+      line-height: 1.25;
+      margin-bottom: 0.25rem;
+    }
+    .event-where {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--slate);
+    }
+    .event-type-tag {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ochre);
+      margin-top: 0.375rem;
+    }
+
+    /* ── COST TEASER ── */
+    .cost-teaser {
+      background: var(--dark);
+      padding: var(--space-xl) 0;
+    }
+    .cost-teaser-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .cost-teaser h2 { color: #fff; }
+    .cost-teaser p { color: rgba(255,255,255,0.65); margin-top: 0.75rem; line-height: 1.65; }
+    .cost-preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .cost-preview-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.875rem 1rem;
+    }
+    .cost-preview-label {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.25rem;
+    }
+    .cost-preview-value {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--ochre);
+    }
+    .cost-preview-sub {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 0.125rem;
+    }
+
+    @media (max-width: 900px) {
+      .location-grid, .events-grid { grid-template-columns: 1fr 1fr; }
+      .cost-teaser-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .location-grid, .events-grid { grid-template-columns: 1fr; }
+      .stats-strip .container { flex-wrap: wrap; gap: 1rem; }
+      .stat-item { border-right: none; padding: 0 1.5rem; }
+      .cost-preview-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -31,9 +243,9 @@
     <img class="hero-photo" src="/images/debed-canyon.jpg" alt="Debed River canyon, Lori Province" loading="eager">
     <div class="hero-overlay"></div>
     <div class="hero-content container">
-      <p class="hero-eyebrow">Northern Armenia</p>
-      <h1>Where the gorge meets the forest.</h1>
-      <p class="hero-sub">Twelve centuries of monasteries, medieval bridges, and copper-canyon light — mapped, narrated, and seasonally timed.</p>
+      <p class="hero-eyebrow">Lori, Armenia</p>
+      <h1>The North You Haven't Reached Yet.</h1>
+      <p class="hero-sub">Gorge trails. Cliff-edge monasteries. Villages where people still forage by season. Lori is one of Armenia's largest regions. Almost nobody comes here.</p>
       <div class="hero-actions">
         <a href="/discover/" class="btn btn-primary">Open the Map</a>
         <a href="/stories/" class="btn btn-outline">Read the Chronicle</a>
@@ -42,12 +254,49 @@
     <span class="hero-img-label">Debed River canyon, Lori Province</span>
   </section>
 
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="container">
+      <div class="stat-item">
+        <span class="stat-num">22</span>
+        <span class="stat-label">Places &amp; Trails</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">14</span>
+        <span class="stat-label">Field Stories</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">15</span>
+        <span class="stat-label">Events This Year</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">7</span>
+        <span class="stat-label">Circuits Mapped</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCOVER SECTION -->
+  <section class="discover-section section-gap">
+    <div class="container">
+      <p class="section-eyebrow">From the field</p>
+      <div style="display:flex; align-items:baseline; justify-content:space-between;">
+        <h2>Discover Lori</h2>
+        <a href="/discover/" class="btn btn-outline">Open the Map</a>
+      </div>
+      <p style="margin-top:0.5rem; color:var(--slate); max-width:560px; font-size:0.9375rem;">Places we know personally — trails, monasteries, villages, and hands-on experiences.</p>
+      <div class="location-grid" id="location-grid">
+        <!-- JS populated -->
+      </div>
+    </div>
+  </section>
+
   <!-- CHRONICLE FEED -->
-  <section class="feed section-gap">
+  <section class="feed section-gap" style="background:var(--sky); border-top:1px solid var(--stone);">
     <div class="container">
       <div class="feed-header">
         <h2>From the Chronicle</h2>
-        <a href="/stories/" class="btn btn-outline">All Stories</a>
+        <a href="/stories/" class="btn btn-outline">All 14 Stories</a>
       </div>
       <div class="feed-grid">
 
@@ -56,10 +305,10 @@
             <img class="card-img" src="/images/story-haghpat-night.jpg" alt="Haghpat Monastery at dawn" loading="lazy">
           </a>
           <div class="card-body">
-            <p class="card-tag">Monastery Plateau</p>
+            <p class="card-tag">Monastery Plateau · Culture</p>
             <h3 class="card-title"><a href="/story/?slug=haghpat-khachkar">The hour the khachkar catches fire</a></h3>
-            <p class="card-excerpt">Each October morning at Haghpat, the rising sun aligns with the gavit oculus and prints amber geometry across a ninth-century cross-stone. We timed it to the minute.</p>
-            <p class="card-meta">Photography &middot; 6 min read</p>
+            <p class="card-excerpt">Each October morning the rising sun aligns with the gavit oculus and prints amber geometry across a ninth-century cross-stone. We timed it to the minute.</p>
+            <p class="card-meta">Photography · 6 min read</p>
           </div>
         </article>
 
@@ -68,25 +317,78 @@
             <img class="card-img" src="/images/story-alaverdi-copper.jpg" alt="Alaverdi copper smelter in the Debed gorge" loading="lazy">
           </a>
           <div class="card-body">
-            <p class="card-tag">Deep Gorges</p>
+            <p class="card-tag">Deep Gorges · Landscape</p>
             <h3 class="card-title"><a href="/story/?slug=alaverdi-copper">Copper, canyon, and the Debed River</a></h3>
             <p class="card-excerpt">Alaverdi's smelter has exhaled sulphur into the gorge since 1770. Today the canyon smells of pine resin and wet stone — a landscape in slow recovery.</p>
-            <p class="card-meta">Reportage &middot; 8 min read</p>
+            <p class="card-meta">Reportage · 8 min read</p>
           </div>
         </article>
 
         <article class="card">
-          <a href="/story/?slug=akner-barn-stage" class="card-img-link">
-            <img class="card-img" src="/images/story-akner-spring.jpg" alt="Akner village in spring" loading="lazy">
+          <a href="/story/?slug=kobayr-fresco" class="card-img-link">
+            <img class="card-img" src="/images/kobayr-monastery.jpg" alt="Kobayr Monastery eastern apse" loading="lazy">
           </a>
           <div class="card-body">
-            <p class="card-tag">Poet's Highlands</p>
-            <h3 class="card-title"><a href="/story/?slug=akner-barn-stage">A barn that became a stage at 1,700 metres</a></h3>
-            <p class="card-excerpt">Every July, Akner village hosts chamber music inside a renovated cattle barn. The acoustics are wrong and completely right. How a small community rebuilt cultural memory in stone.</p>
-            <p class="card-meta">Culture &middot; 7 min read</p>
+            <p class="card-tag">Deep Gorges · Culture</p>
+            <h3 class="card-title"><a href="/story/?slug=kobayr-fresco">The fresco nobody painted</a></h3>
+            <p class="card-excerpt">The unfinished apse at Kobayr — where the Georgian artist stopped mid-stroke and never came back. The pigment is still there. We went to look at the brush marks.</p>
+            <p class="card-meta">Long Read · 9 min read</p>
           </div>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS STRIP -->
+  <section class="events-section section-gap">
+    <div class="container">
+      <p class="section-eyebrow">Lori Calendar</p>
+      <div style="display:flex; align-items:baseline; justify-content:space-between;">
+        <h2>What's On in Lori</h2>
+        <a href="/events/" class="btn btn-outline">All Events</a>
+      </div>
+      <div class="events-grid" id="events-grid">
+        <!-- JS populated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- COST CALCULATOR TEASER -->
+  <section class="cost-teaser">
+    <div class="container">
+      <div class="cost-teaser-inner">
+        <div>
+          <p class="section-eyebrow" style="color:var(--ochre);">Practical planning</p>
+          <h2>How much does a month in Lori cost?</h2>
+          <p>Real prices from local guesthouses, markets, and activity providers. 30–50% lower than Yerevan. Adjust the calculator to match how you travel.</p>
+          <div style="margin-top:var(--space-md); display:flex; gap:var(--space-sm); flex-wrap:wrap;">
+            <a href="/costs/" class="btn btn-primary">Open the Calculator</a>
+            <a href="/plan/" class="btn btn-outline" style="border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.8);">Getting Here</a>
+          </div>
+        </div>
+        <div class="cost-preview-grid">
+          <div class="cost-preview-item">
+            <p class="cost-preview-label">Village room</p>
+            <p class="cost-preview-value">~$150</p>
+            <p class="cost-preview-sub">per month</p>
+          </div>
+          <div class="cost-preview-item">
+            <p class="cost-preview-label">Food (self-catering)</p>
+            <p class="cost-preview-value">~$82</p>
+            <p class="cost-preview-sub">per month</p>
+          </div>
+          <div class="cost-preview-item">
+            <p class="cost-preview-label">Activities</p>
+            <p class="cost-preview-value">Free–$167</p>
+            <p class="cost-preview-sub">trails &amp; workshops</p>
+          </div>
+          <div class="cost-preview-item">
+            <p class="cost-preview-label">Guesthouse stay</p>
+            <p class="cost-preview-value">~$270</p>
+            <p class="cost-preview-sub">per month</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -126,6 +428,7 @@
         <a href="/stories/">The Chronicle</a>
         <a href="/discover/">The Map</a>
         <a href="/plan/">Getting Here</a>
+        <a href="/costs/">Cost Calculator</a>
         <a href="/events/">Regional Briefings</a>
         <a href="/about/">About</a>
       </nav>
@@ -136,5 +439,75 @@
   </footer>
 
   <script src="/js/nav.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    function escHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── DISCOVER: pull 3 highlight locations ──────────────────────────────────
+    var HIGHLIGHT_IDS = ['haghpat-monastery', 'lori-berd-fortress', 'dzoraget-canyon'];
+
+    fetch('/data/locations.json')
+      .then(function(r) { return r.json(); })
+      .then(function(locs) {
+        var picks = locs.filter(function(l) { return HIGHLIGHT_IDS.indexOf(l.id) !== -1; });
+        // preserve order
+        picks.sort(function(a, b) { return HIGHLIGHT_IDS.indexOf(a.id) - HIGHLIGHT_IDS.indexOf(b.id); });
+
+        var IMGS = {
+          'haghpat-monastery': '/images/haghpat-monastery.jpg',
+          'lori-berd-fortress': '/images/lori-berd.jpg',
+          'dzoraget-canyon':    '/images/dzoraget-gorge.jpg'
+        };
+
+        document.getElementById('location-grid').innerHTML = picks.map(function(loc) {
+          var img = IMGS[loc.id] || '';
+          return '<a class="loc-card" href="/discover/">' +
+            '<div style="height:200px;overflow:hidden;background:' + escHtml(loc.circuit_color) + '">' +
+              (img ? '<img class="loc-card-img" src="' + escHtml(img) + '" alt="' + escHtml(loc.name) + '" loading="lazy" onerror="this.style.display=\'none\'">' : '') +
+            '</div>' +
+            '<div class="loc-card-body">' +
+              '<p class="loc-card-type">' + escHtml(loc.type) + '</p>' +
+              '<h3 class="loc-card-name">' + escHtml(loc.name) + '</h3>' +
+              '<p class="loc-card-hook">' + escHtml(loc.hook.slice(0, 120)) + '…</p>' +
+              '<div class="loc-card-footer">' +
+                '<span class="circuit-badge" style="background:' + escHtml(loc.circuit_color) + '">' + escHtml(loc.circuit_name) + '</span>' +
+                '<span style="font-family:var(--font-sans);font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--ochre);">View on map →</span>' +
+              '</div>' +
+            '</div>' +
+          '</a>';
+        }).join('');
+      })
+      .catch(function() {});
+
+    // ── EVENTS: pull next 3 upcoming ─────────────────────────────────────────
+    fetch('/data/events.json')
+      .then(function(r) { return r.json(); })
+      .then(function(events) {
+        var upcoming = events.slice(0, 3);
+        document.getElementById('events-grid').innerHTML = upcoming.map(function(ev) {
+          var parts = ev.date_range.split(' ');
+          var monthStr = parts.length >= 3 ? parts[2] : '';
+          var dayStr = parts.length >= 1 ? parts[0].replace('–', '–').split('–')[0] : '';
+          return '<div class="event-item">' +
+            '<div class="event-date-block">' +
+              '<span class="event-day">' + escHtml(dayStr) + '</span>' +
+              '<span class="event-month">' + escHtml(monthStr.slice(0,3)) + '</span>' +
+            '</div>' +
+            '<div class="event-info">' +
+              '<h3 class="event-title">' + escHtml(ev.title) + '</h3>' +
+              '<p class="event-where">' + escHtml(ev.location) + '</p>' +
+              '<span class="event-type-tag">' + escHtml(ev.type) + '</span>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function() {});
+
+  })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Much Does Lori Cost? — Explore Lori</title>
+  <meta name="description" content="A real cost calculator for a stay in Lori, Armenia. Based on actual local prices for accommodation, food, transport and activities.">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* ── PAGE HERO ── */
+    .costs-hero {
+      background: var(--green);
+      padding: 4rem 0 3rem;
+      border-bottom: 3px solid var(--ochre);
+    }
+    .costs-hero h1 { color: #fff; margin-bottom: 0.75rem; }
+    .costs-hero p { color: rgba(255,255,255,0.7); max-width: 560px; font-size: 1.0625rem; line-height: 1.6; }
+
+    /* ── LAYOUT ── */
+    .costs-body { padding: var(--space-xl) 0; }
+    .costs-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* ── CALCULATOR CARD ── */
+    .calc-card {
+      background: #fff;
+      border: 1px solid var(--stone);
+      overflow: hidden;
+    }
+    .calc-section {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--stone);
+    }
+    .calc-section:last-child { border-bottom: none; }
+    .calc-section-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .calc-section-title {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .calc-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.625rem;
+      margin-bottom: 0.75rem;
+    }
+    .calc-opt {
+      border: 1.5px solid var(--stone);
+      padding: 0.75rem 0.875rem;
+      background: var(--parchment);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+    .calc-opt:hover { border-color: var(--ochre); background: #fdf9f0; }
+    .calc-opt.active { border-color: var(--ochre); background: #fdf9f0; }
+    .calc-opt-name {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .calc-opt-desc {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: var(--slate);
+      line-height: 1.35;
+      margin-top: 0.125rem;
+    }
+    .calc-opt-price {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--ochre);
+      font-weight: 600;
+      margin-top: 0.375rem;
+    }
+    .calc-source {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: #bbb;
+      line-height: 1.5;
+    }
+    .calc-source a { color: #aaa; text-decoration: underline; }
+
+    /* ── RESULT PANEL ── */
+    .calc-result {
+      background: var(--dark);
+      padding: 1.75rem;
+    }
+    .calc-result-label {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.5rem;
+    }
+    .calc-result-total {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--ochre);
+      line-height: 1;
+    }
+    .calc-result-amd {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .calc-breakdown { display: flex; flex-direction: column; gap: 0.5rem; }
+    .calc-breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .calc-breakdown-row:last-child { border-bottom: none; }
+    .calc-breakdown-row strong { color: rgba(255,255,255,0.9); }
+    .calc-fixed {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .calc-fixed-label {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 0.75rem;
+    }
+    .calc-fixed-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .calc-fixed-list li {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── EXPERIENCES TABLE ── */
+    .exp-section { margin-top: var(--space-xl); }
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+      margin-top: var(--space-lg);
+    }
+    .exp-item {
+      border: 1px solid var(--stone);
+      padding: 0.875rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      background: #fff;
+    }
+    .exp-item--free .exp-price { color: var(--green); }
+    .exp-price {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .exp-price em {
+      font-style: normal;
+      font-size: 0.75rem;
+      color: var(--slate);
+      font-weight: 400;
+      margin-left: 0.25rem;
+    }
+    .exp-name {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--slate);
+      line-height: 1.4;
+    }
+    .exp-source {
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      color: #bbb;
+      margin-top: 0.75rem;
+    }
+    .exp-source a { color: #aaa; text-decoration: underline; }
+
+    /* ── CONTEXT NOTE ── */
+    .costs-note {
+      background: var(--sky);
+      border: 1px solid var(--stone);
+      padding: 1.5rem 1.75rem;
+      margin-top: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--slate);
+      line-height: 1.65;
+    }
+    .costs-note strong { color: var(--dark); }
+
+    @media (max-width: 960px) {
+      .costs-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .calc-options { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-logo"><span class="logo-explore">Explore </span>Lori</a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/" class="active">Getting Here</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="costs-hero">
+    <div class="container">
+      <p class="hero-eyebrow" style="color:var(--ochre);margin-bottom:0.75rem;">Practical planning</p>
+      <h1>How much does Lori cost?</h1>
+      <p>Real prices from local guesthouses, markets, and activity providers. Adjust the options below to match how you travel.</p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="costs-body">
+    <div class="container">
+      <div class="costs-layout">
+
+        <!-- CALCULATOR -->
+        <div>
+          <div class="calc-card">
+
+            <!-- Accommodation -->
+            <div class="calc-section">
+              <div class="calc-section-head">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M2 9L9 2l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 7v8h3.5v-4h3v4H14V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="calc-section-title">Where you sleep</span>
+              </div>
+              <div class="calc-options" id="opt-accommodation">
+                <button class="calc-opt active" data-value="60000" data-label="Village room">
+                  <span class="calc-opt-name">Village room</span>
+                  <span class="calc-opt-desc">Long-term rental, basic but comfortable</span>
+                  <span class="calc-opt-price">~$150/mo</span>
+                </button>
+                <button class="calc-opt" data-value="105000" data-label="Guesthouse">
+                  <span class="calc-opt-name">Guesthouse</span>
+                  <span class="calc-opt-desc">Monthly rate negotiated on arrival</span>
+                  <span class="calc-opt-price">~$270/mo</span>
+                </button>
+                <button class="calc-opt" data-value="165000" data-label="B&amp;B / hotel">
+                  <span class="calc-opt-name">B&amp;B / hotel</span>
+                  <span class="calc-opt-desc">Paying nightly, full flexibility</span>
+                  <span class="calc-opt-price">~$425/mo</span>
+                </button>
+                <button class="calc-opt" data-value="270000" data-label="Boutique / unique">
+                  <span class="calc-opt-name">Boutique / unique</span>
+                  <span class="calc-opt-desc">Ethnoforma, glamping, design stays</span>
+                  <span class="calc-opt-price">~$690/mo</span>
+                </button>
+              </div>
+              <p class="calc-source">Van garden B&amp;B from 4,250 AMD/night · KarNel Hotel from 7,300 AMD/night · WOW Glamping from 24,000 AMD/night</p>
+            </div>
+
+            <!-- Food -->
+            <div class="calc-section">
+              <div class="calc-section-head">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M6 2v5a3 3 0 006 0V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 9v7M6 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span class="calc-section-title">How you eat</span>
+              </div>
+              <div class="calc-options" id="opt-food">
+                <button class="calc-opt active" data-value="32000" data-label="Self-catering">
+                  <span class="calc-opt-name">Self-catering</span>
+                  <span class="calc-opt-desc">Market shopping, cooking most meals</span>
+                  <span class="calc-opt-price">~$82/mo</span>
+                </button>
+                <button class="calc-opt" data-value="62000" data-label="Mixed">
+                  <span class="calc-opt-name">Mixed</span>
+                  <span class="calc-opt-desc">Cook at home + eat out a few times a week</span>
+                  <span class="calc-opt-price">~$159/mo</span>
+                </button>
+                <button class="calc-opt" data-value="105000" data-label="Mostly restaurants">
+                  <span class="calc-opt-name">Mostly restaurants</span>
+                  <span class="calc-opt-desc">Local places, occasional nicer dinner</span>
+                  <span class="calc-opt-price">~$270/mo</span>
+                </button>
+              </div>
+              <p class="calc-source">Bread 305 AMD · Eggs (12) 908 AMD · Chicken 1kg 2,666 AMD · Inexpensive meal 4,000 AMD · Mid restaurant for two 16,000 AMD</p>
+            </div>
+
+            <!-- Activities -->
+            <div class="calc-section">
+              <div class="calc-section-head">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 2l1.8 3.6L15 6.3l-3 2.9.7 4.1L9 11.4l-3.7 1.9.7-4.1-3-2.9 4.2-.7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                <span class="calc-section-title">How active you are</span>
+              </div>
+              <div class="calc-options" id="opt-activities">
+                <button class="calc-opt active" data-value="5000" data-label="Mostly free">
+                  <span class="calc-opt-name">Mostly free</span>
+                  <span class="calc-opt-desc">Hiking, monastery visits, village walks</span>
+                  <span class="calc-opt-price">~$13/mo</span>
+                </button>
+                <button class="calc-opt" data-value="28000" data-label="Light paid activities">
+                  <span class="calc-opt-name">Light paid activities</span>
+                  <span class="calc-opt-desc">Cave museum, occasional tour or workshop</span>
+                  <span class="calc-opt-price">~$72/mo</span>
+                </button>
+                <button class="calc-opt" data-value="65000" data-label="Active explorer">
+                  <span class="calc-opt-name">Active explorer</span>
+                  <span class="calc-opt-desc">Horse riding, masterclasses, guided tours weekly</span>
+                  <span class="calc-opt-price">~$167/mo</span>
+                </button>
+              </div>
+              <p class="calc-source">Walking tours 4,000–7,500 AMD · Horse riding 8,000–9,300 AMD · Cultural trips 5,000–15,000 AMD · Private monastery tour 48,600 AMD</p>
+            </div>
+
+            <!-- Transport -->
+            <div class="calc-section">
+              <div class="calc-section-head">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="6" width="14" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 14v2M13 14v2M2 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5 6V4a1 1 0 011-1h6a1 1 0 011 1v2" stroke="currentColor" stroke-width="1.5"/></svg>
+                <span class="calc-section-title">How you get around</span>
+              </div>
+              <div class="calc-options" id="opt-transport">
+                <button class="calc-opt active" data-value="8000" data-label="Marshrutka + walking">
+                  <span class="calc-opt-name">Marshrutka + walking</span>
+                  <span class="calc-opt-desc">Local minibuses between towns, walk the rest</span>
+                  <span class="calc-opt-price">~$21/mo</span>
+                </button>
+                <button class="calc-opt" data-value="22000" data-label="Mix of taxi + bus">
+                  <span class="calc-opt-name">Mix of taxi + bus</span>
+                  <span class="calc-opt-desc">Occasional taxi for more remote spots</span>
+                  <span class="calc-opt-price">~$56/mo</span>
+                </button>
+                <button class="calc-opt" data-value="55000" data-label="Rental car">
+                  <span class="calc-opt-name">Rental car</span>
+                  <span class="calc-opt-desc">Full freedom, reach any village or trail</span>
+                  <span class="calc-opt-price">~$141/mo</span>
+                </button>
+              </div>
+              <p class="calc-source">Taxi 142 AMD/km · Local bus 150 AMD · Fuel 516 AMD/litre · Yerevan–Vanadzor marshrutka ~2,500 AMD</p>
+            </div>
+
+            <!-- Result -->
+            <div class="calc-result">
+              <p class="calc-result-label">Estimated monthly cost</p>
+              <p class="calc-result-total"><span id="result-usd">$266</span></p>
+              <p class="calc-result-amd" id="result-amd">103,700 AMD</p>
+              <div class="calc-breakdown" id="result-breakdown"></div>
+              <div class="calc-fixed">
+                <p class="calc-fixed-label">Plus fixed costs (~$46/mo)</p>
+                <ul class="calc-fixed-list">
+                  <li><span>SIM card + data</span><span>~$15</span></li>
+                  <li><span>Internet (if apartment)</span><span>~$19</span></li>
+                  <li><span>Toiletries &amp; misc</span><span>~$26</span></li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /.calc-card -->
+
+          <!-- Context note -->
+          <div class="costs-note">
+            <p><strong>Lori vs Yerevan:</strong> Prices here are 30–50% lower than the capital. A 1-bedroom apartment in central Yerevan runs 255,000 AMD/month — in Vanadzor or a Lori village you can rent a whole house for 60,000–80,000 AMD.</p>
+            <p>All prices are estimates based on publicly available data. Summer (June–August) sees higher accommodation rates near Haghpat and Sanahin. 1 USD ≈ 390 AMD (March 2026).</p>
+          </div>
+
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:var(--space-md);">
+            <a href="/plan/" class="btn btn-primary">Plan your trip</a>
+            <a href="/about/" class="btn btn-outline">About the project</a>
+          </div>
+
+        </div><!-- /left col -->
+
+        <!-- EXPERIENCES SIDEBAR -->
+        <aside>
+          <h3 style="font-family:var(--font-serif);color:var(--green);margin-bottom:0.25rem;">What your money buys</h3>
+          <p style="font-family:var(--font-sans);font-size:0.875rem;color:var(--slate);margin-bottom:1.25rem;">Real prices from local activity providers</p>
+
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <div class="exp-item exp-item--free">
+              <span class="exp-price">Free</span>
+              <span class="exp-name">Most monastery visits, hiking trails, village walks</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">1,000 AMD <em>~$2.60</em></span>
+              <span class="exp-name">Mendz Er cave museum, Alaverdi</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">2,000 AMD <em>~$5</em></span>
+              <span class="exp-name">Vodka distillation masterclass, Odzun B&amp;B</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">4,000 AMD <em>~$10</em></span>
+              <span class="exp-name">Walk to Tumanyan's area — 6H guided</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">5,000 AMD <em>~$13</em></span>
+              <span class="exp-name">Trip to Arevatsag Canyon from Dsegh — 6H</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">5,000 AMD <em>~$13</em></span>
+              <span class="exp-name">Cultural trip Horomayr–Kobayr monasteries</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">6,000 AMD <em>~$15</em></span>
+              <span class="exp-name">Shared transfer Yerevan–Lori–Yerevan</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">7,500 AMD <em>~$19</em></span>
+              <span class="exp-name">Walk Sanahin–Akner–Kayan Fortress–Haghpat</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">8,000 AMD <em>~$21</em></span>
+              <span class="exp-name">Horse riding to Ardvi — 2H</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">9,300 AMD <em>~$24</em></span>
+              <span class="exp-name">Horseback on historical roads of Lori — 5H</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">15,000 AMD <em>~$38</em></span>
+              <span class="exp-name">Bread making masterclass, Haghpat village</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">25,000 AMD <em>~$64</em></span>
+              <span class="exp-name">Lori to Tavush with Roland Tmoyan — 10H</span>
+            </div>
+            <div class="exp-item">
+              <span class="exp-price">48,600 AMD <em>~$125</em></span>
+              <span class="exp-name">Private tour: Sanahin + Haghpat — full day</span>
+            </div>
+          </div>
+          <p class="exp-source" style="margin-top:0.75rem;">1 USD ≈ 390 AMD · March 2026</p>
+        </aside>
+
+      </div><!-- /.costs-layout -->
+    </div><!-- /.container -->
+  </div><!-- /.costs-body -->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <p class="footer-brand">Explore Lori</p>
+        <p style="margin-top:0.75rem;font-size:0.875rem;color:rgba(255,255,255,0.55);max-width:260px;">
+          Independent editorial platform for Lori Province, Northern Armenia.
+        </p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="/stories/">The Chronicle</a>
+        <a href="/discover/">The Map</a>
+        <a href="/plan/">Getting Here</a>
+        <a href="/costs/">Cost Calculator</a>
+        <a href="/events/">Regional Briefings</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+    <div class="container footer-copy">
+      <p>&copy; 2026 Explore Lori. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    var RATE = 390;
+    var state = {
+      accommodation: 60000,
+      food: 32000,
+      activities: 5000,
+      transport: 8000
+    };
+    var LABELS = {
+      accommodation: 'Accommodation',
+      food: 'Food',
+      activities: 'Activities',
+      transport: 'Transport'
+    };
+
+    function updateResult() {
+      var total = Object.keys(state).reduce(function(sum, k) { return sum + state[k]; }, 0);
+      var usd = Math.round(total / RATE);
+      document.getElementById('result-usd').textContent = '$' + usd.toLocaleString();
+      document.getElementById('result-amd').textContent = total.toLocaleString() + ' AMD';
+      document.getElementById('result-breakdown').innerHTML = Object.keys(state).map(function(k) {
+        var u = Math.round(state[k] / RATE);
+        return '<div class="calc-breakdown-row"><span>' + LABELS[k] + '</span><strong>$' + u + '</strong></div>';
+      }).join('');
+    }
+
+    document.querySelectorAll('.calc-options').forEach(function(group) {
+      group.querySelectorAll('.calc-opt').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var section = group.id.replace('opt-', '');
+          group.querySelectorAll('.calc-opt').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          state[section] = parseInt(btn.dataset.value, 10);
+          updateResult();
+        });
+      });
+    });
+
+    updateResult();
+  })();
+  </script>
+</body>
+</html>
