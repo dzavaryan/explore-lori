@@ -197,7 +197,7 @@
       padding-top: 0.75rem;
       border-top: 1px solid var(--stone);
     }
-    .view-link {
+    .event-type-tag {
       font-family: var(--font-sans);
       font-size: 0.75rem;
       font-weight: 700;
@@ -240,6 +240,7 @@
         <a href="/plan/">Getting Here</a>
         <a href="/events/" class="active">Regional Briefings</a>
         <a href="/about/">About</a>
+        <a href="/costs/">Cost Calculator</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -492,7 +493,7 @@
           '<p class="event-location">' + escHtml(ev.location) + '</p>' +
           '<p class="event-excerpt">' + escHtml(ev.excerpt) + '</p>' +
           '<div class="event-card-footer">' +
-            '<span class="view-link">View details \u2192</span>' +
+            '<span class="event-type-tag">' + escHtml(capFirst(ev.type)) + '</span>' +
           '</div>' +
         '</div>' +
       '</div>';
