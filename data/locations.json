@@ -10,7 +10,7 @@
     "lon": 44.7028,
     "micro_season": "Late October dawn",
     "hook": "At first light the gavit oculus throws amber geometry across a ninth-century khachkar, a spectacle that lasts exactly eleven minutes. Outside, chestnuts are still smoking from the village braziers.",
-    "read_more": "/stories/haghpat-light/"
+    "read_more": "/story/?slug=haghpat-khachkar"
   },
   {
     "id": "sanahin-monastery",
@@ -23,7 +23,7 @@
     "lon": 44.6983,
     "micro_season": "Spring melt, late March",
     "hook": "Sanahin sits on a plateau edge where snowmelt still races through the churchyard drains in March. The paired churches face each other across a courtyard that smells of wet tuff and old beeswax.",
-    "read_more": "/stories/sanahin-paired-churches/"
+    "read_more": "/story/?slug=sanahin-haghpat-path"
   },
   {
     "id": "sanahin-bridge",
@@ -36,7 +36,7 @@
     "lon": 44.7012,
     "micro_season": "Winter low-water, January",
     "hook": "The single-arch bridge built in 1192 by Queen Vaneni still carries pedestrians over the Debed. In winter, low water exposes the rosette carvings on the downstream face invisible at any other season.",
-    "read_more": "/stories/sanahin-bridge/"
+    "read_more": "/story/?slug=sanahin-bridge-problem"
   },
   {
     "id": "coaf-smart-center",
@@ -49,7 +49,7 @@
     "lon": 44.6234,
     "micro_season": "Year-round",
     "hook": "A precision-built innovation hub in Debet village, where children from eleven highland settlements converge for robotics and music. The building is the most architectural object within forty kilometres of tuff and corrugated iron.",
-    "read_more": "/stories/coaf-smart-center/"
+    "read_more": "/stories/"
   },
   {
     "id": "akner-barn-stage",
@@ -62,7 +62,7 @@
     "lon": 44.5789,
     "micro_season": "July festival week",
     "hook": "A renovated stone cattle barn at 1,700 metres becomes a chamber-music hall every July. The acoustics are ruthlessly intimate — every slide of a bow on gut string is audible from the back wall.",
-    "read_more": "/stories/akner-barn-stage/"
+    "read_more": "/story/?slug=akner-barn-stage"
   },
   {
     "id": "lori-berd-fortress",
@@ -75,7 +75,7 @@
     "lon": 44.5500,
     "micro_season": "Autumn, October–November",
     "hook": "The eleventh-century fortress occupies a spur above the confluence of the Pambak and Dzoraget rivers. In autumn the hornbeam below turns cadmium yellow and frames the ruined ramparts from the canyon road.",
-    "read_more": "/stories/lori-berd/"
+    "read_more": "/stories/"
   },
   {
     "id": "dzoraget-canyon",
@@ -88,7 +88,7 @@
     "lon": 44.5300,
     "micro_season": "Spring flood, April",
     "hook": "The Dzoraget drops 600 metres in eight kilometres, carving basalt walls that turn the water grey-green in April flood. The canyon rim path smells of wild garlic and cold spray.",
-    "read_more": "/stories/dzoraget-canyon/"
+    "read_more": "/stories/"
   },
   {
     "id": "alaverdi-copper-smelter",
@@ -101,7 +101,7 @@
     "lon": 44.6667,
     "micro_season": "Summer evening light",
     "hook": "The Soviets built the smelter chimney to exhaust over the ridge; it still dominates the gorge skyline. On summer evenings the canyon walls oxidise green where decades of copper-laden run-off has stained the basalt.",
-    "read_more": "/stories/alaverdi-copper/"
+    "read_more": "/story/?slug=alaverdi-copper"
   },
   {
     "id": "pambak-beehive-meadows",
@@ -114,7 +114,7 @@
     "lon": 44.7900,
     "micro_season": "Mid-June wildflower peak",
     "hook": "At 2,100 metres the sub-alpine meadows hum with Caucasian honey bees working clover and thyme. Beekeepers from Stepanavan arrive in June to stack white boxes along the tree line — the honey is floral and faintly resinous.",
-    "read_more": "/stories/pambak-bees/"
+    "read_more": "/story/?slug=pambak-honey-map"
   },
   {
     "id": "stepanavan-dendropark",
@@ -127,7 +127,7 @@
     "lon": 44.3878,
     "micro_season": "Late May canopy flush",
     "hook": "Founded in 1931, the 35-hectare dendropark contains 170 tree species from five continents. In late May the canopy produces overlapping shades of green that have no single English name.",
-    "read_more": "/stories/stepanavan-dendropark/"
+    "read_more": "/stories/"
   },
   {
     "id": "pushkin-pass",
@@ -140,7 +140,7 @@
     "lon": 44.4000,
     "micro_season": "Late May reopening",
     "hook": "The 2,038-metre pass on the Stepanavan–Vanadzor road typically reopens in late May. The roadside is buried under two metres of compacted snow until April; the melt smells of raw earth and last year's grass.",
-    "read_more": "/stories/pushkin-pass/"
+    "read_more": "/stories/"
   },
   {
     "id": "spitak-memorial-church",
@@ -153,6 +153,6 @@
     "lon": 44.2650,
     "micro_season": "December 7th anniversary",
     "hook": "Built on the epicentre of the 1988 earthquake that killed 25,000 people, the white tuff church smells of fresh-cut stone and old incense. The surrounding town is still visibly mid-reconstruction, three decades on.",
-    "read_more": "/stories/spitak-memorial/"
+    "read_more": "/stories/"
   }
 ]

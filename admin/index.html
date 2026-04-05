@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Explore Lori</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/leaflet.css">
+  <link rel="stylesheet" href="admin.css?v=6">
+</head>
+<body class="admin-body">
+
+  <div class="admin-layout">
+
+    <!-- ── Sidebar ───────────────────────────────────── -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <span class="admin-brand-name">Explore Lori</span>
+        <span class="admin-brand-sub">Content Admin</span>
+        <span class="admin-version-badge">v1.01</span>
+      </div>
+
+      <nav class="admin-nav" id="admin-nav">
+        <a href="#" class="admin-nav-link active" data-section="dashboard">
+          <span class="admin-nav-icon">◈</span> Dashboard
+        </a>
+        <a href="#" class="admin-nav-link" data-section="stories">
+          <span class="admin-nav-icon">📖</span> Stories
+        </a>
+        <a href="#" class="admin-nav-link" data-section="events">
+          <span class="admin-nav-icon">📅</span> Events
+        </a>
+        <a href="#" class="admin-nav-link" data-section="locations">
+          <span class="admin-nav-icon">🗺</span> Locations
+        </a>
+        <a href="#" class="admin-nav-link" data-section="photos">
+          <span class="admin-nav-icon">📷</span> Photos
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <button class="admin-btn admin-btn-outline" id="btn-save-version">
+          Save Version
+        </button>
+        <button class="admin-btn admin-btn-primary" id="btn-deploy">
+          Deploy to Netlify
+        </button>
+        <a href="/" target="_blank" style="display:block;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:0.5rem;text-decoration:none;">
+          View site ↗
+        </a>
+      </div>
+    </aside>
+
+    <!-- ── Main content area ─────────────────────────── -->
+    <main class="admin-main" id="admin-main">
+      <!-- Rendered by admin.js -->
+    </main>
+
+  </div>
+
+  <!-- ── Toast container ───────────────────────────────── -->
+  <div class="admin-toast-container" id="toast-container"></div>
+
+  <!-- ── Spinner overlay ───────────────────────────────── -->
+  <div class="admin-spinner-overlay" id="spinner-overlay" style="display:none">
+    <div class="admin-spinner"></div>
+    <div class="admin-spinner-msg"></div>
+  </div>
+
+  <script src="/js/leaflet.js"></script>
+  <script src="admin.js?v=8"></script>
+</body>
+</html>
