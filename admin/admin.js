@@ -29,6 +29,9 @@
     locations:[],
     pillars:  [],
     images:   [],
+    nav:      null,   // nav.json data
+    pages:    null,   // pages.json data
+    navPageTab: 'about', // active tab in pages editor
     rootHandle: null,     // FileSystemDirectoryHandle
     editing:  null,       // { type, item }
     deployId: null,
@@ -121,6 +124,13 @@
     } catch(e) {
       toast('Failed to load data: ' + e.message, 'error');
     }
+    // Nav + pages JSON
+    try {
+      S.nav = await fetch('/data/nav.json').then(function(r){ return r.ok ? r.json() : null; });
+    } catch(e) { S.nav = null; }
+    try {
+      S.pages = await fetch('/data/pages.json').then(function(r){ return r.ok ? r.json() : null; });
+    } catch(e) { S.pages = null; }
     // Images endpoint only available when running start-admin.py
     try {
       S.images = await fetch('/api/images').then(r => {
@@ -808,6 +818,8 @@
     else if (sec === 'locations' && !ed) { main.innerHTML = locationsListHtml(); bindLocationsList(); }
     else if (sec === 'locations' && ed)  { main.innerHTML = locationEditHtml(ed.item); bindLocationEdit(); }
     else if (sec === 'photos')           { main.innerHTML = photosHtml(); bindPhotos(); }
+    else if (sec === 'nav')              { main.innerHTML = navEditorHtml(); bindNavEditor(); }
+    else if (sec === 'pages')            { main.innerHTML = pagesEditorHtml(); bindPagesEditor(); }
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -1967,6 +1979,314 @@
       + (hint ? '<small style="font-size:0.75rem;color:#6B7A8A">' + hint + '</small>' : '')
       + '</div>';
   }
+
+  // ═══════════════════════════════════════════════════════════
+  // NAV EDITOR
+  // ═══════════════════════════════════════════════════════════
+
+  function defaultNav() {
+    return {
+      site_name: 'Explore Lori',
+      tagline: 'Independent editorial platform for Lori Province, Northern Armenia.',
+      contact_email: 'hello@explorelori.com',
+      links: [
+        { label: 'The Chronicle',      href: '/stories/', footer: true },
+        { label: 'The Map',            href: '/discover/', footer: true },
+        { label: 'Getting Here',       href: '/plan/',    footer: true },
+        { label: 'Regional Briefings', href: '/events/',  footer: true },
+        { label: 'About',              href: '/about/',   footer: true },
+        { label: 'Cost Calculator',    href: '/costs/',   footer: true }
+      ]
+    };
+  }
+
+  function navEditorHtml() {
+    var nav = S.nav || defaultNav();
+    var rows = nav.links.map(function(link, i) {
+      var last = i === nav.links.length - 1;
+      return '<tr class="nav-link-row" data-idx="' + i + '" draggable="true">'
+        + '<td class="nav-drag-handle" title="Drag to reorder">⠿</td>'
+        + '<td><input class="admin-input nav-label-input" value="' + esc(link.label) + '" placeholder="Label"></td>'
+        + '<td><input class="admin-input nav-href-input" value="' + esc(link.href) + '" placeholder="/path/"></td>'
+        + '<td class="nav-footer-cell">'
+        +   '<label class="admin-toggle-label">'
+        +   '<input type="checkbox" class="nav-footer-check"' + (link.footer !== false ? ' checked' : '') + '>'
+        +   '<span class="admin-toggle-track"><span class="admin-toggle-thumb"></span></span>'
+        +   '</label>'
+        + '</td>'
+        + '<td class="nav-order-cell">'
+        +   '<button class="admin-btn admin-btn-xs nav-up" data-idx="' + i + '"' + (i === 0 ? ' disabled' : '') + '>↑</button>'
+        +   '<button class="admin-btn admin-btn-xs nav-dn" data-idx="' + i + '"' + (last ? ' disabled' : '') + '>↓</button>'
+        + '</td>'
+        + '<td><button class="admin-btn admin-btn-xs admin-btn-danger nav-del" data-idx="' + i + '">✕</button></td>'
+        + '</tr>';
+    }).join('');
+
+    return '<div class="admin-section">'
+      + '<div class="admin-section-header">'
+      + '<h1 class="admin-section-title">Navigation</h1>'
+      + '<button class="admin-btn admin-btn-primary admin-btn-sm" id="btn-nav-save">Save Changes</button>'
+      + '</div>'
+      + '<p style="font-size:0.875rem;color:#6B7A8A;margin-bottom:1.5rem">Edit the site navigation links. Changes take effect after Deploy.</p>'
+
+      + '<div class="admin-form" style="margin-bottom:1.5rem">'
+      + '<div class="admin-form-grid">'
+      + '<div class="admin-field">' + lbl('Site Name') + '<input class="admin-input" id="nav-site-name" value="' + esc(nav.site_name || '') + '"></div>'
+      + '<div class="admin-field">' + lbl('Contact Email') + '<input class="admin-input" id="nav-contact-email" value="' + esc(nav.contact_email || '') + '"></div>'
+      + '</div>'
+      + '<div class="admin-field admin-form-full">' + lbl('Footer Tagline') + '<input class="admin-input" id="nav-tagline" value="' + esc(nav.tagline || '') + '"></div>'
+      + '</div>'
+
+      + '<div class="admin-table-wrap">'
+      + '<table class="admin-table nav-links-table" id="nav-links-table">'
+      + '<thead><tr>'
+      + '<th style="width:36px"></th>'
+      + '<th>Label</th>'
+      + '<th>URL</th>'
+      + '<th style="width:80px">In Footer</th>'
+      + '<th style="width:72px">Order</th>'
+      + '<th style="width:40px"></th>'
+      + '</tr></thead>'
+      + '<tbody id="nav-link-rows">' + rows + '</tbody>'
+      + '</table>'
+      + '</div>'
+
+      + '<div style="margin-top:1rem">'
+      + '<button class="admin-btn admin-btn-outline admin-btn-sm" id="btn-nav-add">+ Add Link</button>'
+      + '</div>'
+      + '</div>';
+  }
+
+  function readNavFromForm() {
+    var nav = S.nav ? JSON.parse(JSON.stringify(S.nav)) : defaultNav();
+    nav.site_name     = ($id('nav-site-name')     || {}).value || nav.site_name;
+    nav.tagline       = ($id('nav-tagline')        || {}).value || nav.tagline;
+    nav.contact_email = ($id('nav-contact-email')  || {}).value || nav.contact_email;
+
+    var rows = document.querySelectorAll('#nav-link-rows .nav-link-row');
+    nav.links = [];
+    rows.forEach(function(row) {
+      nav.links.push({
+        label:  row.querySelector('.nav-label-input').value,
+        href:   row.querySelector('.nav-href-input').value,
+        footer: row.querySelector('.nav-footer-check').checked
+      });
+    });
+    return nav;
+  }
+
+  function bindNavEditor() {
+    // Save
+    var btnSave = $id('btn-nav-save');
+    if (btnSave) btnSave.addEventListener('click', async function() {
+      var nav = readNavFromForm();
+      S.nav = nav;
+      try {
+        await writeJSON('data/nav.json', nav);
+        toast('Navigation saved', 'success');
+      } catch(e) {
+        toast('Save failed: ' + e.message, 'error');
+      }
+    });
+
+    // Add link
+    var btnAdd = $id('btn-nav-add');
+    if (btnAdd) btnAdd.addEventListener('click', function() {
+      var nav = readNavFromForm();
+      nav.links.push({ label: 'New Link', href: '/', footer: true });
+      S.nav = nav;
+      render();
+    });
+
+    // Up / Down / Delete (event delegation on tbody)
+    var tbody = $id('nav-link-rows');
+    if (tbody) {
+      tbody.addEventListener('click', function(e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        var nav = readNavFromForm();
+        var idx = parseInt(btn.dataset.idx, 10);
+
+        if (btn.classList.contains('nav-up') && idx > 0) {
+          var tmp = nav.links[idx]; nav.links[idx] = nav.links[idx-1]; nav.links[idx-1] = tmp;
+          S.nav = nav; render(); return;
+        }
+        if (btn.classList.contains('nav-dn') && idx < nav.links.length - 1) {
+          var tmp2 = nav.links[idx]; nav.links[idx] = nav.links[idx+1]; nav.links[idx+1] = tmp2;
+          S.nav = nav; render(); return;
+        }
+        if (btn.classList.contains('nav-del')) {
+          if (!confirm('Remove "' + nav.links[idx].label + '"?')) return;
+          nav.links.splice(idx, 1);
+          S.nav = nav; render(); return;
+        }
+      });
+
+      // Drag-and-drop reorder
+      var dragSrc = null;
+      tbody.addEventListener('dragstart', function(e) {
+        dragSrc = e.target.closest('tr');
+        dragSrc.classList.add('nav-dragging');
+      });
+      tbody.addEventListener('dragend', function() {
+        if (dragSrc) dragSrc.classList.remove('nav-dragging');
+        dragSrc = null;
+        document.querySelectorAll('.nav-link-row').forEach(function(r){ r.classList.remove('nav-drag-over'); });
+      });
+      tbody.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        var target = e.target.closest('tr');
+        if (!target || target === dragSrc) return;
+        document.querySelectorAll('.nav-link-row').forEach(function(r){ r.classList.remove('nav-drag-over'); });
+        target.classList.add('nav-drag-over');
+      });
+      tbody.addEventListener('drop', function(e) {
+        e.preventDefault();
+        var target = e.target.closest('tr');
+        if (!target || target === dragSrc) return;
+        var nav = readNavFromForm();
+        var fromIdx = parseInt(dragSrc.dataset.idx, 10);
+        var toIdx   = parseInt(target.dataset.idx, 10);
+        var moved = nav.links.splice(fromIdx, 1)[0];
+        nav.links.splice(toIdx, 0, moved);
+        S.nav = nav; render();
+      });
+    }
+  }
+
+
+  // ═══════════════════════════════════════════════════════════
+  // PAGES EDITOR
+  // ═══════════════════════════════════════════════════════════
+
+  function defaultPages() {
+    return {
+      about: { hero_title:'About Explore Lori', hero_sub:'', manifesto_heading:'', manifesto_paragraphs:['','',''], contact_heading:'Get in touch', contact_body:'', contact_corrections:'' },
+      plan:  { hero_title:'Getting Here', hero_sub:'', routes_heading:'How to arrive', routes_sub:'', entry_heading:'Key entry points', entry_sub:'' },
+      costs: { hero_title:'Cost Calculator', hero_sub:'', intro:'' }
+    };
+  }
+
+  function pagesEditorHtml() {
+    var pg    = S.pages || defaultPages();
+    var tab   = S.navPageTab || 'about';
+    var tabs  = [['about','About'],['plan','Plan'],['costs','Costs']];
+
+    var tabBar = tabs.map(function(t) {
+      return '<button class="admin-tab-btn' + (tab === t[0] ? ' active' : '') + '" data-tab="' + t[0] + '">' + t[1] + '</button>';
+    }).join('');
+
+    var content = '';
+    if (tab === 'about') {
+      var a = pg.about || {};
+      var paras = a.manifesto_paragraphs || ['','',''];
+      content = '<div class="admin-form">'
+        + '<div class="admin-form-grid">'
+        + '<div class="admin-field">' + lbl('Hero Title') + '<input class="admin-input" id="pg-about-hero-title" value="' + esc(a.hero_title||'') + '"></div>'
+        + '<div class="admin-field admin-form-full">' + lbl('Hero Subtitle') + '<input class="admin-input" id="pg-about-hero-sub" value="' + esc(a.hero_sub||'') + '"></div>'
+        + '</div>'
+        + '<div class="admin-field">' + lbl('Manifesto Heading') + '<input class="admin-input" id="pg-about-mani-h" value="' + esc(a.manifesto_heading||'') + '"></div>'
+        + '<div class="admin-field">' + lbl('Manifesto — Paragraph 1') + '<textarea class="admin-textarea" id="pg-about-mani-p1" rows="4">' + esc(paras[0]||'') + '</textarea></div>'
+        + '<div class="admin-field">' + lbl('Manifesto — Paragraph 2') + '<textarea class="admin-textarea" id="pg-about-mani-p2" rows="4">' + esc(paras[1]||'') + '</textarea></div>'
+        + '<div class="admin-field">' + lbl('Manifesto — Paragraph 3') + '<textarea class="admin-textarea" id="pg-about-mani-p3" rows="4">' + esc(paras[2]||'') + '</textarea></div>'
+        + '<div class="admin-form-grid">'
+        + '<div class="admin-field">' + lbl('Contact Heading') + '<input class="admin-input" id="pg-about-cth" value="' + esc(a.contact_heading||'') + '"></div>'
+        + '<div class="admin-field">' + lbl('Contact Body') + '<textarea class="admin-textarea" id="pg-about-ctb" rows="3">' + esc(a.contact_body||'') + '</textarea></div>'
+        + '<div class="admin-field admin-form-full">' + lbl('Corrections Note') + '<textarea class="admin-textarea" id="pg-about-ctc" rows="2">' + esc(a.contact_corrections||'') + '</textarea></div>'
+        + '</div>'
+        + '</div>';
+    } else if (tab === 'plan') {
+      var p = pg.plan || {};
+      content = '<div class="admin-form">'
+        + '<div class="admin-form-grid">'
+        + '<div class="admin-field">' + lbl('Hero Title') + '<input class="admin-input" id="pg-plan-title" value="' + esc(p.hero_title||'') + '"></div>'
+        + '<div class="admin-field admin-form-full">' + lbl('Hero Subtitle') + '<textarea class="admin-textarea" id="pg-plan-sub" rows="2">' + esc(p.hero_sub||'') + '</textarea></div>'
+        + '<div class="admin-field">' + lbl('Routes Section Heading') + '<input class="admin-input" id="pg-plan-rh" value="' + esc(p.routes_heading||'') + '"></div>'
+        + '<div class="admin-field">' + lbl('Routes Section Subtitle') + '<input class="admin-input" id="pg-plan-rs" value="' + esc(p.routes_sub||'') + '"></div>'
+        + '<div class="admin-field">' + lbl('Entry Points Heading') + '<input class="admin-input" id="pg-plan-eh" value="' + esc(p.entry_heading||'') + '"></div>'
+        + '<div class="admin-field">' + lbl('Entry Points Subtitle') + '<input class="admin-input" id="pg-plan-es" value="' + esc(p.entry_sub||'') + '"></div>'
+        + '</div>'
+        + '</div>';
+    } else if (tab === 'costs') {
+      var c = pg.costs || {};
+      content = '<div class="admin-form">'
+        + '<div class="admin-form-grid">'
+        + '<div class="admin-field">' + lbl('Hero Title') + '<input class="admin-input" id="pg-costs-title" value="' + esc(c.hero_title||'') + '"></div>'
+        + '<div class="admin-field admin-form-full">' + lbl('Hero Subtitle') + '<textarea class="admin-textarea" id="pg-costs-sub" rows="2">' + esc(c.hero_sub||'') + '</textarea></div>'
+        + '<div class="admin-field admin-form-full">' + lbl('Intro Text') + '<textarea class="admin-textarea" id="pg-costs-intro" rows="3">' + esc(c.intro||'') + '</textarea></div>'
+        + '</div>'
+        + '</div>';
+    }
+
+    return '<div class="admin-section">'
+      + '<div class="admin-section-header">'
+      + '<h1 class="admin-section-title">Pages</h1>'
+      + '<button class="admin-btn admin-btn-primary admin-btn-sm" id="btn-pages-save">Save Changes</button>'
+      + '</div>'
+      + '<p style="font-size:0.875rem;color:#6B7A8A;margin-bottom:1.5rem">Edit editorial content for the About, Plan, and Costs pages. Changes take effect after Deploy.</p>'
+      + '<div class="admin-tab-bar">' + tabBar + '</div>'
+      + '<div class="admin-tab-content">' + content + '</div>'
+      + '</div>';
+  }
+
+  function readPagesFromForm() {
+    var pg = S.pages ? JSON.parse(JSON.stringify(S.pages)) : defaultPages();
+    var tab = S.navPageTab || 'about';
+
+    if (tab === 'about') {
+      pg.about = pg.about || {};
+      pg.about.hero_title          = ($id('pg-about-hero-title') || {}).value || '';
+      pg.about.hero_sub            = ($id('pg-about-hero-sub')   || {}).value || '';
+      pg.about.manifesto_heading   = ($id('pg-about-mani-h')     || {}).value || '';
+      pg.about.manifesto_paragraphs = [
+        ($id('pg-about-mani-p1') || {}).value || '',
+        ($id('pg-about-mani-p2') || {}).value || '',
+        ($id('pg-about-mani-p3') || {}).value || ''
+      ];
+      pg.about.contact_heading     = ($id('pg-about-cth') || {}).value || '';
+      pg.about.contact_body        = ($id('pg-about-ctb') || {}).value || '';
+      pg.about.contact_corrections = ($id('pg-about-ctc') || {}).value || '';
+    } else if (tab === 'plan') {
+      pg.plan = pg.plan || {};
+      pg.plan.hero_title      = ($id('pg-plan-title') || {}).value || '';
+      pg.plan.hero_sub        = ($id('pg-plan-sub')   || {}).value || '';
+      pg.plan.routes_heading  = ($id('pg-plan-rh')    || {}).value || '';
+      pg.plan.routes_sub      = ($id('pg-plan-rs')    || {}).value || '';
+      pg.plan.entry_heading   = ($id('pg-plan-eh')    || {}).value || '';
+      pg.plan.entry_sub       = ($id('pg-plan-es')    || {}).value || '';
+    } else if (tab === 'costs') {
+      pg.costs = pg.costs || {};
+      pg.costs.hero_title = ($id('pg-costs-title') || {}).value || '';
+      pg.costs.hero_sub   = ($id('pg-costs-sub')   || {}).value || '';
+      pg.costs.intro      = ($id('pg-costs-intro') || {}).value || '';
+    }
+    return pg;
+  }
+
+  function bindPagesEditor() {
+    // Tab switching (persist form state first)
+    document.querySelectorAll('.admin-tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        S.pages = readPagesFromForm();
+        S.navPageTab = btn.dataset.tab;
+        render();
+      });
+    });
+
+    // Save
+    var btnSave = $id('btn-pages-save');
+    if (btnSave) btnSave.addEventListener('click', async function() {
+      var pg = readPagesFromForm();
+      S.pages = pg;
+      try {
+        await writeJSON('data/pages.json', pg);
+        toast('Pages saved', 'success');
+      } catch(e) {
+        toast('Save failed: ' + e.message, 'error');
+      }
+    });
+  }
+
 
   // ── Init ──────────────────────────────────────────────────────
   async function init() {

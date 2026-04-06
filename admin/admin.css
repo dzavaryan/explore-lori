@@ -927,3 +927,89 @@ body.admin-body {
   justify-content: center;
   line-height: 1;
 }
+
+/* ── Sidebar divider ──────────────────────────────────────── */
+.admin-nav-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 0.5rem 1rem;
+}
+
+/* ── Tab bar (pages editor) ───────────────────────────────── */
+.admin-tab-bar {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 2px solid #E0D8CE;
+  margin-bottom: 1.5rem;
+}
+.admin-tab-btn {
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6B7A8A;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.admin-tab-btn:hover { color: #2C3340; }
+.admin-tab-btn.active { color: #B8943A; border-bottom-color: #B8943A; }
+.admin-tab-content { padding-top: 0.25rem; }
+
+/* ── Nav editor table ─────────────────────────────────────── */
+.nav-links-table .nav-drag-handle {
+  cursor: grab;
+  color: #aaa;
+  font-size: 1.1rem;
+  text-align: center;
+  user-select: none;
+}
+.nav-links-table .nav-drag-handle:active { cursor: grabbing; }
+.nav-links-table .nav-footer-cell { text-align: center; }
+.nav-links-table .nav-order-cell  { white-space: nowrap; }
+.nav-links-table .nav-order-cell .admin-btn + .admin-btn { margin-left: 2px; }
+.nav-link-row.nav-dragging { opacity: 0.4; }
+.nav-link-row.nav-drag-over > td { background: #f3ede2 !important; }
+
+/* ── Toggle switch ────────────────────────────────────────── */
+.admin-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+.admin-toggle-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.admin-toggle-track {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 10px;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.admin-toggle-label input:checked + .admin-toggle-track {
+  background: #B8943A;
+}
+.admin-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: left 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.admin-toggle-label input:checked + .admin-toggle-track .admin-toggle-thumb {
+  left: 18px;
+}
