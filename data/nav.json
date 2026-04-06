@@ -1,0 +1,13 @@
+{
+  "site_name": "Explore Lori",
+  "tagline": "Independent editorial platform for Lori Province, Northern Armenia.",
+  "contact_email": "hello@explorelori.com",
+  "links": [
+    { "label": "The Chronicle",       "href": "/stories/", "footer": true  },
+    { "label": "The Map",             "href": "/discover/", "footer": true  },
+    { "label": "Getting Here",        "href": "/plan/",    "footer": true  },
+    { "label": "Regional Briefings",  "href": "/events/",  "footer": true  },
+    { "label": "About",               "href": "/about/",   "footer": true  },
+    { "label": "Cost Calculator",     "href": "/costs/",   "footer": true  }
+  ]
+}

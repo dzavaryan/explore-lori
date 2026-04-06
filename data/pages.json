@@ -1,0 +1,29 @@
+{
+  "about": {
+    "hero_title": "About Explore Lori",
+    "hero_sub": "An independent editorial platform for Lori Province, Northern Armenia — built to last as long as the monasteries.",
+    "manifesto_heading": "An independent eye on the north",
+    "manifesto_paragraphs": [
+      "Lori Province is the least-documented corner of the South Caucasus. Twelve circuits of gorge, plateau, and forest hold medieval monasteries, Soviet-era copper towns, and villages where the 9th century and the 21st century exist in the same afternoon. Almost none of it has been written about with the care it deserves.",
+      "Explore Lori was founded on a single premise: that a place this complex deserves long-form attention. Not listicles. Not hotel recommendations. Long reads, photography essays, field notes, and reportage — written by people who have spent enough time in the gorge to notice when the light changes direction at noon.",
+      "Everything published here is original, independently reported, and seasonally timed. We do not accept press trips, sponsored content, or destination marketing. The work is editorially independent and always will be."
+    ],
+    "manifesto_image_alt": "Debed River gorge, early morning",
+    "contact_heading": "Get in touch",
+    "contact_body": "For story pitches, photography proposals, partnership enquiries, or corrections — we read everything and reply to most things.",
+    "contact_corrections": "For urgent corrections to published stories, please include the URL in your message."
+  },
+  "plan": {
+    "hero_title": "Getting Here",
+    "hero_sub": "Lori Province sits 2–3 hours north of Yerevan and 3 hours south of Tbilisi. The roads are good. The logistics are straightforward once you know them.",
+    "routes_heading": "How to arrive",
+    "routes_sub": "Three main routes into Lori — by private car, shared minibus from Yerevan, or overland from Tbilisi.",
+    "entry_heading": "Key entry points",
+    "entry_sub": "Three gateway towns, each opening different circuits of the province."
+  },
+  "costs": {
+    "hero_title": "Cost Calculator",
+    "hero_sub": "Real prices for a stay in Lori, Armenia. All figures in AMD and EUR based on actual local rates for accommodation, food, transport, and activities.",
+    "intro": "Use the sliders below to build a realistic daily budget. Prices reflect what independent travellers actually pay — not tourist rates."
+  }
+}
